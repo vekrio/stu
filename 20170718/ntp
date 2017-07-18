@@ -1,0 +1,4 @@
+  rpm -qa | grep ntp         /*检查是否安装ntp*/
+  yum -y install ntp         /*安装*/
+  server ntpd start          /*ntp
+  chkconfig  ntpd on         启动*/

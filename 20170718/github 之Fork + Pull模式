@@ -4,6 +4,7 @@
 4.1.1. 版本库派生
 GotGit版本库[1]用于维护《Git权威指南》一书的官网和勘误，下面演示的勘误表修改是由王胜[2]通过GitHub之外的一个缺陷追踪平台报告的[3]。他在报告中，甚至直接用GNU diff格式告诉我该如何修改。
 下面就以用户gotgithub身份，访问版本库 https://github.com/gotgit/gotgit/ ，添加新的勘误。如图4-1所示，gotgit项目在之前的示例中已经被我们关注但尚未Fork。
+[1](https://github.com/vekrio/stu/blob/master/20170718/photo/1.png?raw=true)
 ../images/gotgit-repo-before-fork.png
 图4-1：原gotgit项目
 点击项目名称右侧的Fork按钮，便在gotgithub用户自己的托管空间下创建项目派生，派生项目版本库出现在版本库列表中，如图4-2。

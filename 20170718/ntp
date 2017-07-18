@@ -5,3 +5,5 @@
   server ntpd start          /*ntp
   
   chkconfig  ntpd on         启动*/
+  
+  

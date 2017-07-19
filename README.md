@@ -41,13 +41,19 @@ http://pkgs.fedoraproject.org/repo/pkgs/man-pages-zh-CN/manpages-zh-1.5.1.tar.gz
 5:  make && make install            #安装
 
 6:设置环境变量：vim /etc/profile.d/cman.sh
+
   输入内容：alias cman='man -M /usr/local/share/man/zh_CN'
+  
   保存退出
 
 7:source /etc/profile.d/cman.sh      #重新执行别名文件
+
 CentOS系统安装中文man手册
+
 8:测试，输入命令：cman ls
 
   #注意事项:
+  
   #中文帮助手册的使用命令是cman,目前只翻译部分不是所有的帮助都是中文
+  
   #如果想使用英文帮助，可以使用命令man

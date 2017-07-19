@@ -17,13 +17,27 @@ linux学习
 
  ## 方法一
 
-1.重启开机按esc
+1.重启开机按e
 
-2.按e
+2.编辑修改两处：ro改为rw,在LANG=en_US.UFT-8后面添加init=/bin/sh
 
-3.编辑修改两处：ro改为rw,在LANG=en_US.UFT-8后面添加init=/bin/sh
+3.按Ctrl+X重启，并修改密码
 
-4.按Ctrl+X重启，并修改密码
+4.由于selinux开启着的需要执行以下命令更新系统信息,否则重启之后密码未生效
+
+touch /.autorelabel
+
+5.重启系统
+
+## 方法二
+
+1.重启开机按e
+
+2.编辑修改：将ro这两个字母修改为rw init=/sysroot/bin/sh
+
+3.按Ctrl+X重启
+
+4.修改密码
 
 5.由于selinux开启着的需要执行以下命令更新系统信息,否则重启之后密码未生效
 
@@ -31,9 +45,27 @@ touch /.autorelabel
 
 6.重启系统
 
-exec /sbin/init
+## 方法三
 
-   开机启动centos 7.0,看到如下画面，选择下图选单，按"e"键
+1.重启开机按e
+
+2.编辑修改LANG=en_US.UFT-8后面添加rd.break
+
+3.按Ctrl+X重启
+
+4.mount -o remount，rw /sysroot
+
+5.chroot  /sysroot
+
+6.修改密码
+
+7.由于selinux开启着的需要执行以下命令更新系统信息,否则重启之后密码未生效
+
+touch /.autorelabel
+
+8.重启系统
+
+
 # 8:  [ 中文man ](https://jingyan.baidu.com/article/f25ef25466bffc482c1b82b6.html)
 
 虽然在CentOS操作系统中具有多语言包，但其man手册是英文的，对于新手来说能够使用中文man手册将加快学习速度。

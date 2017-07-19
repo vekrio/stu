@@ -15,6 +15,24 @@ linux学习
 
 # 7:[centos7忘记root密码](https://jingyan.baidu.com/article/cbf0e5009d61322eab28935f.html)
 
+ ##方法一
+
+1.重启开机按esc
+
+2.按e
+
+3.编辑修改两处：ro改为rw,在LANG=en_US.UFT-8后面添加init=/bin/sh
+
+4.按Ctrl+X重启，并修改密码
+
+5.由于selinux开启着的需要执行以下命令更新系统信息,否则重启之后密码未生效
+
+touch /.autorelabel
+
+6.重启系统
+
+exec /sbin/init
+
    开机启动centos 7.0,看到如下画面，选择下图选单，按"e"键
 # 8:  [ 中文man ](https://jingyan.baidu.com/article/f25ef25466bffc482c1b82b6.html)
 

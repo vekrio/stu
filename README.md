@@ -33,22 +33,6 @@ touch /.autorelabel
 
 1.重启开机按e
 
-2.编辑修改：将ro这两个字母修改为rw init=/sysroot/bin/sh
-
-3.按Ctrl+X重启
-
-4.修改密码
-
-5.由于selinux开启着的需要执行以下命令更新系统信息,否则重启之后密码未生效
-
-touch /.autorelabel
-
-6.重启系统
-
-## 方法三
-
-1.重启开机按e
-
 2.编辑修改LANG=en_US.UFT-8后面添加rd.break
 
 3.按Ctrl+X重启

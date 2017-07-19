@@ -30,7 +30,8 @@ linux学习
 
 1:将安装包下载到本地
 
-http://pkgs.fedoraproject.org/repo/pkgs/man-pages-zh-CN/manpages-zh-1.5.1.tar.gz/13275fd039de8788b15151c896150bc4/
+wget http://pkgs.fedoraproject.org/repo/pkgs/man-pages-zh-CN/manpages-zh-1.5.1.tar.gz/13275fd039de8788b15151c896150bc4/manpages-zh-1.5.1.tar.gz
+
 
 2:打开系统终端,输入：tar xf manpages-zh-1.5.1.tar.gz进行解压缩
 

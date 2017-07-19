@@ -15,7 +15,7 @@ linux学习
 
 # 7:[centos7忘记root密码](https://jingyan.baidu.com/article/cbf0e5009d61322eab28935f.html)
 
- ##方法一
+ ## 方法一
 
 1.重启开机按esc
 

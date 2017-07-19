@@ -94,7 +94,7 @@ CentOS系统安装中文man手册
   #如果想使用英文帮助，可以使用命令man
   
   
-# 9：centos7根目录扩容
+# 9：[centos7根目录扩容](http://www.centoscn.com/CentOS/config/2016/0530/7306.html)
 [root@localhost ~]# fdisk -l
 
 Disk /dev/sda: 8589 MB, 8589934592 bytes, 16777216 sectors

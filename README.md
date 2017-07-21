@@ -347,7 +347,7 @@ linux学习
 	[root@localhost ~]# 
 
 
-	# 9.[CentOS下测试硬盘坏道](http://www.centoscn.com/CentOS/Intermediate/2014/1219/4344.html)
+# 9.[CentOS下测试硬盘坏道](http://www.centoscn.com/CentOS/Intermediate/2014/1219/4344.html)
 
 	硬盘状态测试工具：smartctl、Badblocks、hdparm 
 	感觉用smartctl挺快的，也能快速看到硬盘是否健康，命令如下:

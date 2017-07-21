@@ -349,6 +349,7 @@ tmpfs                184M     0  184M   0% /run/user/0
 
 # 9.[CentOS下测试硬盘坏道](http://www.centoscn.com/CentOS/Intermediate/2014/1219/4344.html)
 
+<<<<<<< HEAD
 硬盘状态测试工具：smartctl、Badblocks、hdparm 
 感觉用smartctl挺快的，也能快速看到硬盘是否健康，命令如下:
 [root@qy ~]#yum install smartmontools -y
@@ -446,6 +447,45 @@ hdparm [-CfghiIqtTvyYZ][-a <快取分区>][-A <0或1>][-c <I/O模式>][-d <0或1
  
  
 可以使用sg_vpd命令查看硬盘转速，sg_vpd命令是sg3_utils其中一个工具.
+=======
+2015/12/19 16:05:18
+
+换行：
+
+<br>方法1: 连续两个以上空格+回车
+<br>方法2：使用``` html ```语言换行标签： <br>
+<br>首行缩进两个字符：```(每个表示一个空格，连续使用两个即可）```
+
+<br>&ensp; 半角的空格
+<br>&emsp; 全角的空格
+<br>字体、字号与颜色: 
+
+<br>Markdown是一种可以使用普通文本编辑器编写的标记语言，通过类似HTML的标记语法，它可以使普通文本内容具有一定的格式。但是它本身是不支持修改字体、字号与颜色等功能的！ 
+  CSDN-markdown编辑器是其衍生版本，扩展了Markdown的功能（如表格、脚注、内嵌HTML等等）！对，就是内嵌HTML，接下来要讲的功能就需要使用内嵌HTML的方法来实现。 
+字体，字号和颜色编辑如下代码
+
+<font face="黑体">我是黑体字</font>
+<font face="微软雅黑">我是微软雅黑</font>
+<font face="STCAIYUN">我是华文彩云</font>
+<font color=#0099ff size=7 face="黑体">color=#0099ff size=72 face="黑体"</font>
+<font color=#00ffff size=72>color=#00ffff</font>
+<font color=gray size=72>color=gray</font>
+
+Size：规定文本的尺寸大小。可能的值：从 1 到 7 的数字。浏览器默认值是 3
+具体颜色分类及标记请参照：各种颜色
+
+背景色: 
+Markdown本身不支持背景色设置，需要采用内置html的方式实现：借助 table, tr, td 等表格标签的 bgcolor 属性来实现背景色的功能。举例如下：
+
+<table><tr><td bgcolor=orange>背景色是：orange</td></tr></table>
+效果如下： 
+背景色是：orange
+2015/12/19 16:04:07
+分割线：你可以在一行中用三个以上的星号、减号、底线来建立一个分隔线，行内不能有其他东西。你也可以在星号或是减号中间插入空格。下面每种写法都可以建立分隔线
+
+链接：链接文字都是用 [方括号] 来标记,在方块括号后面紧接着圆括号并插入网址链接即可:可参照 
+[This link](http://example.NET/) has no title attribute.
+>>>>>>> d8c512c6f4e1003b1b1a63f9774868910d02f6b8
 
 下载地址：http://sg.danny.cz/sg/sg3_utils.html
 

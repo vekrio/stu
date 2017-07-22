@@ -559,5 +559,5 @@ linux学习
 
 
 	找到【文件和打印机共享（回显请求-ICMPv4-in）】右击……选择【启用规则】就OK了！为避免以后不方便查找网络问题，此项尽量开启比较好。
-
+![图片](https://github.com/vekrio/stu/blob/master/20170718/photo/1b4c510fd9f9d72a52d03f23d72a2834349bbb53.jpg?raw=true)
 

@@ -509,6 +509,37 @@ linux学习
 	其他和smartd.conf相关的配置可参见:
 	http://smartmontools.sourceforge.net/man/smartd.conf.5.html
 
+# 10.[Linux source命令](http://www.cnblogs.com/pkufork/p/linux_source.html)
 
+	Linux source命令：
 
+	通常用法：source filepath 或 . filepath
+
+	功能：使当前shell读入路径为filepath的shell文件并依次执行文件中的所有语句，通常用于重新执行刚修改的初始化文件，使之立即生效，而不必注销并重新登录。例如，当我们修改了/etc/profile文件，并想让它立刻生效，而不用重新登录，就可以使用source命令，如source /etc/profile。
+
+	source命令(从 C Shell 而来)是bash shell的内置命令；点命令(.)，就是个点符号(从Bourne Shell而来)是source的另一名称。这从用法中也能看出来。
+
+	 
+
+	source filepath 与 sh filepath 、./filepath的区别：
+
+	当shell脚本具有可执行权限时，用sh filepath与./filepath是没有区别的。./filepath是因为当前目录没有在PATH中，所有"."是用来表示当前目录的。
+
+	sh filepath 会重新建立一个子shell，在子shell中执行脚本里面的语句，该子shell继承父shell的环境变量，但子shell是新建的，其改变的变量不会被带回父shell，除非使用export。
+
+	source filename其实只是简单地读取脚本里面的语句依次在当前shell里面执行，没有建立新的子shell。那么脚本里面所有新建、改变变量的语句都会保存在当前shell里面。
+
+	 
+
+	举例说明：
+
+	新建一个test.sh脚本，内容为:A=1；
+
+	修改其可执行权限：chmod +x test.sh；
+
+	运行sh test.sh后，echo $A，显示为空，因为A=1并未传回给当前shell；
+
+	运行./test.sh后，也是一样的效果；
+
+	运行source test.sh 或者 . test.sh，然后echo $A，则会显示1，说明A=1的变量在当前shell中；
 

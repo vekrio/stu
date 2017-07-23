@@ -347,7 +347,7 @@ linux学习
 	[root@localhost ~]# 
 
 
-# 9.[CentOS下测试硬盘坏道](http://www.centoscn.com/CentOS/Intermediate/2014/1219/4344.html)
+# 10.[CentOS下测试硬盘坏道](http://www.centoscn.com/CentOS/Intermediate/2014/1219/4344.html)
 
 	硬盘状态测试工具：smartctl、Badblocks、hdparm 
 	感觉用smartctl挺快的，也能快速看到硬盘是否健康，命令如下:
@@ -509,7 +509,7 @@ linux学习
 	其他和smartd.conf相关的配置可参见:
 	http://smartmontools.sourceforge.net/man/smartd.conf.5.html
 
-# 10.[Linux source命令](http://www.cnblogs.com/pkufork/p/linux_source.html)
+# 11.[Linux source命令](http://www.cnblogs.com/pkufork/p/linux_source.html)
 
 	Linux source命令：
 
@@ -543,7 +543,7 @@ linux学习
 
 	运行source test.sh 或者 . test.sh，然后echo $A，则会显示1，说明A=1的变量在当前shell中；
 
-# 11.[windows server 2008解决无法PING通问题](https://jingyan.baidu.com/article/a24b33cd6926be19fe002b2c.html)
+# 12.[windows server 2008解决无法PING通问题](https://jingyan.baidu.com/article/a24b33cd6926be19fe002b2c.html)
 
 	windows server 2008解决无法PING通问题
 

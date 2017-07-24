@@ -574,10 +574,10 @@ linux学习
 		/etc/my.cnf                      /*   主配置文件
 		/etc/my.cnf.d/*.cnf                    拓展配置文件*/
 			
-			systemctl  start   mariadb          /* 启动服务 */
-			chkconfig  on  mariadb             /*开机启动*/ 
-			netstat -luntp | grep mysql          /查询mariadb监视端口*/
-			tcp        0      0 0.0.0.0:3306            0.0.0.0:*               LISTEN      1925/mysqld    /*默认3306端口*/
+	systemctl  start   mariadb          /* 启动服务 */
+	chkconfig  on  mariadb             /*开机启动*/ 
+	netstat -luntp | grep mysql          /查询mariadb监视端口*/
+	tcp        0      0 0.0.0.0:3306            0.0.0.0:*               LISTEN      1925/mysqld    /*默认3306端口*/
 			
 			
 			

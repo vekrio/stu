@@ -561,3 +561,14 @@ linux学习
 	找到【文件和打印机共享（回显请求-ICMPv4-in）】右击……选择【启用规则】就OK了！为避免以后不方便查找网络问题，此项尽量开启比较好。
 ![图片](https://github.com/vekrio/stu/blob/master/20170718/photo/1b4c510fd9f9d72a52d03f23d72a2834349bbb53.jpg?raw=true)
 
+
+
+
+# 13.mariadb安装
+	rpm list|grep mariadb                /*查询安装源里的mariadb版本*/
+	yum -y install mariadb-sever*
+	rpm -ql mariadb-server               /*查询mariadb安装里哪些文件*/
+	注：/var/log/mariadb/mariadb.log     /*数据库出错，在这里找这个排错日记*/
+	    /var/lib/mysql                  /*  mariadb-server产生的库，表等数据 */
+		/etc/my.cnf                      /*   主配置文件
+		/etc/my.cnf.d/*.cnf                    扩展配置文件*/

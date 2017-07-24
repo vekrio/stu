@@ -568,7 +568,10 @@ linux学习
 	rpm list|grep mariadb                /*查询安装源里的mariadb版本*/
 	yum -y install mariadb-sever*
 	rpm -ql mariadb-server               /*查询mariadb安装里哪些文件*/
-	注：/var/log/mariadb/mariadb.log     /*数据库出错，在这里找这个排错日记*/
-	    /var/lib/mysql                  /*  mariadb-server产生的库，表等数据 */
-		/etc/my.cnf                      /*   主配置文件
-		/etc/my.cnf.d/*.cnf                    扩展配置文件*/
+	注：	/var/log/mariadb/mariadb.log     /*数据库出错，在这里找这个排错日记*/
+			/var/lib/mysql                  /*  mariadb-server产生的库，表等数据 */
+			/etc/my.cnf                      /*   主配置文件
+			/etc/my.cnf.d/*.cnf                    扩展配置文件*/
+			
+			systemctl  start   mariadb          /* 启动服务 */
+			chkconfig  on  mariadb             /*开机启动*/ 

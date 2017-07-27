@@ -581,4 +581,10 @@ linux学习
 			
 			
 			
-			
+#  14.查询某个工具包是哪个包装出来的（这里比如netstat）
+	which netstat    /*看看有没装netstat*/
+	如没装，在一个已经装好的服务器上查询which netstat
+	/usr/bin/netstat
+	rpm -qf  /usr/bin/netstat    /*查询netstat是哪个包装出来的*/
+
+	 

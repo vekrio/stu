@@ -564,7 +564,7 @@ linux学习
 
 
 
-#  [虚拟机centos7安装 mariadb并修改默认密码设置远程访问](http://blog.csdn.net/u010757785/article/details/52152854)
+# 13.[虚拟机centos7安装 mariadb并修改默认密码设置远程访问](http://blog.csdn.net/u010757785/article/details/52152854)
    ## centos7默认MySQL是maridb
 
 	注意：mariadb与mysql root权限不同

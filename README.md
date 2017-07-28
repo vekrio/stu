@@ -564,21 +564,220 @@ linux学习
 
 
 
-#  13.mariadb学习
-   ## 一: mariadb安装
-	rpm list|grep mariadb                /*查询安装源里的mariadb版本*/
-	yum -y install mariadb-sever*
-	rpm -ql mariadb-server               /*查询mariadb安装里哪些文件*/
-	注：	/var/log/mariadb/mariadb.log     /*数据库出错，在这里找这个排错日记*/
-		/var/lib/mysql                  /*  mariadb-server产生的库，表等数据 */
-		/etc/my.cnf                      /*   主配置文件
-		/etc/my.cnf.d/*.cnf                    拓展配置文件*/
-			
-	systemctl  start   mariadb          /* 启动服务 */
-	chkconfig  on  mariadb             /*开机启动*/ 
-	netstat -luntp | grep mysql          /查询mariadb监视端口*/
-	tcp        0      0 0.0.0.0:3306            0.0.0.0:*               LISTEN      1925/mysqld    /*默认3306端口*/
-			
+#  [虚拟机centos7安装 mariadb并修改默认密码设置远程访问](http://blog.csdn.net/u010757785/article/details/52152854)
+   ## centos7默认MySQL是maridb
+
+	注意：mariadb与mysql root权限不同
+
+
+
+
+	本机连接虚拟机mariadb(本机连接虚拟机mysql,远程连接设置)
+	centos查看ip
+
+
+	这里为了防止失败，我首先检查mysql和mariadb没有安装
+
+	 
+
+	[root@localhost usr]# ps aux|grep mysql     #检测mysql服务
+	root       2180  0.0  0.0 112664   972 pts/0    S+   17:46   0:00 grep --color=auto mysql
+	[root@localhost usr]# whereis mysql     #是否有mysql残留文件
+	[root@localhost usr]#
+	mysql:[root@localhost usr]# whereis mariadb             #查找是否有mariadb如果有就会显示文件夹先卸掉
+	mysql:[root@localhost usr]#
+	[root@localhost usr]# ps aux|grep mariadb               #是否有安装mariadb服务出现下面一行就是没有安装
+	root       2201  0.0  0.0 112664   980 pts/0    S+   17:48   0:00 grep --color=auto mariadb
+	[root@localhost usr]# yum install mariadb mariadb-server         #这是安装nariadb和mariadb服务
+	已加载插件：fastestmirror
+	Loading mirror speeds from cached hostfile
+	 * base: mirrors.tuna.tsinghua.edu.cn
+	 * extras: mirrors.yun-idc.com
+	 * updates: mirrors.sina.cn
+	正在解决依赖关系
+	--> 正在检查事务
+	---> 软件包 mariadb.x86_64.1.5.5.47-1.el7_2 将被 安装
+	--> 正在处理依赖关系 mariadb-libs(x86-64) = 1:5.5.47-1.el7_2，它被软件包 1:mariadb-5.5.47-1.el7_2.x86_64 需要
+	---> 软件包 mariadb-server.x86_64.1.5.5.47-1.el7_2 将被 安装
+	--> 正在检查事务
+	---> 软件包 mariadb-libs.x86_64.1.5.5.47-1.el7_2 将被 安装
+	--> 解决依赖关系完成
+
+	依赖关系解决
+
+	=======================================================================================================================================
+	 Package                            架构                       版本                                  源                           大小
+	=======================================================================================================================================
+	正在安装:
+	 mariadb                            x86_64                     1:5.5.47-1.el7_2                      updates                     8.9 M
+	 mariadb-server                     x86_64                     1:5.5.47-1.el7_2                      updates                      11 M
+	为依赖而安装:
+	 mariadb-libs                       x86_64                     1:5.5.47-1.el7_2                      updates                     755 k
+
+	事务概要
+	=======================================================================================================================================
+	安装  2 软件包 (+1 依赖软件包)
+
+	总下载量：20 M
+	安装大小：108 M
+	Is this ok [y/d/N]: y
+	Downloading packages:
+	(1/3): mariadb-libs-5.5.47-1.el7_2.x86_64.rpm                                                                   | 755 kB  00:00:02     
+	(2/3): mariadb-5.5.47-1.el7_2.x86_64.rpm                                                                        | 8.9 MB  00:00:08     
+	(3/3): mariadb-server-5.5.47-1.el7_2.x86_64.rpm                                                                 |  11 MB  00:00:11     
+	---------------------------------------------------------------------------------------------------------------------------------------
+	总计                                                                                                   1.7 MB/s |  20 MB  00:00:11     
+	Running transaction check
+	Running transaction test
+	Transaction test succeeded
+	Running transaction
+	  正在安装    : 1:mariadb-libs-5.5.47-1.el7_2.x86_64                                                                               1/3
+	  正在安装    : 1:mariadb-5.5.47-1.el7_2.x86_64                                                                                    2/3
+	  正在安装    : 1:mariadb-server-5.5.47-1.el7_2.x86_64                                                                             3/3
+	warning: /var/log/mariadb/mariadb.log created as /var/log/mariadb/mariadb.log.rpmnew
+	  验证中      : 1:mariadb-server-5.5.47-1.el7_2.x86_64                                                                             1/3
+	  验证中      : 1:mariadb-libs-5.5.47-1.el7_2.x86_64                                                                               2/3
+	  验证中      : 1:mariadb-5.5.47-1.el7_2.x86_64                                                                                    3/3
+
+	已安装:
+	  mariadb.x86_64 1:5.5.47-1.el7_2                                mariadb-server.x86_64 1:5.5.47-1.el7_2                               
+
+	作为依赖被安装:
+	  mariadb-libs.x86_64 1:5.5.47-1.el7_2                                                                                                 
+
+	完毕！
+	[root@localhost usr]# systemctl start mariadb.server
+	Failed to start mariadb.server.service: Unit mariadb.server.service failed to load: No such file or directory.
+	[root@localhost usr]# systemctl start mariadb.service
+	[root@localhost usr]# ps aux|grep mariadb
+	mysql      2487  0.6  8.4 904952 84404 ?        Sl   17:53   0:00 /usr/libexec/mysqld --basedir=/usr --datadir=/var/lib/mysql --plugin-dir=/usr/lib64/mysql/plugin --log-error=/var/log/mariadb/mariadb.log --pid-file=/var/run/mariadb/mariadb.pid --socket=/var/lib/mysql/mysql.sock
+	root       2521  0.0  0.0 112664   980 pts/0    S+   17:54   0:00 grep --color=auto mariadb
+	[root@localhost usr]# mysql_secure_installation
+	/usr/bin/mysql_secure_installation:行379: find_mysql_client: 未找到命令
+
+	NOTE: RUNNING ALL PARTS OF THIS SCRIPT IS RECOMMENDED FOR ALL MariaDB
+		  SERVERS IN PRODUCTION USE!  PLEASE READ EACH STEP CAREFULLY!
+
+	In order to log into MariaDB to secure it, we'll need the current
+	password for the root user.  If you've just installed MariaDB, and
+	you haven't set the root password yet, the password will be blank,
+	so you should just press enter here.
+
+	Enter current password for root (enter for none): 
+	OK, successfully used password, moving on...
+
+	Setting the root password ensures that nobody can log into the MariaDB
+	root user without the proper authorisation.
+
+	Set root password? [Y/n] y     #这里选择Y是否重新设置密码
+	New password:                  #新密码
+	Re-enter new password:         #重复新密码
+	Password updated successfully!
+	Reloading privilege tables..
+	 ... Success!
+
+
+	By default, a MariaDB installation has an anonymous user, allowing anyone
+	to log into MariaDB without having to have a user account created for
+	them.  This is intended only for testing, and to make the installation
+	go a bit smoother.  You should remove them before moving into a
+	production environment.
+
+	Remove anonymous users? [Y/n] n        #是否清楚其他用户的意思吧
+	 ... skipping.
+
+	Normally, root should only be allowed to connect from 'localhost'.  This
+	ensures that someone cannot guess at the root password from the network.
+
+	Disallow root login remotely? [Y/n] n         #是否禁止远程访问
+	 ... skipping.
+
+	By default, MariaDB comes with a database named 'test' that anyone can
+	access.  This is also intended only for testing, and should be removed
+	before moving into a production environment.
+
+	Remove test database and access to it? [Y/n] y   #是否删除测试数据
+	 - Dropping test database...
+	 ... Success!
+	 - Removing privileges on test database...
+	 ... Success!
+
+	Reloading the privilege tables will ensure that all changes made so far
+	will take effect immediately.
+
+	Reload privilege tables now? [Y/n] y          #是否重置权限
+	 ... Success!
+
+	Cleaning up...
+
+	All done!  If you've completed all of the above steps, your MariaDB
+	installation should now be secure.
+
+	Thanks for using MariaDB!
+	#这里就完成了
+	#下面重启一下mariadb服务和apache服务
+	[root@localhost usr]# systemctl restart mariadb.service
+	[root@localhost usr]# systemctl restart httpd.service
+	[root@localhost usr]# mysql -u root -p    #登录看一下是否成功
+	Enter password: 
+	Welcome to the MariaDB monitor.  Commands end with ; or \g.
+	Your MariaDB connection id is 3
+	Server version: 5.5.47-MariaDB MariaDB Server
+
+	Copyright (c) 2000, 2015, Oracle, MariaDB Corporation Ab and others.
+
+	Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+	MariaDB [(none)]> 
+
+	之前看了一篇文章觉得太扯了，本来之前是看别人写的，后来自己研究一下，发现完全是两回事
+
+
+	下面发现本地无法访问虚拟机可是ip都能ping通呀！我以为是防火墙，但是我发现我虚拟机防火墙是默认关闭的
+
+	那就只有一个就是权限问题
+
+	这里可以接着上面直接往下走
+
+	[plain] view plain copy print?
+	MariaDB [(none)]> use mysql   #<span style="font-family:Arial;">进入mysql库</span>  
+	Reading table information for completion of table and column names  
+	You can turn off this feature to get a quicker startup with -A  
+	  
+	Database changed  
+	MariaDB [mysql]> select user,password,host from user;     #查询所有用户权限反正不管了  
+	<span style="font-family:Arial;">#</span>我这里是之前<span style="font-family:Arial;">没整干净所以这样的</span>  
+	+------+-------------------------------------------+-----------------------+  
+	| user | password                                  | host                  |  
+	+------+-------------------------------------------+-----------------------+  
+	| root | *DB469070DB0AD0CA0B93040D166D7FC4713D6961 | localhost             |  
+	| root | *DB469070DB0AD0CA0B93040D166D7FC4713D6961 | localhost.localdomain |  
+	| root | *DB469070DB0AD0CA0B93040D166D7FC4713D6961 | 127.0.0.1             |  
+	| root | *DB469070DB0AD0CA0B93040D166D7FC4713D6961 | ::1                   |  
+	|      |                                           | localhost             |  
+	|      |                                           | localhost.localdomain |  
+	+------+-------------------------------------------+-----------------------+  
+	6 rows in set (0.00 sec)  
+	<span style="color:#362e2b;"><span style="font-size:14px;"><span style="font-family:Arial;"></span></span></span><pre name="code" class="plain"><span style="font-family:Arial;">#‘%’意思给用户设置所有ip都可以访问</span>  
+	MariaDB [mysql]> grant all privileges on *.* to root@"%" identified by "1q2w3e4r";
+	Query OK, 0 rows affected (0.00 sec)MariaDB [mysql]> flush privileges; #提交Query OK, 0 rows affected (0.00 sec)MariaDB [mysql]> quit 退出Bye[root@localhost usr]# systemctl stop mariadb.service #停止服务[root@localhost usr]# ps aux|grep mariadb #看一下mariadb服务是否停止如下已停止root 2899 0.0 0.0 112664 980 pts/0 S+ 19:01 0:00 grep --color=auto mariadb[root@localhost usr]# systemctl start mariadb #启动赶快本地用navcat连接试一下
+	[root@localhost usr]# ip addr #不知道ip centos7用ip addr查看 建议最好用静态ip不然每次secure充连多麻烦
+	1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN 
+		link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+		inet 127.0.0.1/8 scope host lo
+		   valid_lft forever preferred_lft forever
+		inet6 ::1/128 scope host 
+		   valid_lft forever preferred_lft forever
+	2: eno16777736: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP qlen 1000
+		link/ether 00:0c:29:4f:a3:ab brd ff:ff:ff:ff:ff:ff
+		inet 192.168.0.173/24 brd 192.168.0.255 scope global dynamic eno16777736
+		   valid_lft 7166sec preferred_lft 7166sec
+		inet6 fe80::20c:29ff:fe4f:a3ab/64 scope link 
+		   valid_lft forever preferred_lft forever
+   
+   
+   
+   
 			
 			
 #  14.查询某个工具包是哪个包装出来的（这里比如netstat）

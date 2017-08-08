@@ -785,5 +785,188 @@ linux学习
 	如没装，在一个已经装好的服务器上查询which netstat
 	/usr/bin/netstat
 	rpm -qf  /usr/bin/netstat    /*查询netstat是哪个包装出来的*/
+	
+	
+#	15  [CentOS 7 上安装 Docker] 详解(http://www.linuxidc.com/Linux/2014-12/110034.htm)
+		Docker 是一个开源工具，它可以让创建和管理 Linux 容器变得简单。容器就像是轻量级的虚拟机，并且可以以毫秒级的速度来启动或停止。Docker 帮助系统管理员和程序员在容器中开发应用程序，并且可以扩展到成千上万的节点。
 
-	 
+	容器和 VM（虚拟机）的主要区别是，容器提供了基于进程的隔离，而虚拟机提供了资源的完全隔离。虚拟机可能需要一分钟来启动，而容器只需要一秒钟或更短。容器使用宿主操作系统的内核，而虚拟机使用独立的内核。
+
+	Docker 的局限性之一是，它只能用在 64 位的操作系统上。
+
+
+
+	在这篇文章中我们将讨论如何在 CentOS 7.x 中安装 docker。
+
+	CentOS 6/7系列安装Docker http://www.linuxidc.com/Linux/2014-07/104768.htm
+
+	Docker的搭建Gitlab CI 全过程详解 http://www.linuxidc.com/Linux/2013-12/93537.htm
+
+	Docker安装应用(CentOS 6.5_x64) http://www.linuxidc.com/Linux/2014-07/104595.htm
+
+	在 Docker 中使用 MySQL http://www.linuxidc.com/Linux/2014-01/95354.htm
+
+	在Ubuntu Trusty 14.04 (LTS) (64-bit)安装Docker http://www.linuxidc.com/Linux/2014-10/108184.htm
+
+	Docker安装应用(CentOS 6.5_x64) http://www.linuxidc.com/Linux/2014-07/104595.htm
+
+	Ubuntu 14.04安装Docker  http://www.linuxidc.com/linux/2014-08/105656.htm
+
+	阿里云CentOS 6.5 模板上安装 Docker http://www.linuxidc.com/Linux/2014-11/109107.htm
+
+	CentOS 7 中 Docker 的安装
+
+	Docker 软件包已经包括在默认的 CentOS-Extras 软件源里。因此想要安装 docker，只需要运行下面的 yum 命令：
+
+	[root@localhost ~]# yum install docker
+	启动 Docker 服务
+
+	安装完成后，使用下面的命令来启动 docker 服务，并将其设置为开机启动：
+
+	[root@localhost ~]# service docker start
+	[root@localhost ~]# chkconfig docker on
+	（LCTT 译注：此处采用了旧式的 sysv 语法，如采用CentOS 7中支持的新式 systemd 语法，如下：
+
+	[root@localhost ~]# systemctl start docker.service
+	[root@localhost ~]# systemctl enable docker.service
+	）
+
+	下载官方的 CentOS 镜像到本地 （LCTT 译注：由于 Docker 被墙 :-< ，所以请使用 http://docker.cn  的镜像，感谢 @马全一 的镜像。 ）
+
+	[root@localhost ~]# docker pull centos
+	Pulling repository centos
+	192178b11d36:Download complete
+	70441cac1ed5:Download complete
+	ae0c2d0bdc10:Download complete
+	511136ea3c5a:Download complete
+	5b12ef8fd570:Download complete
+	确认 CentOS 镜像已经被获取：
+
+	[root@localhost ~]# docker images centos
+	REPOSITORY TAG IMAGE ID CREATED VIRTUAL SIZE
+	centos centos5 192178b11d362 weeks ago 466.9 MB
+	centos centos6 70441cac1ed52 weeks ago 215.8 MB
+	centos centos7 ae0c2d0bdc10 2 weeks ago 224 MB
+	centos latest ae0c2d0bdc10 2 weeks ago 224 MB
+	运行一个 Docker 容器：
+
+	[root@localhost ~]# docker run -i -t centos /bin/bash
+	[root@dbf66395436d /]#
+	我们可以看到，CentOS 容器已经被启动，并且我们得到了 bash 提示符。在 docker 命令中我们使用了 “-i 捕获标准输入输出”和 “-t 分配一个终端或控制台”选项。若要断开与容器的连接，输入 exit。
+
+	[root@cd05639b3f5c /]# cat /etc/RedHat-release
+	CentOSLinux release 7.0.1406(Core)
+	[root@cd05639b3f5c /]#exit
+	exit
+	[root@localhost ~]#
+	我们还可以搜索基于 Fedora 和 Ubuntu 操作系统的容器。
+
+	[root@localhost ~]# docker search ubuntu
+	[root@localhost ~]# docker search fedora
+	显示当前正在运行容器的列表
+
+	
+#	16[centos7安装云监工]()
+
+	
+	yum -y install net-tools
+
+	yum install setuptool（使用setup配置工具很方便地配置防火墙、网络、系统服务等配置项）
+
+	上传crysadm到/root
+
+	yum -y install wget
+
+	cd /etc/yum.repos.d/
+	mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+	wget -O CentOS-Base.repo http://mirrors.163.com/.help/CentOS7-Base-163.repo
+
+	wget http://mirrors.fuzhihui.cn/linux/centos/7/crysadm/nginx.repo
+
+	yum clean all
+
+	yum makecache
+	
+	python -V    /*查看python版本*/
+
+	cd 
+	yum -y install openssl-devel bzip2-devel gdbm-devem-devel readline-devel sqlite-devel gcc make gcc++
+
+	ls
+	cd crysadm
+	wget http://img.fuzhihui.cn/Python-3.4.4.tgz
+
+	tar -zxvf Python-3.4.4.tgz 
+
+	mv Python-3.4.4 /usr/bin
+	ll /usr/bin | grep python
+	cd /usr/bin/Python-3.4.4/
+
+	./configure
+
+	make && make install
+
+	python3.4 -V
+
+	yum -y install epel-release
+	cd /root/crysadm/
+	ls
+	yum -y install redis
+
+	rm -rf get-pip.py
+	wget http://mirrors.fuzhihui.cn/linux/centos/7/crysadm/get-pip.py
+
+	python3.4 get-pip.py 
+
+	pip3.4 install --upgrade pip
+
+	pip3.4 install --upgrade redis
+
+	pip3.4 install --upgrade requests
+
+	pip3.4 install --upgrade flask
+
+	pip3.4 install --upgrade flask-mail
+
+	rm -rf run.sh 
+	wget http://mirrors.fuzhihui.cn/linux/centos/7/crysadm/run.sh
+
+	chmod +x run.sh 
+	./run.sh 
+
+
+	systemctl stop firewalld.service
+
+	systemctl disable firewalld.service
+
+
+
+
+	yum -y install nginx
+
+
+
+	cd /etc/nginx/
+
+	rm -rf nginx.conf
+
+	wget http://mirrors.fuzhihui.cn/linux/centos/7/crysadm/nginx.conf
+
+
+
+	cd conf.d
+
+	rm -rf default.conf
+
+	wget http://mirrors.fuzhihui.cn/linux/centos/7/crysadm/default.conf
+
+
+	wget http://mirrors.fuzhihui.cn/linux/centos/7/crysadm/crysadm.conf
+
+
+
+	cd
+
+	setsebool -P httpd_can_network_connect 1
+
+	systemctl restart nginx.service

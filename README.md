@@ -787,7 +787,7 @@ linux学习
 	rpm -qf  /usr/bin/netstat    /*查询netstat是哪个包装出来的*/
 	
 	
-#	15  [CentOS 7 上安装 Docker] 详解(http://www.linuxidc.com/Linux/2014-12/110034.htm)
+#	15  [CentOS 7 上安装 Docker详解](http://www.linuxidc.com/Linux/2014-12/110034.htm)
 		Docker 是一个开源工具，它可以让创建和管理 Linux 容器变得简单。容器就像是轻量级的虚拟机，并且可以以毫秒级的速度来启动或停止。Docker 帮助系统管理员和程序员在容器中开发应用程序，并且可以扩展到成千上万的节点。
 
 	容器和 VM（虚拟机）的主要区别是，容器提供了基于进程的隔离，而虚拟机提供了资源的完全隔离。虚拟机可能需要一分钟来启动，而容器只需要一秒钟或更短。容器使用宿主操作系统的内核，而虚拟机使用独立的内核。
@@ -866,7 +866,7 @@ linux学习
 	显示当前正在运行容器的列表
 
 	
-#	16[centos7安装云监工]()
+#	16.centos7安装云监工
 
 	
 	yum -y install net-tools

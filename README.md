@@ -970,3 +970,125 @@ linux学习
 	setsebool -P httpd_can_network_connect 1
 
 	systemctl restart nginx.service
+	
+	
+# 17.[分区工具parted的详解及常用分区使用方法](http://zhangmingqian.blog.51cto.com/1497276/1068779)
+	一、         parted的用途及说明
+	概括使用说明：
+	parted用于对磁盘（或RAID磁盘）进行分区及管理，与fdisk分区工具相比，支持2TB以上的磁盘分区，并且允许调整分区的大小。
+	GNU手册说明：
+	parted是一个用于硬盘分区或调整分区大小的工具。使用它你可以创建、清除、调整、移动和复制ext2、ext3、linux-swap、FAT、FAT32和reiserfs分区；也能创建、调整和移动苹果系统的HFS分区；还能检测jfs、ntfs、ufs和xfs分区。该工具常用于为新安装的操作系统创建空间，重新分配硬盘使用情况，在将数据拷贝到新硬盘的时候也常常使用。
+	二、         parted的使用方法及步骤
+	1、对磁盘进行分区
+	（1）命令行方式
+	# parted /dev/sdb mklabel gpt mkpart 1 ext3 1 5T
+	（2）交互式命令方式
+	命令
+	解释
+	# parted /dev/sdb
+	对/dev/sdb进行分区或管理操作
+	GNU   Parted 1.8.1
+	使用 /dev/sdb
+	Welcome   to GNU Parted! Type 'help' to view a list of commands.
+	系统返回值
+	(parted)    mklabel   gpt
+	定义分区表格式
+	（常用的有msdos和gpt分区表格式，msdos不支持2TB以上容量的磁盘，所以大于2TB的磁盘选gpt分区表格式）
+	(parted)    mkpart   p1
+	创建第一个分区，名称为p1
+	（p1只是第一个分区的名称，用别的名称也可以，如part1）
+	File system type？  [ext2]?  ext3
+	定义分区格式
+	（不支持ext4，想分ext4格式的分区，可以通过mkfs.ext4格式化成ext4格式）
+	Start？  1
+	定义分区的起始位置
+	（单位支持K,M,G,T）
+	End？   5T
+	定义分区的结束位置
+	（单位支持K,M,G,T）
+	(parted)    print
+	查看当前分区情况
+	Model:   ATA VBOX HARDDISK (scsi)
+	Disk   /dev/sda: 21.5GB
+	Sector   size (logical/physical): 512B/512B
+	Partition   Table: msdos
+	Number  Start     End   Size  File system  Name  Flags
+	1        32.3kB  5TB   5TB      ext3       p1      
+	系统返回值
+	2、删除分区
+	命令
+	解释
+	# parted /dev/sdb
+	对/dev/sdb进行分区或管理操作
+	(parted)    rm
+	rm删除命令
+	（删除之前必须确保分区没有被挂载）
+	Partition number？ 1
+	删除第一个分区
+	(parted)    print
+	查看当前分区情况
+	Model:   ATA VBOX HARDDISK (scsi)
+	Disk   /dev/sda: 21.5GB
+	Sector   size (logical/physical): 512B/512B
+	Partition   Table: msdos
+	Number  Start     End   Size  File system  Name  Flags
+	系统返回值
+	3、格式化几个TB的磁盘的说明
+	在格式化几个TB的磁盘的时候，时间会非常的长，格式化6T的磁盘时间大概在一个半小时左右。（据硬盘实际情况而定）
+
+	三、   partd分区实例
+	fdisk工具虽然很好用，但对于大于2T以上的硬盘分区特别慢，可能一部分容量识别不了，也不支持非交互模式。
+	用parted就非常方便了，对大硬盘支持很好，也可以实现脚本分区。
+
+	默认一般都安装过了，没有的话install it！
+
+	yum install parted
+	parted有个不提示用户参数选项，就是通过这个选项来实现非交互
+
+		   -s, --script
+				  never prompts for user intervention
+	下面我们通过一个一块硬盘来说明它的具体操作：
+
+	第一个主分区3G
+	剩余分区都给扩展分区
+	第一个逻辑卷分区2G
+	第二个逻辑源用剩余空间
+
+
+	第一个主分区3G
+
+	parted -s /dev/sdb mklabel msdos
+	parted -s /dev/sdb mkpart primary 0 3G
+	剩余空间给扩展分区
+
+	parted -s /dev/sdb mkpart entended 3 100%
+	在扩展分区上创建第一个逻辑分区
+
+	parted -s /dev/sdb mkpart logic 3G 5G
+	创建第二个逻辑分区
+
+	parted -s /dev/sdb mkpart logic 5G 100%            #100%代表使用剩余的所有空间
+	查看分区大小
+
+	parted -s /dev/sdb print
+	Model: ATA QEMU HARDDISK (scsi)
+	Disk /dev/sdb: 8590MB
+	Sector size (logical/physical): 512B/512B
+	Partition Table: msdos
+
+	Number  Start   End     Size    Type      File system  标志
+	 1      512B    3000MB  3000MB  primary
+	 2      3001MB  8590MB  5589MB  extended               lba
+	 5      5000MB  8590MB  3590MB  logical
+	删除分区
+
+	parted -s /dev/sdb rm 5          #rm后面跟的事分区的编号，print出的Number
+	parted -s /dev/sdb print
+	Number  Start   End     Size    Type      File system  标志
+	 1      512B    3000MB  3000MB  primary
+	 2      3001MB  8590MB  5589MB  extended               lba
+	对/dev/sdc分一个主分区，类型为swap
+
+	parted -s /dev/sdc mklabel msdos
+	parted -s /dev/sdc -- mkpartfs primary linux-swap 0 -1         #从使用所有空间
+

@@ -990,7 +990,7 @@ reiserfs分区；也能创建、调整和移动苹果系统的HFS分区；还能
 	二、         parted的使用方法及步骤
 	
 	1、对磁盘进行分区
-	![图片1](https://github.com/vekrio/stu/blob/master/20170718/photo/%E5%88%86%E5%8C%BA%E5%B7%A5%E5%85%B7parted%E7%9A%84%E8%AF%A6%E8%A7%A3%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%88%86%E5%8C%BA%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%951.png?raw=true)
-	![图片2](https://github.com/vekrio/stu/blob/master/20170718/photo/%E5%88%86%E5%8C%BA%E5%B7%A5%E5%85%B7parted%E7%9A%84%E8%AF%A6%E8%A7%A3%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%88%86%E5%8C%BA%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%952.png?raw=true)
-	![图片3](https://github.com/vekrio/stu/blob/master/20170718/photo/%E5%88%86%E5%8C%BA%E5%B7%A5%E5%85%B7parted%E7%9A%84%E8%AF%A6%E8%A7%A3%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%88%86%E5%8C%BA%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%953.png?raw=true)
-	![图片4](https://github.com/vekrio/stu/blob/master/20170718/photo/%E5%88%86%E5%8C%BA%E5%B7%A5%E5%85%B7parted%E7%9A%84%E8%AF%A6%E8%A7%A3%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%88%86%E5%8C%BA%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%954.png?raw=true)
+![图片1](https://github.com/vekrio/stu/blob/master/20170718/photo/%E5%88%86%E5%8C%BA%E5%B7%A5%E5%85%B7parted%E7%9A%84%E8%AF%A6%E8%A7%A3%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%88%86%E5%8C%BA%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%951.png?raw=true)
+![图片2](https://github.com/vekrio/stu/blob/master/20170718/photo/%E5%88%86%E5%8C%BA%E5%B7%A5%E5%85%B7parted%E7%9A%84%E8%AF%A6%E8%A7%A3%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%88%86%E5%8C%BA%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%952.png?raw=true)
+![图片3](https://github.com/vekrio/stu/blob/master/20170718/photo/%E5%88%86%E5%8C%BA%E5%B7%A5%E5%85%B7parted%E7%9A%84%E8%AF%A6%E8%A7%A3%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%88%86%E5%8C%BA%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%953.png?raw=true)
+![图片4](https://github.com/vekrio/stu/blob/master/20170718/photo/%E5%88%86%E5%8C%BA%E5%B7%A5%E5%85%B7parted%E7%9A%84%E8%AF%A6%E8%A7%A3%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%88%86%E5%8C%BA%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%954.png?raw=true)

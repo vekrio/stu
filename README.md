@@ -983,14 +983,11 @@ linux学习
 	（1）命令行方式
 	# parted /dev/sdb mklabel gpt mkpart 1 ext3 1 5T
 	（2）交互式命令方式
-	命令
-	解释
-	# parted /dev/sdb
-	对/dev/sdb进行分区或管理操作
+	命令	    										                 解释
+	# parted /dev/sdb							                       对/dev/sdb进行分区或管理操作
 	GNU   Parted 1.8.1
 	使用 /dev/sdb
-	Welcome   to GNU Parted! Type 'help' to view a list of commands.
-	系统返回值
+	Welcome   to GNU Parted! Type 'help' to view a list of commands.	系统返回值
 	(parted)    mklabel   gpt
 	定义分区表格式
 	（常用的有msdos和gpt分区表格式，msdos不支持2TB以上容量的磁盘，所以大于2TB的磁盘选gpt分区表格式）

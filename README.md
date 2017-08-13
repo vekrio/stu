@@ -1074,7 +1074,10 @@ linux学习
 	5.生成配置文件并编辑
 	mkdir /etc/aria2/   #创建目录
 	vi /etc/aria2/aria2.conf   #创建配置文件
-	配置文件内容
+	
+	
+	配置文件内容:
+	
 	#用户名
 	#rpc-user=user
 	#密码
@@ -1120,6 +1123,8 @@ linux学习
 	#enable-mmap=true
 	#文件预分配, 能有效降低文件碎片, 提高磁盘性能. 缺点是预分配时间较长
 	file-allocation=prealloc
+	
+	
 	启动测试：
 	aria2c --conf-path=/etc/aria2/aria2.conf
 

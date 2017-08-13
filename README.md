@@ -1061,17 +1061,17 @@ linux学习
 	
 	
 #  18.[centos7安装aria2及web端](http://blog.csdn.net/yangfanv/article/details/69952065)
-	1安装mini版centos7系统默认关闭防火墙和selinux
-	2安装wget    yum install -y wget
-	3安装EPEL源
+	1.安装mini版centos7系统默认关闭防火墙和selinux
+	2.安装wget    yum install -y wget
+	3.安装EPEL源
 	wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm   #下载epel源rpm包
 
 	rpm -ivh epel-release-latest-7.noarch.rpm        #安装rpm包
-	4安装Aria2
+	4.安装Aria2
 
 	yum install aria2
 
-	5生成配置文件并编辑
+	5.生成配置文件并编辑
 	mkdir /etc/aria2/   #创建目录
 	vi /etc/aria2/aria2.conf   #创建配置文件
 	配置文件内容
@@ -1123,30 +1123,35 @@ linux学习
 	启动测试：
 	aria2c --conf-path=/etc/aria2/aria2.conf
 
-	6安装Git  yum install -y git
+	6.安装Git  yum install -y git
 
 	安装前端控制UI：
 	git clone https://github.com/ziahamza/webui-aria2 #从git上下载webui-aria2 UI端
+![photo](https://github.com/vekrio/stu/blob/master/20170718/photo/20170410173751749_1.png?raw=true)
 
 
-	7安装httpd    yum  -y  install  httpd
+	7.安装httpd    yum  -y  install  httpd
+![photo](https://github.com/vekrio/stu/blob/master/20170718/photo/20170410174022231_2.png?raw=true)
 
 
 
-	8把克隆下载的webui-aria2 复制到/var/www/html/下  我就不讲命令了，自己百度linux复制或移动目录命令
+	8.把克隆下载的webui-aria2 复制到/var/www/html/下  我就不讲命令了，自己百度linux复制或移动目录命令
+![photo](https://github.com/vekrio/stu/blob/master/20170718/photo/20170410174533858_3.png?raw=true)
 
-	9安装完成后，“aria2c  --enable-rpc  --rpc-listen-all”启用监听RP
+	9.安装完成后，“aria2c  --enable-rpc  --rpc-listen-all”启用监听RP
 	我是这个鬼样子
+![photo](https://github.com/vekrio/stu/blob/master/20170718/photo/20170410174852531_3.png?raw=true)
 	解决办法，我是重启系统也就是centos7，原因应该是开头时候我们测试aria2时候端口占用。
 	然后我们就开始测试连通性了
-	10浏览器访问推荐使用谷歌浏览器或火狐浏览器
+	10.浏览器访问推荐使用谷歌浏览器或火狐浏览器
 
 		http://IP地址/webui，就可访问成功；如果报错，在“设置”--> “服务器设置”中“主机：”后后面填写自己的IP地址就可；
 
 		如果Aria2.conf配置文件中启用了RPC安全认证，需要在WEB客户端设置中填入RPC用户名和密码，否则客户端报错！如果是自己用，
 			个人觉得没必要用RPC认证，打开/etc/aria2.conf删除里面的RPC用户名和密码
+![photo](https://github.com/vekrio/stu/blob/master/20170718/photo/20170410175602774_5.png?raw=true)
 
-	11其他开机启动就自己百度呗
+	11.其他开机启动就自己百度呗
 	无错误后台启动：
 	aria2c --conf-path=/etc/aria2/aria2.conf -D
 	下载目录看见web界面快速访问设置dir吗

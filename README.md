@@ -970,3 +970,8 @@ linux学习
 	setsebool -P httpd_can_network_connect 1
 
 	systemctl restart nginx.service
+	
+	
+#  17.[思科CISCO4900M交换机CONSOLE密码破解](http://jingyan.baidu.com/article/d621e8da2d8a622865913f2a.html)
+
+#  18.[cisco3560交换机密码破解](http://jingyan.baidu.com/article/0964eca270688a8285f536eb.html)

@@ -1167,3 +1167,8 @@ linux学习
 	下载目录看见web界面快速访问设置dir吗
 	参考http://www.2kil.com/9472.html    http://painting.blog.51cto.com/10476797/1730074
 >>>>>>> 15940261b72754889dcf111d6a427bc538e51c82
+
+
+# 	19.[cisco3560交换机密码破解:新IOS](http://jingyan.baidu.com/article/0964eca270688a8285f536eb.html)
+
+#	20.[思科CISCO4900M交换机CONSOLE密码破解:旧IOS](http://jingyan.baidu.com/article/d621e8da2d8a622865913f2a.html)

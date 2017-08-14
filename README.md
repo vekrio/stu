@@ -972,6 +972,198 @@ linux学习
 	systemctl restart nginx.service
 	
 	
+<<<<<<< HEAD
 #  17.[思科CISCO4900M交换机CONSOLE密码破解](http://jingyan.baidu.com/article/d621e8da2d8a622865913f2a.html)
 
 #  18.[cisco3560交换机密码破解](http://jingyan.baidu.com/article/0964eca270688a8285f536eb.html)
+=======
+# 17.[分区工具parted的详解及常用分区使用方法](http://zhangmingqian.blog.51cto.com/1497276/1068779)
+	
+	一、         parted的用途及说明
+	概括使用说明：
+	
+	parted用于对磁盘（或RAID磁盘）进行分区及管理，与fdisk分区工具相比，支持2TB以上的磁盘分区，并且允许调整分区的大小。
+	
+	GNU手册说明：
+	
+	parted是一个用于硬盘分区或调整分区大小的工具。使用它你可以创建、清除、调整、移动和复制ext2、ext3、linux-swap、FAT、FAT32和
+	
+	reiserfs分区；也能创建、调整和移动苹果系统的HFS分区；还能检测jfs、ntfs、ufs和xfs分区。该工具常用于为新安装的操作系统创建空
+	ygfv bcv b nm  b
+	间，重新分配硬盘使用情况，在将数据拷贝到新硬盘的时候也常常使用。
+
+	二、         parted的使用方法及步骤
+	
+	1、对磁盘进行分区
+![图片1](https://github.com/vekrio/stu/blob/master/20170718/photo/%E5%88%86%E5%8C%BA%E5%B7%A5%E5%85%B7parted%E7%9A%84%E8%AF%A6%E8%A7%A3%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%88%86%E5%8C%BA%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%951.png?raw=true)
+![图片2](https://github.com/vekrio/stu/blob/master/20170718/photo/%E5%88%86%E5%8C%BA%E5%B7%A5%E5%85%B7parted%E7%9A%84%E8%AF%A6%E8%A7%A3%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%88%86%E5%8C%BA%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%952.png?raw=true)
+![图片3](https://github.com/vekrio/stu/blob/master/20170718/photo/%E5%88%86%E5%8C%BA%E5%B7%A5%E5%85%B7parted%E7%9A%84%E8%AF%A6%E8%A7%A3%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%88%86%E5%8C%BA%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%953.png?raw=true)
+![图片4](https://github.com/vekrio/stu/blob/master/20170718/photo/%E5%88%86%E5%8C%BA%E5%B7%A5%E5%85%B7parted%E7%9A%84%E8%AF%A6%E8%A7%A3%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%88%86%E5%8C%BA%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%954.png?raw=true)
+
+	  [root@CentOS7 ~]# parted /dev/sdb
+	GNU Parted 3.1
+	Using /dev/sdb
+	Welcome to GNU Parted! Type 'help' to view a list of commands.
+	(parted) p                                                                
+	Model: ATA ST4000NM0035-1V4 (scsi)
+	Disk /dev/sdb: 4001GB
+	Sector size (logical/physical): 512B/512B
+	Partition Table: gpt
+	Disk Flags: 
+
+	Number  Start   End     Size    File system  Name  Flags
+	 1      17.4kB  4001GB  4001GB               p1
+
+	(parted) q                                                                
+	[root@CentOS7 ~]# mkfs.ext4 /dev/sdb1
+	mke2fs 1.42.9 (28-Dec-2013)
+	Filesystem label=
+	OS type: Linux
+	Block size=4096 (log=2)
+	Fragment size=4096 (log=2)
+	Stride=0 blocks, Stripe width=0 blocks
+	244195328 inodes, 976754637 blocks
+	48837731 blocks (5.00%) reserved for the super user
+	First data block=0
+	Maximum filesystem blocks=3124756480
+	29809 block groups
+	32768 blocks per group, 32768 fragments per group
+	8192 inodes per group
+	Superblock backups stored on blocks: 
+			32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+			4096000, 7962624, 11239424, 20480000, 23887872, 71663616, 78675968, 
+			102400000, 214990848, 512000000, 550731776, 644972544
+
+	Allocating group tables: done                            
+	Writing inode tables: done                            
+	Creating journal (32768 blocks): done
+	Writing superblocks and filesystem accounting information: done       
+
+	[root@CentOS7 ~]# pvs
+	  PV         VG             Fmt  Attr PSize  PFree 
+	  /dev/sda2  centos_centos7 lvm2 a--  74.04g 64.00m
+	[root@CentOS7 ~]# df -h
+	Filesystem                       Size  Used Avail Use% Mounted on
+	/dev/mapper/centos_centos7-root   48G  5.7G   42G  12% /
+	devtmpfs                         1.7G     0  1.7G   0% /dev
+	tmpfs                            1.8G  140K  1.8G   1% /dev/shm
+	tmpfs                            1.8G  8.9M  1.7G   1% /run
+	tmpfs                            1.8G     0  1.8G   0% /sys/fs/cgroup
+	/dev/mapper/centos_centos7-home   24G  3.7G   20G  16% /home
+	/dev/sda1                        497M  125M  373M  26% /boot
+	[root@CentOS7 ~]# mount /dev/sdb1 /home/u
+	[root@CentOS7 ~]# df -h
+	Filesystem                       Size  Used Avail Use% Mounted on
+	/dev/mapper/centos_centos7-root   48G  5.7G   42G  12% /
+	devtmpfs                         1.7G     0  1.7G   0% /dev
+	tmpfs                            1.8G  140K  1.8G   1% /dev/shm
+	tmpfs                            1.8G  8.9M  1.7G   1% /run
+	tmpfs                            1.8G     0  1.8G   0% /sys/fs/cgroup
+	/dev/mapper/centos_centos7-home   24G  3.7G   20G  16% /home
+	/dev/sda1                        497M  125M  373M  26% /boot
+	/dev/sdb1                        3.6T   89M  3.4T   1% /home/u
+	[root@CentOS7 ~]# 
+	
+	
+#  18.[centos7安装aria2及web端](http://blog.csdn.net/yangfanv/article/details/69952065)
+	1.安装mini版centos7系统默认关闭防火墙和selinux
+	2.安装wget    yum install -y wget
+	3.安装EPEL源
+	wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm   #下载epel源rpm包
+
+	rpm -ivh epel-release-latest-7.noarch.rpm        #安装rpm包
+	4.安装Aria2
+
+	yum install aria2
+
+	5.生成配置文件并编辑
+	mkdir /etc/aria2/   #创建目录
+	vi /etc/aria2/aria2.conf   #创建配置文件
+	
+	
+	配置文件内容:
+	
+	#用户名
+	#rpc-user=user
+	#密码
+	#rpc-passwd=passwd
+	#上面的认证方式不建议使用,建议使用下面的token方式
+	#设置加密的密钥
+	#rpc-secret=token
+	#允许rpc
+	enable-rpc=true
+	#允许所有来源, web界面跨域权限需要
+	rpc-allow-origin-all=true
+	#允许外部访问，false的话只监听本地端口
+	rpc-listen-all=true
+	#RPC端口, 仅当默认端口被占用时修改
+	rpc-listen-port=6800
+	#最大同时下载数(任务数), 路由建议值: 3
+	max-concurrent-downloads=5
+	#断点续传
+	continue=true
+	#同服务器连接数
+	max-connection-per-server=5
+	#最小文件分片大小, 下载线程数上限取决于能分出多少片, 对于小文件重要
+	min-split-size=10M
+	#单文件最大线程数, 路由建议值: 5
+	split=10
+	#下载速度限制
+	max-overall-download-limit=0
+	#单文件速度限制
+	max-download-limit=0
+	#上传速度限制
+	max-overall-upload-limit=0
+	#单文件速度限制
+	max-upload-limit=0
+	#断开速度过慢的连接
+	#lowest-speed-limit=0
+	#验证用，需要1.16.1之后的release版本
+	#referer=*
+	#文件保存路径, 默认为当前启动位置
+	dir=/root/downloads
+	#文件缓存, 使用内置的文件缓存, 如果你不相信Linux内核文件缓存和磁盘内置缓存时使用
+	#disk-cache=0
+	#另一种Linux文件缓存方式
+	#enable-mmap=true
+	#文件预分配, 能有效降低文件碎片, 提高磁盘性能. 缺点是预分配时间较长
+	file-allocation=prealloc
+	
+	
+	启动测试：
+	aria2c --conf-path=/etc/aria2/aria2.conf
+
+	6.安装Git  yum install -y git
+
+	安装前端控制UI：
+	git clone https://github.com/ziahamza/webui-aria2 #从git上下载webui-aria2 UI端
+![photo](https://github.com/vekrio/stu/blob/master/20170718/photo/20170410173751749_1.png?raw=true)
+
+
+	7.安装httpd    yum  -y  install  httpd
+![photo](https://github.com/vekrio/stu/blob/master/20170718/photo/20170410174022231_2.png?raw=true)
+
+
+
+	8.把克隆下载的webui-aria2 复制到/var/www/html/下  我就不讲命令了，自己百度linux复制或移动目录命令
+![photo](https://github.com/vekrio/stu/blob/master/20170718/photo/20170410174533858_3.png?raw=true)
+
+	9.安装完成后，“aria2c  --enable-rpc  --rpc-listen-all”启用监听RP
+	我是这个鬼样子
+![photo](https://github.com/vekrio/stu/blob/master/20170718/photo/20170410174852531_3.png?raw=true)
+	解决办法，我是重启系统也就是centos7，原因应该是开头时候我们测试aria2时候端口占用。
+	然后我们就开始测试连通性了
+	10.浏览器访问推荐使用谷歌浏览器或火狐浏览器
+
+		http://IP地址/webui，就可访问成功；如果报错，在“设置”--> “服务器设置”中“主机：”后后面填写自己的IP地址就可；
+
+		如果Aria2.conf配置文件中启用了RPC安全认证，需要在WEB客户端设置中填入RPC用户名和密码，否则客户端报错！如果是自己用，
+			个人觉得没必要用RPC认证，打开/etc/aria2.conf删除里面的RPC用户名和密码
+![photo](https://github.com/vekrio/stu/blob/master/20170718/photo/20170410175602774_5.png?raw=true)
+
+	11.其他开机启动就自己百度呗
+	无错误后台启动：
+	aria2c --conf-path=/etc/aria2/aria2.conf -D
+	下载目录看见web界面快速访问设置dir吗
+	参考http://www.2kil.com/9472.html    http://painting.blog.51cto.com/10476797/1730074
+>>>>>>> 15940261b72754889dcf111d6a427bc538e51c82

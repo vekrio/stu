@@ -1,11 +1,12 @@
 # stu
 linux学习 
 
-# 1:[centos7查看版本信息](https://github.com/vekrio/stu/blob/master/20170718/Redhat-release)
+# 1:[centos7查看版本信息](http://jingyan.baidu.com/article/e6c8503c062dcee54f1a18d0.html)
+		登陆root帐户，输入 cat  /etc/redhat-release，即可显示系统版本
 
-# 2:[ntp安装](https://github.com/vekrio/stu/blob/master/20170718/ntp)
+# 2:[ntp安装](http://jingyan.baidu.com/article/22fe7cedd62b153002617ff2.html)
 
-# 3:[centos7查看已启动的服务列表](https://github.com/vekrio/stu/blob/master/20170718/list-unit-files)
+# 3:[centos7查看已启动的服务列表](http://man.linuxde.net/systemctl)
 
 # 4:[centos7仓库导入公钥](https://github.com/vekrio/stu/blob/master/20170718/%E5%AF%BC%E5%85%A5%E5%85%AC%E9%92%A5)
 

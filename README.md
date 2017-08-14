@@ -3,6 +3,13 @@ linux学习
 
 # 1:[centos7查看版本信息](http://jingyan.baidu.com/article/e6c8503c062dcee54f1a18d0.html)
 		登陆root帐户，输入 cat  /etc/redhat-release，即可显示系统版本
+		
+		输入 uname  -r ，可以查询内核版本
+		
+		输入 df  -h，可以查看各分区的使用情况。其中，从左到右各列的内容依次是：
+           文件系统、总大小、已使用大小、剩余大小、使用率、挂载点。
+		   
+		输入du  -sh，则可以查看当前文件夹所占空间。它的功能等同于 du . -sh。而输入 du 目录名 -sh，则可以查看指定目录的大小。
 
 # 2:[ntp安装](http://jingyan.baidu.com/article/22fe7cedd62b153002617ff2.html)
 
@@ -1173,3 +1180,40 @@ linux学习
 # 	19.[cisco3560交换机密码破解:新IOS](http://jingyan.baidu.com/article/0964eca270688a8285f536eb.html)
 
 #	20.[思科CISCO4900M交换机CONSOLE密码破解:旧IOS](http://jingyan.baidu.com/article/d621e8da2d8a622865913f2a.html)
+
+#	21.[yum -y upgrade 和 yum -y update 区别](http://www.linuxidc.com/Linux/2013-08/88808.htm)
+	分别测试yum -y upgrade和yum -y update
+
+	升级前
+
+	系统版本：  CentOS5.5
+
+	内核版本：  2.6.18-194.el5
+
+	升级前做过简单配置文件修改
+
+	yum -y upgrade    升级后
+
+	系统版本：    centos5.7
+
+	内核版本：  2.6.18-194.el5
+
+	系统和软件配置不做修改
+
+	yum -y update    升级后
+
+	系统版本：    centos5.7
+
+	内核版本：    2.6.18-238.el5
+
+	系统和软件配置文件更新
+
+	结论：
+
+	yum -y update
+
+	升级所有包，改变软件设置和系统设置,系统版本内核都升级
+
+	yum -y upgrade
+
+	升级所有包，不改变软件设置和系统设置，系统版本升级，内核不改变

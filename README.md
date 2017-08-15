@@ -1217,3 +1217,370 @@ linux学习
 	yum -y upgrade
 
 	升级所有包，不改变软件设置和系统设置，系统版本升级，内核不改变
+	
+	
+#	22。centos7.2测速
+
+##	[root@localhost ~]# yum -y install pip
+	已加载插件：fastestmirror, langpacks
+	Repodata is over 2 weeks old. Install yum-cron? Or run: yum makecache fast
+	base                                                                                                                                 | 3.6 kB  00:00:00     
+	extras                                                                                                                               | 3.4 kB  00:00:00     
+	updates                                                                                                                              | 3.4 kB  00:00:00     
+	(1/2): extras/7/x86_64/primary_db                                                                                                    | 191 kB  00:00:01     
+	(2/2): updates/7/x86_64/primary_db                                                                                                   | 7.8 MB  00:00:04     
+	Determining fastest mirrors
+	 * base: mirrors.cn99.com
+	 * extras: mirrors.zju.edu.cn
+	 * updates: mirrors.cn99.com
+	没有可用软件包 pip。
+	错误：无须任何处理
+##	[root@localhost ~]# yum -y install epel-release
+	已加载插件：fastestmirror, langpacks
+	Loading mirror speeds from cached hostfile
+	 * base: mirrors.cn99.com
+	 * extras: mirrors.zju.edu.cn
+	 * updates: mirrors.cn99.com
+	正在解决依赖关系
+	--> 正在检查事务
+	---> 软件包 epel-release.noarch.0.7-9 将被 安装
+	--> 解决依赖关系完成
+
+	依赖关系解决
+
+	============================================================================================================================================================
+	 Package                                   架构                                版本                               源                                   大小
+	============================================================================================================================================================
+	正在安装:
+	 epel-release                              noarch                              7-9                                extras                               14 k
+
+	事务概要
+	============================================================================================================================================================
+	安装  1 软件包
+
+	总下载量：14 k
+	安装大小：24 k
+	Downloading packages:
+	警告：/var/cache/yum/x86_64/7/extras/packages/epel-release-7-9.noarch.rpm: 头V3 RSA/SHA256 Signature, 密钥 ID f4a80eb5: NOKEY
+	epel-release-7-9.noarch.rpm 的公钥尚未安装
+	epel-release-7-9.noarch.rpm                                                                                                          |  14 kB  00:00:00     
+	从 file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7 检索密钥
+	导入 GPG key 0xF4A80EB5:
+	 用户ID     : "CentOS-7 Key (CentOS 7 Official Signing Key) <security@centos.org>"
+	 指纹       : 6341 ab27 53d7 8a78 a7c2 7bb1 24c6 a8a7 f4a8 0eb5
+	 软件包     : centos-release-7-2.1511.el7.centos.2.10.x86_64 (@anaconda)
+	 来自       : /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+	Running transaction check
+	Running transaction test
+	Transaction test succeeded
+	Running transaction
+	  正在安装    : epel-release-7-9.noarch                                                                                                                 1/1 
+	  验证中      : epel-release-7-9.noarch                                                                                                                 1/1 
+
+	已安装:
+	  epel-release.noarch 0:7-9                                                                                                                                 
+
+	完毕！
+##	[root@localhost ~]# yum -y install python-pip
+	已加载插件：fastestmirror, langpacks
+	epel/x86_64/metalink                                                                                                                 | 6.5 kB  00:00:00     
+	epel                                                                                                                                 | 4.3 kB  00:00:00     
+	(1/3): epel/x86_64/updateinfo                                                                                                        | 807 kB  00:00:00     
+	(2/3): epel/x86_64/group_gz                                                                                                          | 170 kB  00:00:01     
+	epel/x86_64/primary_db         FAILED                                          =========================-                 ]  2.1 B/s | 3.9 MB 253:18:36 ETA 
+	https://ftp.yz.yamagata-u.ac.jp/pub/linux/fedora-projects/epel/7/x86_64/repodata/6d24201966188d08f2377f99f6d17600294a70599ad330dbc6a156d1e2084966-primary.sqlite.xz: [Errno 12] Timeout on https://ftp.yz.yamagata-u.ac.jp/pub/linux/fedora-projects/epel/7/x86_64/repodata/6d24201966188d08f2377f99f6d17600294a70599ad330dbc6a156d1e2084966-primary.sqlite.xz: (28, 'Operation too slow. Less than 1000 bytes/sec transferred the last 30 seconds')
+	正在尝试其它镜像。
+	(3/3): epel/x86_64/primary_db                                                                                                        | 4.7 MB  00:00:09     
+	Loading mirror speeds from cached hostfile
+	 * base: mirrors.cn99.com
+	 * epel: mirrors.ustc.edu.cn
+	 * extras: mirrors.zju.edu.cn
+	 * updates: mirrors.cn99.com
+	正在解决依赖关系
+	--> 正在检查事务
+	---> 软件包 python2-pip.noarch.0.8.1.2-5.el7 将被 安装
+	--> 解决依赖关系完成
+
+	依赖关系解决
+
+	============================================================================================================================================================
+	 Package                                 架构                               版本                                     源                                大小
+	============================================================================================================================================================
+	正在安装:
+	 python2-pip                             noarch                             8.1.2-5.el7                              epel                             1.7 M
+
+	事务概要
+	============================================================================================================================================================
+	安装  1 软件包
+
+	总下载量：1.7 M
+	安装大小：7.2 M
+	Downloading packages:
+	警告：/var/cache/yum/x86_64/7/epel/packages/python2-pip-8.1.2-5.el7.noarch.rpm: 头V3 RSA/SHA256 Signature, 密钥 ID 352c64e5: NOKEY/s |    0 B  --:--:-- ETA 
+	python2-pip-8.1.2-5.el7.noarch.rpm 的公钥尚未安装
+	python2-pip-8.1.2-5.el7.noarch.rpm                                                                                                   | 1.7 MB  00:00:00     
+	从 file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7 检索密钥
+	导入 GPG key 0x352C64E5:
+	 用户ID     : "Fedora EPEL (7) <epel@fedoraproject.org>"
+	 指纹       : 91e9 7d7c 4a5e 96f1 7f3e 888f 6a2f aea2 352c 64e5
+	 软件包     : epel-release-7-9.noarch (@extras)
+	 来自       : /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+	Running transaction check
+	Running transaction test
+	Transaction test succeeded
+	Running transaction
+	  正在安装    : python2-pip-8.1.2-5.el7.noarch                                                                                                          1/1 
+	  验证中      : python2-pip-8.1.2-5.el7.noarch                                                                                                          1/1 
+
+	已安装:
+	  python2-pip.noarch 0:8.1.2-5.el7                                                                                                                          
+
+	完毕！
+
+##	[root@localhost ~]# easy_install speedtest-cli
+	Searching for speedtest-cli
+	Best match: speedtest-cli 1.0.6
+	Processing speedtest_cli-1.0.6-py2.7.egg
+	speedtest-cli 1.0.6 is already the active version in easy-install.pth
+	Installing speedtest script to /usr/bin
+	Installing speedtest-cli script to /usr/bin
+
+	Using /usr/lib/python2.7/site-packages/speedtest_cli-1.0.6-py2.7.egg
+	Processing dependencies for speedtest-cli
+	Finished processing dependencies for speedtest-cli
+
+##	[root@localhost ~]# pip install --upgrade pip
+	Collecting pip
+	  Downloading pip-9.0.1-py2.py3-none-any.whl (1.3MB)
+		100% |████████████████████████████████| 1.3MB 31kB/s 
+	Installing collected packages: pip
+	  Found existing installation: pip 8.1.2
+		Uninstalling pip-8.1.2:
+		  Successfully uninstalled pip-8.1.2
+	Successfully installed pip-9.0.1
+##	[root@localhost ~]# pip install git https://github.com/sivel/speedtest-cli.git
+	Collecting https://github.com/sivel/speedtest-cli.git
+	  Downloading https://github.com/sivel/speedtest-cli.git
+		 / 122kB 180kB/s
+	  Cannot unpack file /tmp/pip-h6PCAK-unpack/speedtest-cli.git (downloaded from /tmp/pip-Jq9olp-build, content-type: text/html; charset=utf-8); cannot detect archive format
+	Cannot determine archive format of /tmp/pip-Jq9olp-build
+##	[root@localhost ~]# ls -al
+	总用量 36
+	dr-xr-x---.  5 root root 4096 8月  15 21:27 .
+	dr-xr-xr-x. 17 root root 4096 12月 28 2016 ..
+	-rw-------.  1 root root 1536 12月 28 2016 anaconda-ks.cfg
+	-rw-------.  1 root root   25 8月  15 21:27 .bash_history
+	-rw-r--r--.  1 root root   18 12月 29 2013 .bash_logout
+	-rw-r--r--.  1 root root  176 12月 29 2013 .bash_profile
+	-rw-r--r--.  1 root root  176 12月 29 2013 .bashrc
+	drwxr-xr-x.  4 root root   27 8月  15 21:27 .cache
+	drwxr-xr-x.  3 root root   17 7月  11 15:56 .config
+	-rw-r--r--.  1 root root  100 12月 29 2013 .cshrc
+	drwxr-----.  3 root root   18 8月  15 21:19 .pki
+	-rw-r--r--.  1 root root  129 12月 29 2013 .tcshrc
+
+##	[root@localhost ~]# yum -y install git
+	已加载插件：fastestmirror, langpacks
+	Loading mirror speeds from cached hostfile
+	 * base: mirrors.cn99.com
+	 * epel: mirrors.ustc.edu.cn
+	 * extras: mirrors.zju.edu.cn
+	 * updates: mirrors.cn99.com
+	正在解决依赖关系
+	--> 正在检查事务
+	---> 软件包 git.x86_64.0.1.8.3.1-6.el7_2.1 将被 安装
+	--> 正在处理依赖关系 perl-Git = 1.8.3.1-6.el7_2.1，它被软件包 git-1.8.3.1-6.el7_2.1.x86_64 需要
+	--> 正在处理依赖关系 perl(Term::ReadKey)，它被软件包 git-1.8.3.1-6.el7_2.1.x86_64 需要
+	--> 正在处理依赖关系 perl(Git)，它被软件包 git-1.8.3.1-6.el7_2.1.x86_64 需要
+	--> 正在处理依赖关系 perl(Error)，它被软件包 git-1.8.3.1-6.el7_2.1.x86_64 需要
+	--> 正在检查事务
+	---> 软件包 perl-Error.noarch.1.0.17020-2.el7 将被 安装
+	---> 软件包 perl-Git.noarch.0.1.8.3.1-6.el7_2.1 将被 安装
+	---> 软件包 perl-TermReadKey.x86_64.0.2.30-20.el7 将被 安装
+	--> 解决依赖关系完成
+
+	依赖关系解决
+
+	============================================================================================================================================================
+	 Package                                   架构                            版本                                         源                             大小
+	============================================================================================================================================================
+	正在安装:
+	 git                                       x86_64                          1.8.3.1-6.el7_2.1                            base                          4.4 M
+	为依赖而安装:
+	 perl-Error                                noarch                          1:0.17020-2.el7                              base                           32 k
+	 perl-Git                                  noarch                          1.8.3.1-6.el7_2.1                            base                           53 k
+	 perl-TermReadKey                          x86_64                          2.30-20.el7                                  base                           31 k
+
+	事务概要
+	============================================================================================================================================================
+	安装  1 软件包 (+3 依赖软件包)
+
+	总下载量：4.5 M
+	安装大小：22 M
+	Downloading packages:
+	(1/4): perl-Error-0.17020-2.el7.noarch.rpm                                                                                           |  32 kB  00:00:00     
+	(2/4): perl-TermReadKey-2.30-20.el7.x86_64.rpm                                                                                       |  31 kB  00:00:00     
+	(3/4): perl-Git-1.8.3.1-6.el7_2.1.noarch.rpm                                                                                         |  53 kB  00:00:00     
+	(4/4): git-1.8.3.1-6.el7_2.1.x86_64.rpm                                                                                              | 4.4 MB  00:00:02     
+	------------------------------------------------------------------------------------------------------------------------------------------------------------
+	总计                                                                                                                        1.7 MB/s | 4.5 MB  00:00:02     
+	Running transaction check
+	Running transaction test
+	Transaction test succeeded
+	Running transaction
+	  正在安装    : 1:perl-Error-0.17020-2.el7.noarch                                                                                                       1/4 
+	  正在安装    : perl-TermReadKey-2.30-20.el7.x86_64                                                                                                     2/4 
+	  正在安装    : git-1.8.3.1-6.el7_2.1.x86_64                                                                                                            3/4 
+	  正在安装    : perl-Git-1.8.3.1-6.el7_2.1.noarch                                                                                                       4/4 
+	  验证中      : perl-Git-1.8.3.1-6.el7_2.1.noarch                                                                                                       1/4 
+	  验证中      : perl-TermReadKey-2.30-20.el7.x86_64                                                                                                     2/4 
+	  验证中      : 1:perl-Error-0.17020-2.el7.noarch                                                                                                       3/4 
+	  验证中      : git-1.8.3.1-6.el7_2.1.x86_64                                                                                                            4/4 
+
+	已安装:
+	  git.x86_64 0:1.8.3.1-6.el7_2.1                                                                                                                            
+
+	作为依赖被安装:
+	  perl-Error.noarch 1:0.17020-2.el7                perl-Git.noarch 0:1.8.3.1-6.el7_2.1                perl-TermReadKey.x86_64 0:2.30-20.el7               
+
+	完毕！
+##	[root@localhost ~]# git clone https://github.com/sivel/speedtest-cli.git
+	正克隆到 'speedtest-cli'...
+	remote: Counting objects: 913, done.
+	remote: Total 913 (delta 0), reused 0 (delta 0), pack-reused 913
+	接收对象中: 100% (913/913), 264.34 KiB | 44.00 KiB/s, done.
+	处理 delta 中: 100% (515/515), done.
+	[root@localhost ~]# python speedtest-cli/setup.py install
+
+	来自: http://man.linuxde.net/speedtest-clirunning install
+	running bdist_egg
+	running egg_info
+	creating speedtest_cli.egg-info
+	writing speedtest_cli.egg-info/PKG-INFO
+	writing top-level names to speedtest_cli.egg-info/top_level.txt
+	writing dependency_links to speedtest_cli.egg-info/dependency_links.txt
+	writing entry points to speedtest_cli.egg-info/entry_points.txt
+	writing manifest file 'speedtest_cli.egg-info/SOURCES.txt'
+	warning: manifest_maker: standard file 'setup.py' not found
+
+	file speedtest.py (for module speedtest) not found
+	file speedtest_cli.py (for module speedtest_cli) not found
+	reading manifest file 'speedtest_cli.egg-info/SOURCES.txt'
+	writing manifest file 'speedtest_cli.egg-info/SOURCES.txt'
+	installing library code to build/bdist.linux-x86_64/egg
+	running install_lib
+	running build_py
+	file speedtest.py (for module speedtest) not found
+	file speedtest_cli.py (for module speedtest_cli) not found
+	file speedtest.py (for module speedtest) not found
+	file speedtest_cli.py (for module speedtest_cli) not found
+	warning: install_lib: 'build/lib' does not exist -- no Python modules to install
+
+	creating build
+	creating build/bdist.linux-x86_64
+	creating build/bdist.linux-x86_64/egg
+	creating build/bdist.linux-x86_64/egg/EGG-INFO
+	copying speedtest_cli.egg-info/PKG-INFO -> build/bdist.linux-x86_64/egg/EGG-INFO
+	copying speedtest_cli.egg-info/SOURCES.txt -> build/bdist.linux-x86_64/egg/EGG-INFO
+	copying speedtest_cli.egg-info/dependency_links.txt -> build/bdist.linux-x86_64/egg/EGG-INFO
+	copying speedtest_cli.egg-info/entry_points.txt -> build/bdist.linux-x86_64/egg/EGG-INFO
+	copying speedtest_cli.egg-info/top_level.txt -> build/bdist.linux-x86_64/egg/EGG-INFO
+	zip_safe flag not set; analyzing archive contents...
+	creating dist
+	creating 'dist/speedtest_cli-1.0.6-py2.7.egg' and adding 'build/bdist.linux-x86_64/egg' to it
+	removing 'build/bdist.linux-x86_64/egg' (and everything under it)
+	Processing speedtest_cli-1.0.6-py2.7.egg
+	Removing /usr/lib/python2.7/site-packages/speedtest_cli-1.0.6-py2.7.egg
+	Copying speedtest_cli-1.0.6-py2.7.egg to /usr/lib/python2.7/site-packages
+	speedtest-cli 1.0.6 is already the active version in easy-install.pth
+	Installing speedtest script to /usr/bin
+	Installing speedtest-cli script to /usr/bin
+
+	Installed /usr/lib/python2.7/site-packages/speedtest_cli-1.0.6-py2.7.egg
+	Processing dependencies for speedtest-cli==1.0.6
+	Finished processing dependencies for speedtest-cli==1.0.6
+
+##	[root@localhost ~]# ls -al
+	总用量 44
+	dr-xr-x---.  9 root root 4096 8月  15 21:32 .
+	dr-xr-xr-x. 17 root root 4096 12月 28 2016 ..
+	-rw-------.  1 root root 1536 12月 28 2016 anaconda-ks.cfg
+	-rw-------.  1 root root   25 8月  15 21:27 .bash_history
+	-rw-r--r--.  1 root root   18 12月 29 2013 .bash_logout
+	-rw-r--r--.  1 root root  176 12月 29 2013 .bash_profile
+	-rw-r--r--.  1 root root  176 12月 29 2013 .bashrc
+	drwxr-xr-x.  3 root root   31 8月  15 21:32 build
+	drwxr-xr-x.  4 root root   27 8月  15 21:27 .cache
+	drwxr-xr-x.  3 root root   17 7月  11 15:56 .config
+	-rw-r--r--.  1 root root  100 12月 29 2013 .cshrc
+	drwxr-xr-x.  2 root root   42 8月  15 21:32 dist
+	drwxr-----.  3 root root   18 8月  15 21:19 .pki
+	drwxr-xr-x.  3 root root 4096 8月  15 21:32 speedtest-cli
+	drwxr-xr-x.  2 root root 4096 8月  15 21:32 speedtest_cli.egg-info
+	-rw-r--r--.  1 root root  129 12月 29 2013 .tcshrc
+##	[root@localhost ~]# chmod +x speedtest-cli
+
+##	[root@localhost ~]# ls -al
+	总用量 44
+	dr-xr-x---.  9 root root 4096 8月  15 21:32 .
+	dr-xr-xr-x. 17 root root 4096 12月 28 2016 ..
+	-rw-------.  1 root root 1536 12月 28 2016 anaconda-ks.cfg
+	-rw-------.  1 root root   25 8月  15 21:27 .bash_history
+	-rw-r--r--.  1 root root   18 12月 29 2013 .bash_logout
+	-rw-r--r--.  1 root root  176 12月 29 2013 .bash_profile
+	-rw-r--r--.  1 root root  176 12月 29 2013 .bashrc
+	drwxr-xr-x.  3 root root   31 8月  15 21:32 build
+	drwxr-xr-x.  4 root root   27 8月  15 21:27 .cache
+	drwxr-xr-x.  3 root root   17 7月  11 15:56 .config
+	-rw-r--r--.  1 root root  100 12月 29 2013 .cshrc
+	drwxr-xr-x.  2 root root   42 8月  15 21:32 dist
+	drwxr-----.  3 root root   18 8月  15 21:19 .pki
+	drwxr-xr-x.  3 root root 4096 8月  15 21:32 speedtest-cli
+	drwxr-xr-x.  2 root root 4096 8月  15 21:32 speedtest_cli.egg-info
+	-rw-r--r--.  1 root root  129 12月 29 2013 .tcshrc
+##	[root@localhost ~]# cd speedtest-cli/
+	[root@localhost speedtest-cli]# ll
+##	总用量 96
+	-rw-r--r--. 1 root root  1671 8月  15 21:32 CONTRIBUTING.md
+	-rw-r--r--. 1 root root 11358 8月  15 21:32 LICENSE
+	-rw-r--r--. 1 root root    35 8月  15 21:32 MANIFEST.in
+	-rw-r--r--. 1 root root  5215 8月  15 21:32 README.rst
+	-rw-r--r--. 1 root root    20 8月  15 21:32 setup.cfg
+	-rw-r--r--. 1 root root  3196 8月  15 21:32 setup.py
+	-rw-r--r--. 1 root root  2385 8月  15 21:32 speedtest-cli.1
+	-rw-r--r--. 1 root root  1200 8月  15 21:32 speedtest_cli.py
+	-rwxr-xr-x. 1 root root 47228 8月  15 21:32 speedtest.py
+	-rw-r--r--. 1 root root   333 8月  15 21:32 tox.ini
+##	[root@localhost speedtest-cli]# ./speedtest.py 
+	Retrieving speedtest.net configuration...
+	Testing from China Telecom (61.155.49.166)...
+	Retrieving speedtest.net server list...
+	Selecting best server based on ping...
+	Hosted by China Unicom (Nanjing) [1.80 km]: 12.652 ms
+	Testing download speed................................................................................
+	Download: 71.93 Mbit/s
+	Testing upload speed................................................................................................
+	Upload: 16.05 Mbit/s
+##	[root@localhost speedtest-cli]# ./speedtest.py 
+	Retrieving speedtest.net configuration...
+	Testing from China Telecom (61.155.49.166)...
+	Retrieving speedtest.net server list...
+	Selecting best server based on ping...
+	Hosted by China Unicom (Nanjing) [1.80 km]: 14.923 ms
+	Testing download speed................................................................................
+	Download: 74.22 Mbit/s
+	Testing upload speed................................................................................................
+	Upload: 16.66 Mbit/s
+##	[root@localhost speedtest-cli]# speedtest-cli --list | grep China
+
+	来自: http://man.linuxde.net/speedtest-cliTraceback (most recent call last):
+	  File "/usr/bin/speedtest-cli", line 9, in <module>
+		load_entry_point('speedtest-cli==1.0.6', 'console_scripts', 'speedtest-cli')()
+	  File "/usr/lib/python2.7/site-packages/pkg_resources.py", line 378, in load_entry_point
+		return get_distribution(dist).load_entry_point(group, name)
+	  File "/usr/lib/python2.7/site-packages/pkg_resources.py", line 2566, in load_entry_point
+		return ep.load()
+	  File "/usr/lib/python2.7/site-packages/pkg_resources.py", line 2260, in load
+		entry = __import__(self.module_name, globals(),globals(), ['__name__'])
+	ImportError: No module named speedtest
+

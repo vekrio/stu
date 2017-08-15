@@ -1283,7 +1283,7 @@ linux学习
 		
 #	23。centos7.2测速
 
-   首先安装epel扩展源：
+    首先安装epel扩展源：
 
 　　yum -y install epel-release
 

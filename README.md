@@ -1631,6 +1631,8 @@ linux学习
 	Cannot retrieve speedtest configuration
 	ERROR: <urlopen error timed out>
 ###	[root@localhost speedtest-cli]# 
+
+ #另注释：speedtest-cli  用法
 ![1](https://github.com/vekrio/stu/blob/master/20170718/photo/speedtest-cli%E5%91%BD%E4%BB%A4_Linux%20speedtest-cli%20%E5%91%BD%E4%BB%A4%E7%94%A8%E6%B3%95%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8B%E6%B5%8B%E8%AF%95%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%A4%96%E7%BD%91%E9%80%9F%E5%BA%A61.png?raw=true)
 ![2](https://github.com/vekrio/stu/blob/master/20170718/photo/speedtest-cli%E5%91%BD%E4%BB%A4_Linux%20speedtest-cli%20%E5%91%BD%E4%BB%A4%E7%94%A8%E6%B3%95%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8B%E6%B5%8B%E8%AF%95%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%A4%96%E7%BD%91%E9%80%9F%E5%BA%A62.png?raw=true)
 ![3](https://github.com/vekrio/stu/blob/master/20170718/photo/speedtest-cli%E5%91%BD%E4%BB%A4_Linux%20speedtest-cli%20%E5%91%BD%E4%BB%A4%E7%94%A8%E6%B3%95%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8B%E6%B5%8B%E8%AF%95%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%A4%96%E7%BD%91%E9%80%9F%E5%BA%A63.png?raw=true)

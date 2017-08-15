@@ -1221,20 +1221,6 @@ linux学习
 	
 #	22。centos7.2测速
 
-##	[root@localhost ~]# yum -y install pip
-	已加载插件：fastestmirror, langpacks
-	Repodata is over 2 weeks old. Install yum-cron? Or run: yum makecache fast
-	base                                                                                                                                 | 3.6 kB  00:00:00     
-	extras                                                                                                                               | 3.4 kB  00:00:00     
-	updates                                                                                                                              | 3.4 kB  00:00:00     
-	(1/2): extras/7/x86_64/primary_db                                                                                                    | 191 kB  00:00:01     
-	(2/2): updates/7/x86_64/primary_db                                                                                                   | 7.8 MB  00:00:04     
-	Determining fastest mirrors
-	 * base: mirrors.cn99.com
-	 * extras: mirrors.zju.edu.cn
-	 * updates: mirrors.cn99.com
-	没有可用软件包 pip。
-	错误：无须任何处理
 ##	[root@localhost ~]# yum -y install epel-release
 	已加载插件：fastestmirror, langpacks
 	Loading mirror speeds from cached hostfile
@@ -1281,6 +1267,22 @@ linux学习
 	  epel-release.noarch 0:7-9                                                                                                                                 
 
 	完毕！
+
+##	[root@localhost ~]# yum -y install pip
+	已加载插件：fastestmirror, langpacks
+	Repodata is over 2 weeks old. Install yum-cron? Or run: yum makecache fast
+	base                                                                                                                                 | 3.6 kB  00:00:00     
+	extras                                                                                                                               | 3.4 kB  00:00:00     
+	updates                                                                                                                              | 3.4 kB  00:00:00     
+	(1/2): extras/7/x86_64/primary_db                                                                                                    | 191 kB  00:00:01     
+	(2/2): updates/7/x86_64/primary_db                                                                                                   | 7.8 MB  00:00:04     
+	Determining fastest mirrors
+	 * base: mirrors.cn99.com
+	 * extras: mirrors.zju.edu.cn
+	 * updates: mirrors.cn99.com
+	没有可用软件包 pip。
+	错误：无须任何处理
+
 ##	[root@localhost ~]# yum -y install python-pip
 	已加载插件：fastestmirror, langpacks
 	epel/x86_64/metalink                                                                                                                 | 6.5 kB  00:00:00     
@@ -1358,26 +1360,6 @@ linux学习
 		Uninstalling pip-8.1.2:
 		  Successfully uninstalled pip-8.1.2
 	Successfully installed pip-9.0.1
-##	[root@localhost ~]# pip install git https://github.com/sivel/speedtest-cli.git
-	Collecting https://github.com/sivel/speedtest-cli.git
-	  Downloading https://github.com/sivel/speedtest-cli.git
-		 / 122kB 180kB/s
-	  Cannot unpack file /tmp/pip-h6PCAK-unpack/speedtest-cli.git (downloaded from /tmp/pip-Jq9olp-build, content-type: text/html; charset=utf-8); cannot detect archive format
-	Cannot determine archive format of /tmp/pip-Jq9olp-build
-##	[root@localhost ~]# ls -al
-	总用量 36
-	dr-xr-x---.  5 root root 4096 8月  15 21:27 .
-	dr-xr-xr-x. 17 root root 4096 12月 28 2016 ..
-	-rw-------.  1 root root 1536 12月 28 2016 anaconda-ks.cfg
-	-rw-------.  1 root root   25 8月  15 21:27 .bash_history
-	-rw-r--r--.  1 root root   18 12月 29 2013 .bash_logout
-	-rw-r--r--.  1 root root  176 12月 29 2013 .bash_profile
-	-rw-r--r--.  1 root root  176 12月 29 2013 .bashrc
-	drwxr-xr-x.  4 root root   27 8月  15 21:27 .cache
-	drwxr-xr-x.  3 root root   17 7月  11 15:56 .config
-	-rw-r--r--.  1 root root  100 12月 29 2013 .cshrc
-	drwxr-----.  3 root root   18 8月  15 21:19 .pki
-	-rw-r--r--.  1 root root  129 12月 29 2013 .tcshrc
 
 ##	[root@localhost ~]# yum -y install git
 	已加载插件：fastestmirror, langpacks

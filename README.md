@@ -1295,12 +1295,13 @@ linux学习
 
 　　yum clean all
 
-##	[root@localhost ~]# yum -y install epel-release
+	Last login: Tue Aug 15 22:17:50 2017 from 180.117.106.199
+###	[root@localhost ~]# yum -y install epel-release
 	已加载插件：fastestmirror, langpacks
 	Loading mirror speeds from cached hostfile
-	 * base: mirrors.cn99.com
-	 * extras: mirrors.zju.edu.cn
-	 * updates: mirrors.cn99.com
+	 * base: mirrors.btte.net
+	 * extras: mirrors.163.com
+	 * updates: mirrors.163.com
 	正在解决依赖关系
 	--> 正在检查事务
 	---> 软件包 epel-release.noarch.0.7-9 将被 安装
@@ -1321,15 +1322,7 @@ linux学习
 	总下载量：14 k
 	安装大小：24 k
 	Downloading packages:
-	警告：/var/cache/yum/x86_64/7/extras/packages/epel-release-7-9.noarch.rpm: 头V3 RSA/SHA256 Signature, 密钥 ID f4a80eb5: NOKEY
-	epel-release-7-9.noarch.rpm 的公钥尚未安装
 	epel-release-7-9.noarch.rpm                                                                                                          |  14 kB  00:00:00     
-	从 file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7 检索密钥
-	导入 GPG key 0xF4A80EB5:
-	 用户ID     : "CentOS-7 Key (CentOS 7 Official Signing Key) <security@centos.org>"
-	 指纹       : 6341 ab27 53d7 8a78 a7c2 7bb1 24c6 a8a7 f4a8 0eb5
-	 软件包     : centos-release-7-2.1511.el7.centos.2.10.x86_64 (@anaconda)
-	 来自       : /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
 	Running transaction check
 	Running transaction test
 	Transaction test succeeded
@@ -1341,37 +1334,60 @@ linux学习
 	  epel-release.noarch 0:7-9                                                                                                                                 
 
 	完毕！
-
-##	[root@localhost ~]# yum -y install pip
+###	[root@localhost ~]# yum clean all
 	已加载插件：fastestmirror, langpacks
-	Repodata is over 2 weeks old. Install yum-cron? Or run: yum makecache fast
+	正在清理软件源： base epel extras updates
+	Cleaning up everything
+	Cleaning up list of fastest mirrors
+###	[root@localhost ~]# yum makecache
+	已加载插件：fastestmirror, langpacks
 	base                                                                                                                                 | 3.6 kB  00:00:00     
-	extras                                                                                                                               | 3.4 kB  00:00:00     
-	updates                                                                                                                              | 3.4 kB  00:00:00     
-	(1/2): extras/7/x86_64/primary_db                                                                                                    | 191 kB  00:00:01     
-	(2/2): updates/7/x86_64/primary_db                                                                                                   | 7.8 MB  00:00:04     
-	Determining fastest mirrors
-	 * base: mirrors.cn99.com
-	 * extras: mirrors.zju.edu.cn
-	 * updates: mirrors.cn99.com
-	没有可用软件包 pip。
-	错误：无须任何处理
-
-##	[root@localhost ~]# yum -y install python-pip
-	已加载插件：fastestmirror, langpacks
 	epel/x86_64/metalink                                                                                                                 | 6.5 kB  00:00:00     
 	epel                                                                                                                                 | 4.3 kB  00:00:00     
-	(1/3): epel/x86_64/updateinfo                                                                                                        | 807 kB  00:00:00     
-	(2/3): epel/x86_64/group_gz                                                                                                          | 170 kB  00:00:01     
-	epel/x86_64/primary_db         FAILED                                          =========================-                 ]  2.1 B/s | 3.9 MB 253:18:36 ETA 
-	https://ftp.yz.yamagata-u.ac.jp/pub/linux/fedora-projects/epel/7/x86_64/repodata/6d24201966188d08f2377f99f6d17600294a70599ad330dbc6a156d1e2084966-primary.sqlite.xz: [Errno 12] Timeout on https://ftp.yz.yamagata-u.ac.jp/pub/linux/fedora-projects/epel/7/x86_64/repodata/6d24201966188d08f2377f99f6d17600294a70599ad330dbc6a156d1e2084966-primary.sqlite.xz: (28, 'Operation too slow. Less than 1000 bytes/sec transferred the last 30 seconds')
+	extras                                                                                                                               | 3.4 kB  00:00:00     
+	updates                                                                                                                              | 3.4 kB  00:00:00     
+	(1/17): base/7/x86_64/group_gz                                                                                                       | 155 kB  00:00:00     
+	(2/17): epel/x86_64/group_gz                                                                                                         | 170 kB  00:00:00     
+	(3/17): epel/x86_64/updateinfo                                                                                                       | 807 kB  00:00:00     
+	(4/17): epel/x86_64/primary_db                                                                                                       | 4.7 MB  00:00:02     
+	(5/17): epel/x86_64/other_db                                                                                                         | 2.2 MB  00:00:04     
+	(6/17): extras/7/x86_64/filelists_db                                                                                                 | 1.1 MB  00:00:00     
+	(7/17): extras/7/x86_64/prestodelta                                                                                                  | 149 kB  00:00:00     
+	(8/17): extras/7/x86_64/primary_db                                                                                                   | 191 kB  00:00:00     
+	(9/17): extras/7/x86_64/other_db                                                                                                     | 903 kB  00:00:00     
+	(10/17): updates/7/x86_64/filelists_db                                                                                               | 4.4 MB  00:00:00     
+	(11/17): updates/7/x86_64/prestodelta                                                                                                | 954 kB  00:00:00     
+	(12/17): updates/7/x86_64/primary_db                                                                                                 | 7.8 MB  00:00:01     
+	(13/17): base/7/x86_64/primary_db                                                                                                    | 5.6 MB  00:00:18     
+	(14/17): updates/7/x86_64/other_db                                                                                                   |  93 MB  00:00:10     
+	(15/17): base/7/x86_64/other_db                                                                                                      | 2.4 MB  00:01:19     
+	base/7/x86_64/filelists_db     FAILED                                          ======================================-    ] 118 kB/s | 127 MB  00:01:36 ETA 
+	http://mirrors.nju.edu.cn/centos/7.3.1611/os/x86_64/repodata/3a1b41925bb25892c1003b22979ea0705aa815fed57f992cf0229b76539a9ac4-filelists.sqlite.bz2: [Errno 12] Timeout on http://mirrors.nju.edu.cn/centos/7.3.1611/os/x86_64/repodata/3a1b41925bb25892c1003b22979ea0705aa815fed57f992cf0229b76539a9ac4-filelists.sqlite.bz2: (28, 'Operation too slow. Less than 1000 bytes/sec transferred the last 30 seconds')
 	正在尝试其它镜像。
-	(3/3): epel/x86_64/primary_db                                                                                                        | 4.7 MB  00:00:09     
+	(16/17): base/7/x86_64/filelists_db                                                                                                  | 6.6 MB  00:00:03     
+	(17/17): epel/x86_64/filelists_db                                                                                                    | 7.9 MB  00:02:20     
+	Determining fastest mirrors
+	 * base: mirrors.cn99.com
+	 * epel: mirrors.ustc.edu.cn
+	 * extras: mirrors.163.com
+	 * updates: mirrors.163.com
+	元数据缓存已建立
+###	[root@localhost ~]# yum -y install pip
+	已加载插件：fastestmirror, langpacks
 	Loading mirror speeds from cached hostfile
 	 * base: mirrors.cn99.com
 	 * epel: mirrors.ustc.edu.cn
-	 * extras: mirrors.zju.edu.cn
-	 * updates: mirrors.cn99.com
+	 * extras: mirrors.163.com
+	 * updates: mirrors.163.com
+	没有可用软件包 pip。
+	错误：无须任何处理
+###	[root@localhost ~]# yum -y install python-pip
+	已加载插件：fastestmirror, langpacks
+	Loading mirror speeds from cached hostfile
+	 * base: mirrors.cn99.com
+	 * epel: mirrors.ustc.edu.cn
+	 * extras: mirrors.163.com
+	 * updates: mirrors.163.com
 	正在解决依赖关系
 	--> 正在检查事务
 	---> 软件包 python2-pip.noarch.0.8.1.2-5.el7 将被 安装
@@ -1392,9 +1408,9 @@ linux学习
 	总下载量：1.7 M
 	安装大小：7.2 M
 	Downloading packages:
-	警告：/var/cache/yum/x86_64/7/epel/packages/python2-pip-8.1.2-5.el7.noarch.rpm: 头V3 RSA/SHA256 Signature, 密钥 ID 352c64e5: NOKEY/s |    0 B  --:--:-- ETA 
+	警告：/var/cache/yum/x86_64/7/epel/packages/python2-pip-8.1.2-5.el7.noarch.rpm: 头V3 RSA/SHA256 Signature, 密钥 ID 352c64e5: NOKEY/s | 864 kB  --:--:-- ETA 
 	python2-pip-8.1.2-5.el7.noarch.rpm 的公钥尚未安装
-	python2-pip-8.1.2-5.el7.noarch.rpm                                                                                                   | 1.7 MB  00:00:00     
+	python2-pip-8.1.2-5.el7.noarch.rpm                                                                                                   | 1.7 MB  00:00:02     
 	从 file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7 检索密钥
 	导入 GPG key 0x352C64E5:
 	 用户ID     : "Fedora EPEL (7) <epel@fedoraproject.org>"
@@ -1412,36 +1428,42 @@ linux学习
 	  python2-pip.noarch 0:8.1.2-5.el7                                                                                                                          
 
 	完毕！
-
-##	[root@localhost ~]# easy_install speedtest-cli
+###	[root@localhost ~]# easy_install speedtest-cli
 	Searching for speedtest-cli
+	Reading https://pypi.python.org/simple/speedtest-cli/
 	Best match: speedtest-cli 1.0.6
-	Processing speedtest_cli-1.0.6-py2.7.egg
-	speedtest-cli 1.0.6 is already the active version in easy-install.pth
+	Downloading https://pypi.python.org/packages/12/3e/e6d34ed8ce9f2d111480fd585e5404a00d74cfd3d076c538f31538195ec8/speedtest-cli-1.0.6.tar.gz#md5=594bc47b1bc11fcc4861eedb976feecb
+	Processing speedtest-cli-1.0.6.tar.gz
+	Writing /tmp/easy_install-yoD4Ga/speedtest-cli-1.0.6/setup.cfg
+	Running speedtest-cli-1.0.6/setup.py -q bdist_egg --dist-dir /tmp/easy_install-yoD4Ga/speedtest-cli-1.0.6/egg-dist-tmp-XHjtOC
+	zip_safe flag not set; analyzing archive contents...
+	Adding speedtest-cli 1.0.6 to easy-install.pth file
 	Installing speedtest script to /usr/bin
 	Installing speedtest-cli script to /usr/bin
 
-	Using /usr/lib/python2.7/site-packages/speedtest_cli-1.0.6-py2.7.egg
+	Installed /usr/lib/python2.7/site-packages/speedtest_cli-1.0.6-py2.7.egg
 	Processing dependencies for speedtest-cli
 	Finished processing dependencies for speedtest-cli
-
-##	[root@localhost ~]# pip install --upgrade pip
+###	[root@localhost ~]# ls 
+	anaconda-ks.cfg
+###	[root@localhost ~]# pip install --upgrade pip
 	Collecting pip
 	  Downloading pip-9.0.1-py2.py3-none-any.whl (1.3MB)
-		100% |████████████████████████████████| 1.3MB 31kB/s 
+		100% |████████████████████████████████| 1.3MB 35kB/s 
 	Installing collected packages: pip
 	  Found existing installation: pip 8.1.2
 		Uninstalling pip-8.1.2:
 		  Successfully uninstalled pip-8.1.2
 	Successfully installed pip-9.0.1
-
-##	[root@localhost ~]# yum -y install git
+###	[root@localhost ~]# git clone https://github.com/sivel/speedtest-cli.git
+	bash: git: 未找到命令...
+###	[root@localhost ~]# yum -y install git
 	已加载插件：fastestmirror, langpacks
 	Loading mirror speeds from cached hostfile
 	 * base: mirrors.cn99.com
 	 * epel: mirrors.ustc.edu.cn
-	 * extras: mirrors.zju.edu.cn
-	 * updates: mirrors.cn99.com
+	 * extras: mirrors.163.com
+	 * updates: mirrors.163.com
 	正在解决依赖关系
 	--> 正在检查事务
 	---> 软件包 git.x86_64.0.1.8.3.1-6.el7_2.1 将被 安装
@@ -1474,12 +1496,12 @@ linux学习
 	总下载量：4.5 M
 	安装大小：22 M
 	Downloading packages:
-	(1/4): perl-Error-0.17020-2.el7.noarch.rpm                                                                                           |  32 kB  00:00:00     
+	(1/4): perl-Git-1.8.3.1-6.el7_2.1.noarch.rpm                                                                                         |  53 kB  00:00:00     
 	(2/4): perl-TermReadKey-2.30-20.el7.x86_64.rpm                                                                                       |  31 kB  00:00:00     
-	(3/4): perl-Git-1.8.3.1-6.el7_2.1.noarch.rpm                                                                                         |  53 kB  00:00:00     
+	(3/4): perl-Error-0.17020-2.el7.noarch.rpm                                                                                           |  32 kB  00:00:00     
 	(4/4): git-1.8.3.1-6.el7_2.1.x86_64.rpm                                                                                              | 4.4 MB  00:00:02     
 	------------------------------------------------------------------------------------------------------------------------------------------------------------
-	总计                                                                                                                        1.7 MB/s | 4.5 MB  00:00:02     
+	总计                                                                                                                        1.8 MB/s | 4.5 MB  00:00:02     
 	Running transaction check
 	Running transaction test
 	Transaction test succeeded
@@ -1500,143 +1522,112 @@ linux学习
 	  perl-Error.noarch 1:0.17020-2.el7                perl-Git.noarch 0:1.8.3.1-6.el7_2.1                perl-TermReadKey.x86_64 0:2.30-20.el7               
 
 	完毕！
-##	[root@localhost ~]# git clone https://github.com/sivel/speedtest-cli.git
+###	[root@localhost ~]# git clone https://github.com/sivel/speedtest-cli.git
 	正克隆到 'speedtest-cli'...
 	remote: Counting objects: 913, done.
 	remote: Total 913 (delta 0), reused 0 (delta 0), pack-reused 913
-	接收对象中: 100% (913/913), 264.34 KiB | 44.00 KiB/s, done.
+	接收对象中: 100% (913/913), 264.34 KiB | 148.00 KiB/s, done.
 	处理 delta 中: 100% (515/515), done.
-	[root@localhost ~]# python speedtest-cli/setup.py install
-
-	来自: http://man.linuxde.net/speedtest-clirunning install
-	running bdist_egg
-	running egg_info
-	creating speedtest_cli.egg-info
-	writing speedtest_cli.egg-info/PKG-INFO
-	writing top-level names to speedtest_cli.egg-info/top_level.txt
-	writing dependency_links to speedtest_cli.egg-info/dependency_links.txt
-	writing entry points to speedtest_cli.egg-info/entry_points.txt
-	writing manifest file 'speedtest_cli.egg-info/SOURCES.txt'
-	warning: manifest_maker: standard file 'setup.py' not found
-
-	file speedtest.py (for module speedtest) not found
-	file speedtest_cli.py (for module speedtest_cli) not found
-	reading manifest file 'speedtest_cli.egg-info/SOURCES.txt'
-	writing manifest file 'speedtest_cli.egg-info/SOURCES.txt'
-	installing library code to build/bdist.linux-x86_64/egg
-	running install_lib
-	running build_py
-	file speedtest.py (for module speedtest) not found
-	file speedtest_cli.py (for module speedtest_cli) not found
-	file speedtest.py (for module speedtest) not found
-	file speedtest_cli.py (for module speedtest_cli) not found
-	warning: install_lib: 'build/lib' does not exist -- no Python modules to install
-
-	creating build
-	creating build/bdist.linux-x86_64
-	creating build/bdist.linux-x86_64/egg
-	creating build/bdist.linux-x86_64/egg/EGG-INFO
-	copying speedtest_cli.egg-info/PKG-INFO -> build/bdist.linux-x86_64/egg/EGG-INFO
-	copying speedtest_cli.egg-info/SOURCES.txt -> build/bdist.linux-x86_64/egg/EGG-INFO
-	copying speedtest_cli.egg-info/dependency_links.txt -> build/bdist.linux-x86_64/egg/EGG-INFO
-	copying speedtest_cli.egg-info/entry_points.txt -> build/bdist.linux-x86_64/egg/EGG-INFO
-	copying speedtest_cli.egg-info/top_level.txt -> build/bdist.linux-x86_64/egg/EGG-INFO
-	zip_safe flag not set; analyzing archive contents...
-	creating dist
-	creating 'dist/speedtest_cli-1.0.6-py2.7.egg' and adding 'build/bdist.linux-x86_64/egg' to it
-	removing 'build/bdist.linux-x86_64/egg' (and everything under it)
-	Processing speedtest_cli-1.0.6-py2.7.egg
-	Removing /usr/lib/python2.7/site-packages/speedtest_cli-1.0.6-py2.7.egg
-	Copying speedtest_cli-1.0.6-py2.7.egg to /usr/lib/python2.7/site-packages
-	speedtest-cli 1.0.6 is already the active version in easy-install.pth
-	Installing speedtest script to /usr/bin
-	Installing speedtest-cli script to /usr/bin
-
-	Installed /usr/lib/python2.7/site-packages/speedtest_cli-1.0.6-py2.7.egg
-	Processing dependencies for speedtest-cli==1.0.6
-	Finished processing dependencies for speedtest-cli==1.0.6
-
-##	[root@localhost ~]# ls -al
-	总用量 44
-	dr-xr-x---.  9 root root 4096 8月  15 21:32 .
-	dr-xr-xr-x. 17 root root 4096 12月 28 2016 ..
-	-rw-------.  1 root root 1536 12月 28 2016 anaconda-ks.cfg
-	-rw-------.  1 root root   25 8月  15 21:27 .bash_history
-	-rw-r--r--.  1 root root   18 12月 29 2013 .bash_logout
-	-rw-r--r--.  1 root root  176 12月 29 2013 .bash_profile
-	-rw-r--r--.  1 root root  176 12月 29 2013 .bashrc
-	drwxr-xr-x.  3 root root   31 8月  15 21:32 build
-	drwxr-xr-x.  4 root root   27 8月  15 21:27 .cache
-	drwxr-xr-x.  3 root root   17 7月  11 15:56 .config
-	-rw-r--r--.  1 root root  100 12月 29 2013 .cshrc
-	drwxr-xr-x.  2 root root   42 8月  15 21:32 dist
-	drwxr-----.  3 root root   18 8月  15 21:19 .pki
-	drwxr-xr-x.  3 root root 4096 8月  15 21:32 speedtest-cli
-	drwxr-xr-x.  2 root root 4096 8月  15 21:32 speedtest_cli.egg-info
-	-rw-r--r--.  1 root root  129 12月 29 2013 .tcshrc
-##	[root@localhost ~]# chmod +x speedtest-cli
-
-##	[root@localhost ~]# ls -al
-	总用量 44
-	dr-xr-x---.  9 root root 4096 8月  15 21:32 .
-	dr-xr-xr-x. 17 root root 4096 12月 28 2016 ..
-	-rw-------.  1 root root 1536 12月 28 2016 anaconda-ks.cfg
-	-rw-------.  1 root root   25 8月  15 21:27 .bash_history
-	-rw-r--r--.  1 root root   18 12月 29 2013 .bash_logout
-	-rw-r--r--.  1 root root  176 12月 29 2013 .bash_profile
-	-rw-r--r--.  1 root root  176 12月 29 2013 .bashrc
-	drwxr-xr-x.  3 root root   31 8月  15 21:32 build
-	drwxr-xr-x.  4 root root   27 8月  15 21:27 .cache
-	drwxr-xr-x.  3 root root   17 7月  11 15:56 .config
-	-rw-r--r--.  1 root root  100 12月 29 2013 .cshrc
-	drwxr-xr-x.  2 root root   42 8月  15 21:32 dist
-	drwxr-----.  3 root root   18 8月  15 21:19 .pki
-	drwxr-xr-x.  3 root root 4096 8月  15 21:32 speedtest-cli
-	drwxr-xr-x.  2 root root 4096 8月  15 21:32 speedtest_cli.egg-info
-	-rw-r--r--.  1 root root  129 12月 29 2013 .tcshrc
-##	[root@localhost ~]# cd speedtest-cli/
-	[root@localhost speedtest-cli]# ll
-##	总用量 96
-	-rw-r--r--. 1 root root  1671 8月  15 21:32 CONTRIBUTING.md
-	-rw-r--r--. 1 root root 11358 8月  15 21:32 LICENSE
-	-rw-r--r--. 1 root root    35 8月  15 21:32 MANIFEST.in
-	-rw-r--r--. 1 root root  5215 8月  15 21:32 README.rst
-	-rw-r--r--. 1 root root    20 8月  15 21:32 setup.cfg
-	-rw-r--r--. 1 root root  3196 8月  15 21:32 setup.py
-	-rw-r--r--. 1 root root  2385 8月  15 21:32 speedtest-cli.1
-	-rw-r--r--. 1 root root  1200 8月  15 21:32 speedtest_cli.py
-	-rwxr-xr-x. 1 root root 47228 8月  15 21:32 speedtest.py
-	-rw-r--r--. 1 root root   333 8月  15 21:32 tox.ini
-##	[root@localhost speedtest-cli]# ./speedtest.py 
+###	[root@localhost ~]# ls 
+	anaconda-ks.cfg  speedtest-cli
+###	[root@localhost ~]# cd speedtest-cli/
+###	[root@localhost speedtest-cli]# ll
+	总用量 96
+	-rw-r--r--. 1 root root  1671 8月  15 23:04 CONTRIBUTING.md
+	-rw-r--r--. 1 root root 11358 8月  15 23:04 LICENSE
+	-rw-r--r--. 1 root root    35 8月  15 23:04 MANIFEST.in
+	-rw-r--r--. 1 root root  5215 8月  15 23:04 README.rst
+	-rw-r--r--. 1 root root    20 8月  15 23:04 setup.cfg
+	-rw-r--r--. 1 root root  3196 8月  15 23:04 setup.py
+	-rw-r--r--. 1 root root  2385 8月  15 23:04 speedtest-cli.1
+	-rw-r--r--. 1 root root  1200 8月  15 23:04 speedtest_cli.py
+	-rwxr-xr-x. 1 root root 47228 8月  15 23:04 speedtest.py
+	-rw-r--r--. 1 root root   333 8月  15 23:04 tox.ini
+###	[root@localhost speedtest-cli]# ./speedtest.py
 	Retrieving speedtest.net configuration...
 	Testing from China Telecom (61.155.49.166)...
 	Retrieving speedtest.net server list...
 	Selecting best server based on ping...
-	Hosted by China Unicom (Nanjing) [1.80 km]: 12.652 ms
+	Hosted by China Mobile Group Jiangsu Co.,Ltd. (Wuxi) [154.00 km]: 19.032 ms
 	Testing download speed................................................................................
-	Download: 71.93 Mbit/s
+	Download: 23.56 Mbit/s
 	Testing upload speed................................................................................................
-	Upload: 16.05 Mbit/s
-##	[root@localhost speedtest-cli]# ./speedtest.py 
+	Upload: 11.36 Mbit/s
+###	[root@localhost speedtest-cli]# ./speedtest.py
 	Retrieving speedtest.net configuration...
 	Testing from China Telecom (61.155.49.166)...
 	Retrieving speedtest.net server list...
 	Selecting best server based on ping...
-	Hosted by China Unicom (Nanjing) [1.80 km]: 14.923 ms
+	Hosted by China Mobile Group Jiangsu Co.,Ltd. (Wuxi) [154.00 km]: 29.803 ms
 	Testing download speed................................................................................
-	Download: 74.22 Mbit/s
+	Download: 47.78 Mbit/s
 	Testing upload speed................................................................................................
-	Upload: 16.66 Mbit/s
-##	[root@localhost speedtest-cli]# speedtest-cli --list | grep China
-
-	来自: http://man.linuxde.net/speedtest-cliTraceback (most recent call last):
-	  File "/usr/bin/speedtest-cli", line 9, in <module>
-		load_entry_point('speedtest-cli==1.0.6', 'console_scripts', 'speedtest-cli')()
-	  File "/usr/lib/python2.7/site-packages/pkg_resources.py", line 378, in load_entry_point
-		return get_distribution(dist).load_entry_point(group, name)
-	  File "/usr/lib/python2.7/site-packages/pkg_resources.py", line 2566, in load_entry_point
-		return ep.load()
-	  File "/usr/lib/python2.7/site-packages/pkg_resources.py", line 2260, in load
-		entry = __import__(self.module_name, globals(),globals(), ['__name__'])
-	ImportError: No module named speedtest
-
+	Upload: 13.57 Mbit/s
+###	[root@localhost speedtest-cli]# speedtest-cli --list | grep China
+	 5446) CHINA UNICOM JIANGSU COMPANY (Nanjing, China) [1.67 km]
+	13704) China Unicom (Nanjing, China) [1.80 km]
+	 5724) ChinaUnicom (Hefei, China) [142.64 km]
+	 4377) China Mobile Group Anhui Co.,Ltd (Hefei, China) [142.64 km]
+	 5122) China Mobile Group Jiangsu Co.,Ltd. (Wuxi, China) [154.00 km]
+	 3927) China Mobile Jiangsu Co., Ltd. (Suzhou, China) [191.28 km]
+	 4647) China Mobile Group Zhejiang Co.,Ltd (Hangzhou, China) [240.93 km]
+	12278) China Mobile Group Zhejiang Branch (Hangzhou, China) [240.93 km]
+	 5300) Hangzhou , Zhejiang Unicom (Hangzhou, China) [240.93 km]
+	 7509) China Telecom ZheJiang Branch (Hangzhou, China) [240.93 km]
+	 3633) China Telecom (Shanghai, China) [274.95 km]
+	 4665) China Mobile Group Shanghai Co.,LTD (Shanghai, China) [274.95 km]
+	 5083) Shanghai Branch, China Unicom (Shanghai, China) [274.95 km]
+	 6715) China Mobile Group Zhejiang Co., Ltd. (Ningbo, China) [359.75 km]
+	 5097) Chinaunicom.jx (Nanchang, China) [467.10 km]
+	 7230) China Unicom.JiangXi Co.,Ltd (Nanchang, China) [467.10 km]
+	 5563) JINAN Wo China company (Jinan, China) [537.86 km]
+	12538) SHANDONG UNICOM (Jinan, China) [537.86 km]
+	 6810) HENAN UNICOM (Zhengzhou, China) [562.89 km]
+	 5131) China unicom henan branch (Zhengzhou, China) [562.89 km]
+	 4595) China Telecom HeNan Branch (Zhengzhou, China) [562.89 km]
+	 6435) china Telecom hubei branch (Xiangyang, China) [626.25 km]
+	12637) China Telecom Xiangyang Branch (XiangYang, China) [626.25 km]
+	 4884) China Unicom FuJian (Fuzhou, China) [667.54 km]
+	 4870) Changsha, Hunan Unicom (Changsha, China) [704.41 km]
+	 6132) ChinaTelecom.Hunan (Changsha, China) [704.41 km]
+	 5475) China Unicom (Tianjin, China) [799.39 km]
+	 5506) china unicom (Xiamen, China) [848.03 km]
+	12868) China unicom shanxi branch (Taiyuan, China) [858.63 km]
+	 5505) Beijing Broadband Network (Beijing, China) [899.03 km]
+	 4751) Beijing Telecom (Beijing, China) [899.03 km]
+	 6302) Beijing Fiber City (Beijing, China) [899.03 km]
+	 5145) Beijing Unicom (Beijing, China) [899.03 km]
+	 4863) Xi'an branch,Chinaunicom (Xi'an, China) [951.12 km]
+	11605) HHB SOLUTIONS (Guangzhou, China) [1131.65 km]
+	 5081) ShenZhen Telecom (Shenzhen, China) [1154.24 km]
+	10201) China Network Unicom Shenzhen Branch (Shenzhen, China) [1154.24 km]
+	12512) nmzl (Huhehaote, China) [1160.25 km]
+	 5017) China Unicom,Liaoning Branch (Shenyang, China) [1166.75 km]
+	 6852) FPT Telecom (Chai Wan, China) [1177.32 km]
+	 2993) Website Solution Limited (Hong Kong, China) [1182.16 km]
+	10267) Interoute VDC (Hong Kong, China) [1182.16 km]
+	12990) QTS Data Centers (Hong Kong, China) [1182.16 km]
+	 1536) STC (Hong Kong, China) [1182.16 km]
+	 8170) Atombase Global Datamation (Hong Kong, China) [1182.16 km]
+	 5726) China Unicom Chong Qing Branch (Chongqing, China) [1198.20 km]
+	 6592) China Telecom Chongqing (Chongqing, China) [1198.20 km]
+	 5509) Chinaunicom Ningxia branch (Ningxia, China) [1333.26 km]
+	11444) University of Electronic Science and Technology of China (Chengdu, China) [1404.59 km]
+	 4624) ChinaTelecom (Chengdu, China) [1404.59 km]
+	 2461) China Unicom (Chengdu, China) [1404.59 km]
+	10742) Changchun Unicom (Changchun, China) [1432.71 km]
+	 9484) China Unicom (Changchun, China) [1432.71 km]
+	 4690) China Unicom Lanzhou Branch Co.Ltd (Lanzhou, China) [1447.09 km]
+	10305) GX-Telecom (Nanning, China) [1455.24 km]
+	 5674) GX-Unicom (Nanning, China) [1455.24 km]
+	 5992) Qinghai China Unicom (Xining, China) [1639.68 km]
+	 5460) China Unicom Heilongjiang Branch (Harbin, China) [1664.91 km]
+	 5103) Yunnan Chinaunicom (Kunming, China) [1751.00 km]
+	 6168) China Telecom (Kunming, China) [1751.00 km]
+	 5750) Lhasaunicom (Lhasa, China) [2648.36 km]
+	 6144) xjunicom (Urumqi, China) [3005.19 km]
+###	[root@localhost speedtest-cli]# speedtest-cli --server=3633 --share
+	Retrieving speedtest.net configuration...
+	Cannot retrieve speedtest configuration
+	ERROR: <urlopen error timed out>
+###	[root@localhost speedtest-cli]# 

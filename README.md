@@ -1990,5 +1990,5 @@ linux学习
 	listen=YES
 	listen_ipv6=NO
 
-#	25.Centos7下的systemctl命令与service和chkconfig(http://blog.csdn.net/cds86333774/article/details/51165361)
+#	25.[Centos7下的systemctl命令与service和chkconfig](http://blog.csdn.net/cds86333774/article/details/51165361)
 

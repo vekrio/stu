@@ -1992,3 +1992,13 @@ linux学习
 
 #	25.[Centos7下的systemctl命令与service和chkconfig](http://blog.csdn.net/cds86333774/article/details/51165361)
 
+#    26.centos7最小化安装支持tab补全
+	yum -y install bash-completion
+
+#	27.
+
+#	28.
+
+#	29.
+
+# 	30.

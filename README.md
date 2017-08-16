@@ -1946,7 +1946,7 @@ linux学习
 
 	首先，我们必须给出最根本的解决方法：修改grub，在引导时就不加载IPV6模块
 
-
+![1](https://github.com/vekrio/stu/blob/master/20170718/photo/20141122232658847.png?raw=true)
 
 	这样修改之后，使用
 
@@ -1969,7 +1969,7 @@ linux学习
 	需要特别说明的是：在这种方法下，使用# lsmod | grep ipv6依然会有一些相关模块列出。
 
 	2. 通过ifconfig查看网卡信息，以下打开和关闭ipv6的差别：
-
+![2](https://github.com/vekrio/stu/blob/master/20170718/photo/221212121212121.png?raw=true)
 
 	禁用IPV6的操作步骤
 	Step 1: add this rule in /etc/sysctl.conf : net.ipv6.conf.all.disable_ipv6=1

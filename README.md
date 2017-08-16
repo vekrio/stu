@@ -1995,10 +1995,13 @@ linux学习
 #    26.centos7最小化安装支持tab补全
 	yum -y install bash-completion
 
-#	27.
+#	27.yum -y install vim*
 
-#	28.
+#	28. tar -zvxf 文件解压缩 tar -zcvf 新压缩文件名.tar.gz  需要压缩的文件
 
-#	29.
+#	29.hwclock 
+###	-r  读取硬件时钟
+###	-s  硬件时钟->系统时钟
+###	-w  系统时钟->硬件时钟
 
 # 	30.

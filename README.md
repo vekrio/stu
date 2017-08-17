@@ -661,7 +661,10 @@ linux学习
 	mysql      2487  0.6  8.4 904952 84404 ?        Sl   17:53   0:00 /usr/libexec/mysqld --basedir=/usr --datadir=/var/lib/mysql --plugin-dir=/usr/lib64/mysql/plugin --log-error=/var/log/mariadb/mariadb.log --pid-file=/var/run/mariadb/mariadb.pid --socket=/var/lib/mysql/mysql.sock
 	root       2521  0.0  0.0 112664   980 pts/0    S+   17:54   0:00 grep --color=auto mariadb
 
-	###	[root@localhost ~]# mysql -u root                        /*mariadb直接回车，密码为空*/
+###	[root@localhost ~]# mysql -u root                        /*mariadb直接回车，密码为空*/
+
+### [root@localhost ~]# mysqladmin -u root -p password ******     /*mariadb修改密码：-u root，是指定用户，指定修改root用户的密码。
+	-p password 是密码选项，其后面的newpasswd即为新的密码*/
 	
 	[root@localhost usr]# mysql_secure_installation
 	/usr/bin/mysql_secure_installation:行379: find_mysql_client: 未找到命令

@@ -2052,5 +2052,7 @@ linux学习
 #	32.[宝塔Linux面板](https://www.bt.cn/)
 
 #	33.[【Linux下如何创建 阵列 Raid 1】](http://m.toutiaocdn.cn/group/6454709155730031118/?iid=13449879950&app=news_article&tt_from=android_share&utm_medium=toutiao_android&utm_campaign=client_share)
-#
+
+#	34.[Linux有问必答：如何扩展XFS文件系统](https://linux.cn/article-3997-1.html)
+
 #

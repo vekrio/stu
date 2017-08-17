@@ -596,7 +596,7 @@ linux学习
 	mysql:[root@localhost usr]#
 	[root@localhost usr]# ps aux|grep mariadb               #是否有安装mariadb服务出现下面一行就是没有安装
 	root       2201  0.0  0.0 112664   980 pts/0    S+   17:48   0:00 grep --color=auto mariadb
-	[root@localhost usr]# yum install mariadb mariadb-server         #这是安装nariadb和mariadb服务
+	[root@localhost usr]# yum install mariadb mariadb-server         #这是安装mariadb和mariadb服务
 	已加载插件：fastestmirror
 	Loading mirror speeds from cached hostfile
 	 * base: mirrors.tuna.tsinghua.edu.cn
@@ -660,6 +660,9 @@ linux学习
 	[root@localhost usr]# ps aux|grep mariadb
 	mysql      2487  0.6  8.4 904952 84404 ?        Sl   17:53   0:00 /usr/libexec/mysqld --basedir=/usr --datadir=/var/lib/mysql --plugin-dir=/usr/lib64/mysql/plugin --log-error=/var/log/mariadb/mariadb.log --pid-file=/var/run/mariadb/mariadb.pid --socket=/var/lib/mysql/mysql.sock
 	root       2521  0.0  0.0 112664   980 pts/0    S+   17:54   0:00 grep --color=auto mariadb
+
+	###	[root@localhost ~]# mysql -u root                        /*mariadb直接回车，密码为空*/
+	
 	[root@localhost usr]# mysql_secure_installation
 	/usr/bin/mysql_secure_installation:行379: find_mysql_client: 未找到命令
 

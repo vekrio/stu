@@ -2061,4 +2061,25 @@ linux学习
 
 #	34.[Linux有问必答：如何扩展XFS文件系统](https://linux.cn/article-3997-1.html)
 
-#
+#	35.[解决SSH连接超时的2个配置方法](http://sooxin.iteye.com/blog/2314305)
+	连自己的VPS经常会断开，时间久了感觉挺讨厌，以下是两种解决方法。
+	方法一：
+	1、设置服务器向SSH客户端连接会话发送频率和时间
+	.代码如下:
+	#vi /etc/ssh/sshd_config，添加如下两行
+	ClientAliveInterval 60
+	ClientAliveCountMax 86400
+
+	注：
+	ClientAliveInterval选项定义了每隔多少秒给SSH客户端发送一次信号；
+	ClientAliveCountMax选项定义了超过多少秒后断开与ssh客户端连接
+	2、重新启动系统SSH服务
+	.代码如下:
+	#service sshd restart 
+	 
+	方法二：
+	使用命令直接用户修改配置文件，设置“TMOUT=180”，即超时时间为3分钟
+	.代码如下:
+	#vim /etc/profile 添加下面两行
+	#设置为3分钟
+	TMOUT=180

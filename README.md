@@ -2119,7 +2119,8 @@ linux学习
 	这样,centnet-service.sh这个脚本在开机的时候就会被执行了,以后再这里面写启动服务的命令就可以了.
 
 # 37.[Linux扩展Swap分区的三种方法](http://blog.sina.com.cn/s/blog_7c80356b0102wgro.html)
-	###第一种已验证
+
+###	 	第一种已验证
 # 38.
 # 39.
 # 40.

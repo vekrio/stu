@@ -2120,7 +2120,70 @@ linux学习
 
 # 37.[Linux扩展Swap分区的三种方法](http://blog.sina.com.cn/s/blog_7c80356b0102wgro.html)
 
-###	 	第一种已验证
+	###	 	第一种已验证
+	What's Swap?
+
+	当物理内存占用完了后，当系统还需要更多的物理内存时，物理内存中Inactive Pages 就转移到了到Swap空间。Swap 空间是在位于硬盘上的一个逻辑分区，因此访问速度较物理内存慢。
+
+	当机器的物理内存发生变化时，Swap 分区也要根据需要作相应的扩展。
+
+	有三种方法可以对Swap 分区进行扩展：
+
+	一、扩展正在使用的Swap 分区的逻辑卷（Recommended）；
+
+	二、新建Swap 分区；
+
+	三、新建swap file。
+
+	具体步骤如下：
+
+	一、扩展正在使用的Swap 分区的逻辑卷
+
+	设定用作Swap 分区的逻辑卷为：/dev/VolGroup00/LogVol01
+
+	#swapoff -v /dev/VolGroup00/LogVol01    //关闭该卷的Swap分区
+
+	# lvm lvresize /dev/VolGroup00/LogVol01 -L +1024M    //为该卷的容量增加1024M
+
+	# mkswap /dev/VolGroup00/LogVol01    //格式化Swap分区
+
+	# swapon -va    //启用Swap分区
+
+	# free    //验证结果
+
+	二、新建Swap 分区
+
+	设定新建的Swap 分区的逻辑卷为：/dev/VolGroup00/LogVol02
+
+	# lvm lvcreate VolGroup00 -n LogVol02 -L 1024M    //新建一个1024M大小的逻辑卷
+
+	# mkswap /dev/VolGroup00/LogVol02    //格式化成Swap分区
+
+	#/dev/VolGroup00/LogVol02 swap swap defaults 0 0    //将这个分区信息写进fstab文件（相当于分区表）
+
+	# swapon -va    //启动Swap分区
+
+	# free    //验证结果
+
+	三、新建swapfile
+
+	通过此种方式进行Swap 的扩展，首先要计算出block的数目。具体为根据需要扩展的swapfile的大小，以M为单位。block=swap分区大小*1024, 例如，需要扩展1024M的swapfile，则：block=1024*1024=1048576。
+
+	然后做如下步骤：
+
+	#dd if=/dev/zero of=/swapfile bs=1024 count=1048576
+
+	#mkswap /swapfile   //使该文件成为Swap配置文件
+
+	#swapon /swapfile   //启用swapfile
+
+	#/swapfile swap swap defaults 0 0   //使该文件加入开机启动项并写入fstab文件
+
+	#free   //验证结果 
+
+	总结：三种方法都能对Swap分区进行扩展，但是推荐使用第一种方法。
+
+	注：以上方法仅在基于RedHat制作的发行版本（如CentOS、OracleLinux、NeoKylin等），其他诸如Fedora、Debian等系统未做测试。​
 # 38.
 # 39.
 # 40.

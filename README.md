@@ -102,256 +102,395 @@ linux学习
 	  #如果想使用英文帮助，可以使用命令man
   
   
-# 9：[centos7根目录扩容](http://www.centoscn.com/CentOS/config/2016/0530/7306.html)
-	[root@localhost ~]# fdisk -l
+# 9：[centos7根目录扩容及增加swap](http://www.centoscn.com/CentOS/config/2016/0530/7306.html)
+	
+	Last login: Fri Aug 18 15:12:01 2017 from 61.155.49.162
+###	[root@localhost ~]# ll
+	total 4
+	-rw-------. 1 root root 1248 Jul 11 22:00 anaconda-ks.cfg
+###	[root@localhost ~]# df -lhT
+	Filesystem          Type      Size  Used Avail Use% Mounted on
+	/dev/mapper/cl-root xfs       6.2G  1.4G  4.9G  22% /
+	devtmpfs            devtmpfs  909M     0  909M   0% /dev
+	tmpfs               tmpfs     920M     0  920M   0% /dev/shm
+	tmpfs               tmpfs     920M   17M  904M   2% /run
+	tmpfs               tmpfs     920M     0  920M   0% /sys/fs/cgroup
+	/dev/sda1           xfs      1014M  166M  849M  17% /boot
+	tmpfs               tmpfs     184M     0  184M   0% /run/user/0
+	Last login: Fri Aug 18 15:42:03 2017 from 61.155.49.162
+###	[root@localhost ~]# fdisk -l
+
+	Disk /dev/sdb: 34.4 GB, 34359738368 bytes, 67108864 sectors
+	Units = sectors of 1 * 512 = 512 bytes
+	Sector size (logical/physical): 512 bytes / 512 bytes
+	I/O size (minimum/optimal): 512 bytes / 512 bytes
+
 
 	Disk /dev/sda: 8589 MB, 8589934592 bytes, 16777216 sectors
-
 	Units = sectors of 1 * 512 = 512 bytes
-
 	Sector size (logical/physical): 512 bytes / 512 bytes
-
 	I/O size (minimum/optimal): 512 bytes / 512 bytes
-
 	Disk label type: dos
-
-	Disk identifier: 0x00024b27
-
+	Disk identifier: 0x000031df
 
 	   Device Boot      Start         End      Blocks   Id  System
-	   
 	/dev/sda1   *        2048     2099199     1048576   83  Linux
-
 	/dev/sda2         2099200    16777215     7339008   8e  Linux LVM
 
-	Disk /dev/sdb: 8589 MB, 8589934592 bytes, 16777216 sectors
-
-	Units = sectors of 1 * 512 = 512 bytes
-
-	Sector size (logical/physical): 512 bytes / 512 bytes
-
-	I/O size (minimum/optimal): 512 bytes / 512 bytes
-
 	Disk /dev/mapper/cl-root: 6652 MB, 6652166144 bytes, 12992512 sectors
-
 	Units = sectors of 1 * 512 = 512 bytes
-
 	Sector size (logical/physical): 512 bytes / 512 bytes
-
 	I/O size (minimum/optimal): 512 bytes / 512 bytes
 
 
 	Disk /dev/mapper/cl-swap: 859 MB, 859832320 bytes, 1679360 sectors
-
 	Units = sectors of 1 * 512 = 512 bytes
-
 	Sector size (logical/physical): 512 bytes / 512 bytes
-
 	I/O size (minimum/optimal): 512 bytes / 512 bytes
 
+###	[root@localhost ~]# parted /dev/sdb
+	GNU Parted 3.1
+	Using /dev/sdb
+	Welcome to GNU Parted! Type 'help' to view a list of commands.
+	(parted) mklabel  
+	align-check  disk_toggle  mklabel      mktable      print        rescue       select       toggle       version      
+	disk_set     help         mkpart       name         quit         rm           set          unit         
+	(parted) mklabel  msdos
+	(parted) mkpart p1
+	parted: invalid token: p1
+	Partition type?  primary/extended? p                                      
+	File system type?  [ext2]?                                                
+	Start?                                                                    
+	Start? 0                                                                  
+	End? 100%
+	Warning: The resulting partition is not properly aligned for best performance.
+	Ignore/Cancel? i                                                          
+	(parted) p                                                                
+	Model: VMware Virtual disk (scsi)
+	Disk /dev/sdb: 34.4GB
+	Sector size (logical/physical): 512B/512B
+	Partition Table: msdos
+	Disk Flags: 
 
-	[root@localhost ~]# fdisk /dev/sdb
+	Number  Start  End     Size    Type     File system  Flags
+	 1      512B   34.4GB  34.4GB  primary
 
-	Welcome to fdisk (util-linux 2.23.2).
+	(parted) quit                                                             
+	Information: You may need to update /etc/fstab.
 
-	Changes will remain in memory only, until you decide to write them.
+###	[root@localhost ~]# fdisk -l                                              
 
-	Be careful before using the write command.
-
-	Device does not contain a recognized partition table
-
-	Building a new DOS disklabel with disk identifier 0x8393e904.
-
-	Command (m for help): n
-
-	Partition type:
-
-	   p   primary (0 primary, 0 extended, 4 free)
-	   
-	   e   extended
-	   
-	Select (default p): p
-
-	Partition number (1-4, default 1): 
-
-	First sector (2048-16777215, default 2048): 
-
-	Using default value 2048
-
-	Last sector, +sectors or +size{K,M,G} (2048-16777215, default 16777215): 
-
-	Using default value 16777215
-
-	Partition 1 of type Linux and of size 8 GiB is set
-
-	Command (m for help): t
-
-	Selected partition 1
-
-	Hex code (type L to list all codes): 8e
-
-	Changed type of partition 'Linux' to 'Linux LVM'
-
-	Command (m for help): p
-
-	Disk /dev/sdb: 8589 MB, 8589934592 bytes, 16777216 sectors
-
+	Disk /dev/sdb: 34.4 GB, 34359738368 bytes, 67108864 sectors
 	Units = sectors of 1 * 512 = 512 bytes
-
 	Sector size (logical/physical): 512 bytes / 512 bytes
-
 	I/O size (minimum/optimal): 512 bytes / 512 bytes
-
 	Disk label type: dos
-
-	Disk identifier: 0x8393e904
+	Disk identifier: 0x0006e17c
 
 	   Device Boot      Start         End      Blocks   Id  System
-	   
-	/dev/sdb1            2048    16777215     8387584   8e  Linux LVM
+	/dev/sdb1               1    67108863    33554431+  83  Linux
 
-	Command (m for help): w
+	Disk /dev/sda: 8589 MB, 8589934592 bytes, 16777216 sectors
+	Units = sectors of 1 * 512 = 512 bytes
+	Sector size (logical/physical): 512 bytes / 512 bytes
+	I/O size (minimum/optimal): 512 bytes / 512 bytes
+	Disk label type: dos
+	Disk identifier: 0x000031df
 
-	The partition table has been altered!
+	   Device Boot      Start         End      Blocks   Id  System
+	/dev/sda1   *        2048     2099199     1048576   83  Linux
+	/dev/sda2         2099200    16777215     7339008   8e  Linux LVM
 
-	Calling ioctl() to re-read partition table.
+	Disk /dev/mapper/cl-root: 6652 MB, 6652166144 bytes, 12992512 sectors
+	Units = sectors of 1 * 512 = 512 bytes
+	Sector size (logical/physical): 512 bytes / 512 bytes
+	I/O size (minimum/optimal): 512 bytes / 512 bytes
 
-	Syncing disks.
 
-	[root@localhost ~]# pvs
+	Disk /dev/mapper/cl-swap: 859 MB, 859832320 bytes, 1679360 sectors
+	Units = sectors of 1 * 512 = 512 bytes
+	Sector size (logical/physical): 512 bytes / 512 bytes
+	I/O size (minimum/optimal): 512 bytes / 512 bytes
 
-	  PV         VG Fmt  Attr PSize PFree
-	  
-	  /dev/sda2  cl lvm2 a--  7.00g    0 
-	  
-	[root@localhost ~]# pvcreate /dev/sdb1
-	 
+###	[root@localhost ~]# pvcreate /dev/sdb1
 	  Physical volume "/dev/sdb1" successfully created.
-	  
-	[root@localhost ~]# pvs
-
-	  PV         VG Fmt  Attr PSize PFree
-	  
-	  /dev/sda2  cl lvm2 a--  7.00g    0 
-	  
-	  /dev/sdb1     lvm2 ---  8.00g 8.00g
-	  
-	[root@localhost ~]# vgex
-
-	vgexport  vgextend  
-
 	[root@localhost ~]# vgs
-
 	  VG #PV #LV #SN Attr   VSize VFree
-	  
 	  cl   1   2   0 wz--n- 7.00g    0 
-	  
-	[root@localhost ~]# vgex
-
+###	[root@localhost ~]# pvs
+	  PV         VG Fmt  Attr PSize  PFree 
+	  /dev/sda2  cl lvm2 a--   7.00g     0 
+	  /dev/sdb1     lvm2 ---  32.00g 32.00g
+###	[root@localhost ~]# vgex
 	vgexport  vgextend  
-
-	[root@localhost ~]# vgextend cl /dev/sdb1
-
+###	[root@localhost ~]# vgextend cl /dev/sdb1
 	  Volume group "cl" successfully extended
-	  
 	[root@localhost ~]# vgs
-
-	  VG #PV #LV #SN Attr   VSize  VFree
-	  
-	  cl   2   2   0 wz--n- 14.99g 8.00g
-	  
-	[root@localhost ~]# lgs
-
-	bash: lgs: command not found...
-
-	[root@localhost ~]# lvs
-
-	  LV   VG Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
-	  
-	  root cl -wi-ao----   6.20g    
-	  
-	  swap cl -wi-ao---- 820.00m  
-	  
-	[root@localhost ~]# lvextend /dev/cl/
-
-	/dev/cl/root  /dev/cl/swap  
-
-	[root@localhost ~]# lvextend /dev/cl/
-
-	/dev/cl/root  /dev/cl/swap 
-	 
-	[root@localhost ~]# lvextend -L +8G /dev/cl/root  
-
-	  Insufficient free space: 2048 extents needed, but only 2047 available
-	  
-	[root@localhost ~]# lvextend -L +7.95G /dev/cl/root  
-
-	  Rounding size to boundary between physical extents: 7.95 GiB.
-	  
-	  Size of logical volume cl/root changed from 6.20 GiB (1586 extents) to 14.15 GiB (3622 extents).
-	  
+	  VG #PV #LV #SN Attr   VSize  VFree 
+	  cl   2   2   0 wz--n- 38.99g 32.00g
+###	[root@localhost ~]# lvextend -L +32GB /dev/cl/root 
+	  Insufficient free space: 8192 extents needed, but only 8191 available
+###	[root@localhost ~]# lvextend -L +31.95GB /dev/cl/root  
+	  Rounding size to boundary between physical extents: 31.95 GiB.
+	  Size of logical volume cl/root changed from 6.20 GiB (1586 extents) to 38.15 GiB (9766 extents).
 	  Logical volume cl/root successfully resized.
-	  
-	[root@localhost ~]# xfs
-
-	xfs_admin      xfs_db         xfs_freeze     xfs_info       xfs_logprint   xfs_mkfile     xfs_repair   
-	  
-	xfs_bmap       xfsdump        xfs_fsr        xfsinvutil     xfs_mdrestore  xfs_ncheck     xfsrestore 
-		
-	xfs_copy       xfs_estimate   xfs_growfs     xfs_io         xfs_metadump   xfs_quota      xfs_rtcp 
-		  
-	[root@localhost ~]# xfs_growfs /dev/
-
-	Display all 162 possibilities? (y or n)
-
-	[root@localhost ~]# xfs_growfs /dev/cl/
-
+###	[root@localhost ~]# df -lhT
+	Filesystem          Type      Size  Used Avail Use% Mounted on
+	/dev/mapper/cl-root xfs       6.2G  1.4G  4.9G  22% /
+	devtmpfs            devtmpfs  3.9G     0  3.9G   0% /dev
+	tmpfs               tmpfs     3.9G     0  3.9G   0% /dev/shm
+	tmpfs               tmpfs     3.9G  8.5M  3.9G   1% /run
+	tmpfs               tmpfs     3.9G     0  3.9G   0% /sys/fs/cgroup
+	/dev/sda1           xfs      1014M  183M  832M  19% /boot
+	tmpfs               tmpfs     783M     0  783M   0% /run/user/0
+###	[root@localhost ~]# xfs_growfs /dev/cl/
 	root  swap  
-
-	[root@localhost ~]# xfs_growfs /dev/cl/
-
-	root  swap 
-	 
-	[root@localhost ~]# xfs_growfs /dev/cl/root 
-
+	[root@localhost ~]# xfs_growfs /dev/cl/root
 	meta-data=/dev/mapper/cl-root    isize=512    agcount=4, agsize=406016 blks
-
 			 =                       sectsz=512   attr=2, projid32bit=1
-			 
 			 =                       crc=1        finobt=0 spinodes=0
-			 
 	data     =                       bsize=4096   blocks=1624064, imaxpct=25
-
 			 =                       sunit=0      swidth=0 blks
-			 
 	naming   =version 2              bsize=4096   ascii-ci=0 ftype=1
-
 	log      =internal               bsize=4096   blocks=2560, version=2
-
 			 =                       sectsz=512   sunit=0 blks, lazy-count=1
-			 
 	realtime =none                   extsz=4096   blocks=0, rtextents=0
+	data blocks changed from 1624064 to 10000384
+###	[root@localhost ~]# lvs
+	  LV   VG Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+	  root cl -wi-ao----  38.15g                                                    
+	  swap cl -wi-ao---- 820.00m                                                    
+###	[root@localhost ~]# vgdisplay 
+	  --- Volume group ---
+	  VG Name               cl
+	  System ID             
+	  Format                lvm2
+	  Metadata Areas        2
+	  Metadata Sequence No  5
+	  VG Access             read/write
+	  VG Status             resizable
+	  MAX LV                0
+	  Cur LV                2
+	  Open LV               2
+	  Max PV                0
+	  Cur PV                2
+	  Act PV                2
+	  VG Size               38.99 GiB
+	  PE Size               4.00 MiB
+	  Total PE              9982
+	  Alloc PE / Size       9971 / 38.95 GiB
+	  Free  PE / Size       11 / 44.00 MiB
+	  VG UUID               Qgvl8Y-8uoN-05rT-D5oj-6jOA-pB0t-xpbPqR
+	   
+###	[root@localhost ~]# vgre
+	vgreduce  vgremove  vgrename  
+###	[root@localhost ~]# lvresize -L -8GB /dev/cl/root
+	  WARNING: Reducing active and open logical volume to 30.15 GiB.
+	  THIS MAY DESTROY YOUR DATA (filesystem etc.)
+	Do you really want to reduce cl/root? [y/n]: y
+	  Size of logical volume cl/root changed from 38.15 GiB (9766 extents) to 30.15 GiB (7718 extents).
+	  Logical volume cl/root successfully resized.
+###	[root@localhost ~]# vgdisplay 
+	  --- Volume group ---
+	  VG Name               cl
+	  System ID             
+	  Format                lvm2
+	  Metadata Areas        2
+	  Metadata Sequence No  6
+	  VG Access             read/write
+	  VG Status             resizable
+	  MAX LV                0
+	  Cur LV                2
+	  Open LV               2
+	  Max PV                0
+	  Cur PV                2
+	  Act PV                2
+	  VG Size               38.99 GiB
+	  PE Size               4.00 MiB
+	  Total PE              9982
+	  Alloc PE / Size       7923 / 30.95 GiB
+	  Free  PE / Size       2059 / 8.04 GiB
+	  VG UUID               Qgvl8Y-8uoN-05rT-D5oj-6jOA-pB0t-xpbPqR
+	   
+###	[root@localhost ~]# vgextend -L +8GB /dev/cl/
+	root  swap  
+###	[root@localhost ~]# vgextend -L +8GB /dev/cl/swap 
+	vgextend: invalid option -- 'L'
+	  Error during parsing of command line.
+###	[root@localhost ~]# vgextend -l +8GB /dev/cl/swap  
+	vgextend: invalid option -- 'l'
+	  Error during parsing of command line.
+###	[root@localhost ~]# lvextend -L +8GB /dev/cl/swap 
+	  Size of logical volume cl/swap changed from 820.00 MiB (205 extents) to 8.80 GiB (2253 extents).
+	  Logical volume cl/swap successfully resized.
+###	[root@localhost ~]# lvdisplay 
+	  --- Logical volume ---
+	  LV Path                /dev/cl/swap
+	  LV Name                swap
+	  VG Name                cl
+	  LV UUID                C7O7Xc-S60j-OHix-38Ko-BbfD-ZILN-rSMKXr
+	  LV Write Access        read/write
+	  LV Creation host, time localhost.localdomain, 2017-07-11 21:55:40 +0800
+	  LV Status              available
+	  # open                 2
+	  LV Size                8.80 GiB
+	  Current LE             2253
+	  Segments               2
+	  Allocation             inherit
+	  Read ahead sectors     auto
+	  - currently set to     8192
+	  Block device           253:1
+	   
+	  --- Logical volume ---
+	  LV Path                /dev/cl/root
+	  LV Name                root
+	  VG Name                cl
+	  LV UUID                fh27Ps-QqJv-7CEe-Gt4n-aC2E-jP2j-TKlyCx
+	  LV Write Access        read/write
+	  LV Creation host, time localhost.localdomain, 2017-07-11 21:55:40 +0800
+	  LV Status              available
+	  # open                 1
+	  LV Size                30.15 GiB
+	  Current LE             7718
+	  Segments               2
+	  Allocation             inherit
+	  Read ahead sectors     auto
+	  - currently set to     8192
+	  Block device           253:0
+	   
+###	[root@localhost ~]# df -lhT
+	Filesystem          Type      Size  Used Avail Use% Mounted on
+	/dev/mapper/cl-root xfs        39G  1.4G   37G   4% /
+	devtmpfs            devtmpfs  3.9G     0  3.9G   0% /dev
+	tmpfs               tmpfs     3.9G     0  3.9G   0% /dev/shm
+	tmpfs               tmpfs     3.9G  8.5M  3.9G   1% /run
+	tmpfs               tmpfs     3.9G     0  3.9G   0% /sys/fs/cgroup
+	/dev/sda1           xfs      1014M  183M  832M  19% /boot
+	tmpfs               tmpfs     783M     0  783M   0% /run/user/0
+###	[root@localhost ~]# free -m
+				  total        used        free      shared  buff/cache   available
+	Mem:           7822         167        7380           8         275        7381
+	Swap:           819           0         819
+###	[root@localhost ~]# vi /etc/fstab 
 
-	data blocks changed from 1624064 to 3708928
+	#
+	# /etc/fstab
+	# Created by anaconda on Tue Jul 11 21:55:42 2017
+	#
+	# Accessible filesystems, by reference, are maintained under '/dev/disk'
+	# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+	#
+	/dev/mapper/cl-root     /                       xfs     defaults        0 0
+	UUID=4475fa42-8f2f-4371-ada0-95d370318466 /boot                   xfs     defaults        0 0
+	/dev/mapper/cl-swap     swap                    swap    defaults        0 0
+                                                                                                                
+	~                                                                                                                                            
+                                                                                                           
+	~                                                                                                                                            
+	"/etc/fstab" 11L, 465C
 
-	[root@localhost ~]# df -h
+	[1]+  Stopped                 vi /etc/fstab
+###	[root@localhost ~]# free –h
+				  total        used        free      shared  buff/cache   available
+	Mem:        8010268      171068     7557208        8680      281992     7558364
+	Swap:        839676           0      839676
 
-	Filesystem           Size  Used Avail Use% Mounted on
+###	[root@localhost ~]# xfs_growfs /dev/cl/swap 
+	xfs_growfs: /dev/cl/swap is not a mounted XFS filesystem
+###	[root@localhost ~]# df -lhT
+	Filesystem          Type      Size  Used Avail Use% Mounted on
+	/dev/mapper/cl-root xfs        39G  1.4G   37G   4% /
+	devtmpfs            devtmpfs  3.9G     0  3.9G   0% /dev
+	tmpfs               tmpfs     3.9G     0  3.9G   0% /dev/shm
+	tmpfs               tmpfs     3.9G  8.5M  3.9G   1% /run
+	tmpfs               tmpfs     3.9G     0  3.9G   0% /sys/fs/cgroup
+	/dev/sda1           xfs      1014M  183M  832M  19% /boot
+	tmpfs               tmpfs     783M     0  783M   0% /run/user/0
+###	[root@localhost ~]# lvdisplay 
+	  --- Logical volume ---
+	  LV Path                /dev/cl/swap
+	  LV Name                swap
+	  VG Name                cl
+	  LV UUID                C7O7Xc-S60j-OHix-38Ko-BbfD-ZILN-rSMKXr
+	  LV Write Access        read/write
+	  LV Creation host, time localhost.localdomain, 2017-07-11 21:55:40 +0800
+	  LV Status              available
+	  # open                 2
+	  LV Size                8.80 GiB
+	  Current LE             2253
+	  Segments               2
+	  Allocation             inherit
+	  Read ahead sectors     auto
+	  - currently set to     8192
+	  Block device           253:1
+	   
+	  --- Logical volume ---
+	  LV Path                /dev/cl/root
+	  LV Name                root
+	  VG Name                cl
+	  LV UUID                fh27Ps-QqJv-7CEe-Gt4n-aC2E-jP2j-TKlyCx
+	  LV Write Access        read/write
+	  LV Creation host, time localhost.localdomain, 2017-07-11 21:55:40 +0800
+	  LV Status              available
+	  # open                 1
+	  LV Size                30.15 GiB
+	  Current LE             7718
+	  Segments               2
+	  Allocation             inherit
+	  Read ahead sectors     auto
+	  - currently set to     8192
+	  Block device           253:0
+	   
+###	[root@localhost ~]# swapoff -v /dev/cl/swap 
+	swapoff /dev/cl/swap
+###	[root@localhost ~]# mkswap /dev/cl/swap 
+	mkswap: /dev/cl/swap: warning: wiping old swap signature.
+	Setting up swapspace version 1, size = 9228284 KiB
+	no label, UUID=a6ae2aa2-cf8e-4f33-8c74-943ae38846e9
+	[root@localhost ~]# swapon -va 
+	swapon /dev/mapper/cl-swap
+	swapon: /dev/mapper/cl-swap: found swap signature: version 1, page-size 4, same byte order
+	swapon: /dev/mapper/cl-swap: pagesize=4096, swapsize=9449766912, devsize=9449766912
+###	[root@localhost ~]# free
+				  total        used        free      shared  buff/cache   available
+	Mem:        8010268      179852     7534032        8680      296384     7546784
+	Swap:       9228284           0     9228284
+###	[root@localhost ~]# free -m
+				  total        used        free      shared  buff/cache   available
+	Mem:           7822         175        7357           8         289        7370
+	Swap:          9011           0        9011
+###	[root@localhost ~]# free -g
+				  total        used        free      shared  buff/cache   available
+	Mem:              7           0           7           0           0           7
+	Swap:             8           0           8
+###	[root@localhost ~]# free -G
+	free: invalid option -- 'G'
 
-	/dev/mapper/cl-root   15G  4.5G  9.8G  32% /
+	Usage:
+	 free [options]
 
-	devtmpfs             905M     0  905M   0% /dev
+	Options:
+	 -b, --bytes         show output in bytes
+	 -k, --kilo          show output in kilobytes
+	 -m, --mega          show output in megabytes
+	 -g, --giga          show output in gigabytes
+		 --tera          show output in terabytes
+	 -h, --human         show human-readable output
+		 --si            use powers of 1000 not 1024
+	 -l, --lohi          show detailed low and high memory statistics
+	 -t, --total         show total for RAM + swap
+	 -s N, --seconds N   repeat printing every N seconds
+	 -c N, --count N     repeat printing N times, then exit
+	 -w, --wide          wide output
 
-	tmpfs                920M     0  920M   0% /dev/shm
+		 --help     display this help and exit
+	 -V, --version  output version information and exit
 
-	tmpfs                920M  8.9M  911M   1% /run
-
-	tmpfs                920M     0  920M   0% /sys/fs/cgroup
-
-	/dev/sda1           1014M  227M  788M  23% /boot
-
-	tmpfs                184M     0  184M   0% /run/user/0
-
+	For more details see free(1).
+###	[root@localhost ~]# free -g
+				  total        used        free      shared  buff/cache   available
+	Mem:              7           0           7           0           0           7
+	Swap:             8           0           8
 	[root@localhost ~]# 
 
 

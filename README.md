@@ -2890,6 +2890,7 @@ linux学习
 
 	完毕！
 ###	[root@localhost mycloud]# systemctl start mariadb
+###	[root@localhost seafile-server-6.1.2]# systemctl enable mariadb
 ###	[root@localhost mycloud]# netstat -luntp          
 	Active Internet connections (only servers)
 	Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
@@ -3155,7 +3156,6 @@ linux学习
 	  icmp-blocks: 
 	  rich rules: 
 
-###	[root@localhost seafile-server-6.1.2]# 
 
 # 39.
 # 40.

@@ -2259,8 +2259,7 @@ linux学习
 
 # 37.[Linux扩展Swap分区的三种方法](http://blog.sina.com.cn/s/blog_7c80356b0102wgro.html)
 
-	###	 	第一种已验证
-	What's Swap?
+		What's Swap?
 
 	当物理内存占用完了后，当系统还需要更多的物理内存时，物理内存中Inactive Pages 就转移到了到Swap空间。Swap 空间是在位于硬盘上的一个逻辑分区，因此访问速度较物理内存慢。
 
@@ -2323,6 +2322,842 @@ linux学习
 	总结：三种方法都能对Swap分区进行扩展，但是推荐使用第一种方法。
 
 	注：以上方法仅在基于RedHat制作的发行版本（如CentOS、OracleLinux、NeoKylin等），其他诸如Fedora、Debian等系统未做测试。​
-# 38.
+# 38.私有云搭建
+	Last failed login: Sat Aug 19 08:47:27 CST 2017 from 61.155.49.162 on ssh:notty
+	There was 1 failed login attempt since the last successful login.
+	Last login: Fri Aug 18 22:30:17 2017 from 49.69.155.179
+###	[root@localhost ~]# cd /home/
+###	[root@localhost home]# mkdir mycloud
+###	[root@localhost home]# cd mycloud/
+###	[root@localhost mycloud]# wget http://seafile-downloads.oss-cn-shanghai.aliyuncs.com/seafile-server_6.1.2_x86-64.tar.gz
+	--2017-08-19 08:50:45--  http://seafile-downloads.oss-cn-shanghai.aliyuncs.com/seafile-server_6.1.2_x86-64.tar.gz
+	正在解析主机 seafile-downloads.oss-cn-shanghai.aliyuncs.com (seafile-downloads.oss-cn-shanghai.aliyuncs.com)... 106.14.229.115
+	正在连接 seafile-downloads.oss-cn-shanghai.aliyuncs.com (seafile-downloads.oss-cn-shanghai.aliyuncs.com)|106.14.229.115|:80... 已连接。
+	已发出 HTTP 请求，正在等待回应... 200 OK
+	长度：23948057 (23M) [application/x-tar]
+	正在保存至: “seafile-server_6.1.2_x86-64.tar.gz”
+
+	100%[===================================================================================================>] 23,948,057  2.20MB/s 用时 11s    
+
+	2017-08-19 08:50:56 (2.17 MB/s) - 已保存 “seafile-server_6.1.2_x86-64.tar.gz” [23948057/23948057])
+
+###	[root@localhost mycloud]# tar -xzf seafile-server_*
+###	[root@localhost mycloud]# ll
+	总用量 23392
+	drwxrwxr-x. 6  500  500     4096 8月  14 16:45 seafile-server-6.1.2
+	-rw-r--r--. 1 root root 23948057 8月  15 10:19 seafile-server_6.1.2_x86-64.tar.gz
+###	[root@localhost mycloud]# cd seafile-server-6.1.2/
+###	[root@localhost seafile-server-6.1.2]# ll
+	总用量 132
+	-rw-rw-r--.  1 500 500 11322 8月  14 16:45 check_init_admin.py
+	-rwxrwxr-x.  1 500 500  1821 8月  14 16:45 reset-admin.sh
+	drwxrwxr-x.  2 500 500    25 8月  14 16:45 runtime
+	-rwxrwxr-x.  1 500 500  1937 8月  14 16:45 seaf-fsck.sh
+	-rwxrwxr-x.  1 500 500  3325 8月  14 16:45 seaf-fuse.sh
+	-rwxrwxr-x.  1 500 500  2832 8月  14 16:45 seaf-gc.sh
+	drwxrwxr-x.  6 500 500    53 8月  14 16:45 seafile
+	-rwxrwxr-x.  1 500 500  5176 8月  14 16:45 seafile.sh
+	drwxrwxr-x. 12 500 500  4096 8月  14 16:42 seahub
+	-rwxrwxr-x.  1 500 500  7737 8月  14 16:45 seahub.sh
+	-rw-rw-r--.  1 500 500 52792 8月  14 16:45 setup-seafile-mysql.py
+	-rwxrwxr-x.  1 500 500  2604 8月  14 16:45 setup-seafile-mysql.sh
+	-rwxrwxr-x.  1 500 500 22058 8月  14 16:45 setup-seafile.sh
+	drwxrwxr-x.  4 500 500  4096 8月  14 16:41 upgrade
+###	[root@localhost seafile-server-6.1.2]# cd ..
+###	[root@localhost mycloud]# mkdir installed
+###	[root@localhost mycloud]# mv seafile-server_* installed
+###	[root@localhost mycloud]# ll
+	总用量 4
+	drwxr-xr-x. 2 root root   48 8月  19 08:52 installed
+	drwxrwxr-x. 6  500  500 4096 8月  14 16:45 seafile-server-6.1.2
+###	[root@localhost mycloud]# cd seafile-server-6.1.2/
+###	[root@localhost seafile-server-6.1.2]# yum install mariadb-server
+	已加载插件：fastestmirror
+	base                                                                                                                  | 3.6 kB  00:00:00     
+	extras                                                                                                                | 3.4 kB  00:00:00     
+	updates                                                                                                               | 3.4 kB  00:00:00     
+	Loading mirror speeds from cached hostfile
+	 * base: mirrors.zju.edu.cn
+	 * extras: mirrors.cn99.com
+	 * updates: mirrors.zju.edu.cn
+	正在解决依赖关系
+	--> 正在检查事务
+	---> 软件包 mariadb-server.x86_64.1.5.5.52-1.el7 将被 安装
+	--> 正在处理依赖关系 mariadb(x86-64) = 1:5.5.52-1.el7，它被软件包 1:mariadb-server-5.5.52-1.el7.x86_64 需要
+	--> 正在处理依赖关系 perl-DBI，它被软件包 1:mariadb-server-5.5.52-1.el7.x86_64 需要
+	--> 正在处理依赖关系 perl-DBD-MySQL，它被软件包 1:mariadb-server-5.5.52-1.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(vars)，它被软件包 1:mariadb-server-5.5.52-1.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(strict)，它被软件包 1:mariadb-server-5.5.52-1.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(Sys::Hostname)，它被软件包 1:mariadb-server-5.5.52-1.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(POSIX)，它被软件包 1:mariadb-server-5.5.52-1.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(Getopt::Long)，它被软件包 1:mariadb-server-5.5.52-1.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(File::Temp)，它被软件包 1:mariadb-server-5.5.52-1.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(File::Path)，它被软件包 1:mariadb-server-5.5.52-1.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(File::Copy)，它被软件包 1:mariadb-server-5.5.52-1.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(File::Basename)，它被软件包 1:mariadb-server-5.5.52-1.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(Data::Dumper)，它被软件包 1:mariadb-server-5.5.52-1.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(DBI)，它被软件包 1:mariadb-server-5.5.52-1.el7.x86_64 需要
+	--> 正在处理依赖关系 libaio.so.1(LIBAIO_0.4)(64bit)，它被软件包 1:mariadb-server-5.5.52-1.el7.x86_64 需要
+	--> 正在处理依赖关系 libaio.so.1(LIBAIO_0.1)(64bit)，它被软件包 1:mariadb-server-5.5.52-1.el7.x86_64 需要
+	--> 正在处理依赖关系 /usr/bin/perl，它被软件包 1:mariadb-server-5.5.52-1.el7.x86_64 需要
+	--> 正在处理依赖关系 libaio.so.1()(64bit)，它被软件包 1:mariadb-server-5.5.52-1.el7.x86_64 需要
+	--> 正在检查事务
+	---> 软件包 libaio.x86_64.0.0.3.109-13.el7 将被 安装
+	---> 软件包 mariadb.x86_64.1.5.5.52-1.el7 将被 安装
+	--> 正在处理依赖关系 perl(Exporter)，它被软件包 1:mariadb-5.5.52-1.el7.x86_64 需要
+	---> 软件包 perl.x86_64.4.5.16.3-291.el7 将被 安装
+	--> 正在处理依赖关系 perl-libs = 4:5.16.3-291.el7，它被软件包 4:perl-5.16.3-291.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(Socket) >= 1.3，它被软件包 4:perl-5.16.3-291.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(Scalar::Util) >= 1.10，它被软件包 4:perl-5.16.3-291.el7.x86_64 需要
+	--> 正在处理依赖关系 perl-macros，它被软件包 4:perl-5.16.3-291.el7.x86_64 需要
+	--> 正在处理依赖关系 perl-libs，它被软件包 4:perl-5.16.3-291.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(threads::shared)，它被软件包 4:perl-5.16.3-291.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(threads)，它被软件包 4:perl-5.16.3-291.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(constant)，它被软件包 4:perl-5.16.3-291.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(Time::Local)，它被软件包 4:perl-5.16.3-291.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(Time::HiRes)，它被软件包 4:perl-5.16.3-291.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(Storable)，它被软件包 4:perl-5.16.3-291.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(Socket)，它被软件包 4:perl-5.16.3-291.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(Scalar::Util)，它被软件包 4:perl-5.16.3-291.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(Pod::Simple::XHTML)，它被软件包 4:perl-5.16.3-291.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(Pod::Simple::Search)，它被软件包 4:perl-5.16.3-291.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(Filter::Util::Call)，它被软件包 4:perl-5.16.3-291.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(File::Spec::Unix)，它被软件包 4:perl-5.16.3-291.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(File::Spec::Functions)，它被软件包 4:perl-5.16.3-291.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(File::Spec)，它被软件包 4:perl-5.16.3-291.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(Cwd)，它被软件包 4:perl-5.16.3-291.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(Carp)，它被软件包 4:perl-5.16.3-291.el7.x86_64 需要
+	--> 正在处理依赖关系 libperl.so()(64bit)，它被软件包 4:perl-5.16.3-291.el7.x86_64 需要
+	---> 软件包 perl-DBD-MySQL.x86_64.0.4.023-5.el7 将被 安装
+	---> 软件包 perl-DBI.x86_64.0.1.627-4.el7 将被 安装
+	--> 正在处理依赖关系 perl(RPC::PlServer) >= 0.2001，它被软件包 perl-DBI-1.627-4.el7.x86_64 需要
+	--> 正在处理依赖关系 perl(RPC::PlClient) >= 0.2000，它被软件包 perl-DBI-1.627-4.el7.x86_64 需要
+	---> 软件包 perl-Data-Dumper.x86_64.0.2.145-3.el7 将被 安装
+	---> 软件包 perl-File-Path.noarch.0.2.09-2.el7 将被 安装
+	---> 软件包 perl-File-Temp.noarch.0.0.23.01-3.el7 将被 安装
+	---> 软件包 perl-Getopt-Long.noarch.0.2.40-2.el7 将被 安装
+	--> 正在处理依赖关系 perl(Pod::Usage) >= 1.14，它被软件包 perl-Getopt-Long-2.40-2.el7.noarch 需要
+	--> 正在处理依赖关系 perl(Text::ParseWords)，它被软件包 perl-Getopt-Long-2.40-2.el7.noarch 需要
+	--> 正在检查事务
+	---> 软件包 perl-Carp.noarch.0.1.26-244.el7 将被 安装
+	---> 软件包 perl-Exporter.noarch.0.5.68-3.el7 将被 安装
+	---> 软件包 perl-Filter.x86_64.0.1.49-3.el7 将被 安装
+	---> 软件包 perl-PathTools.x86_64.0.3.40-5.el7 将被 安装
+	---> 软件包 perl-PlRPC.noarch.0.0.2020-14.el7 将被 安装
+	--> 正在处理依赖关系 perl(Net::Daemon) >= 0.13，它被软件包 perl-PlRPC-0.2020-14.el7.noarch 需要
+	--> 正在处理依赖关系 perl(Net::Daemon::Test)，它被软件包 perl-PlRPC-0.2020-14.el7.noarch 需要
+	--> 正在处理依赖关系 perl(Net::Daemon::Log)，它被软件包 perl-PlRPC-0.2020-14.el7.noarch 需要
+	--> 正在处理依赖关系 perl(Compress::Zlib)，它被软件包 perl-PlRPC-0.2020-14.el7.noarch 需要
+	---> 软件包 perl-Pod-Simple.noarch.1.3.28-4.el7 将被 安装
+	--> 正在处理依赖关系 perl(Pod::Escapes) >= 1.04，它被软件包 1:perl-Pod-Simple-3.28-4.el7.noarch 需要
+	--> 正在处理依赖关系 perl(Encode)，它被软件包 1:perl-Pod-Simple-3.28-4.el7.noarch 需要
+	---> 软件包 perl-Pod-Usage.noarch.0.1.63-3.el7 将被 安装
+	--> 正在处理依赖关系 perl(Pod::Text) >= 3.15，它被软件包 perl-Pod-Usage-1.63-3.el7.noarch 需要
+	--> 正在处理依赖关系 perl-Pod-Perldoc，它被软件包 perl-Pod-Usage-1.63-3.el7.noarch 需要
+	---> 软件包 perl-Scalar-List-Utils.x86_64.0.1.27-248.el7 将被 安装
+	---> 软件包 perl-Socket.x86_64.0.2.010-4.el7 将被 安装
+	---> 软件包 perl-Storable.x86_64.0.2.45-3.el7 将被 安装
+	---> 软件包 perl-Text-ParseWords.noarch.0.3.29-4.el7 将被 安装
+	---> 软件包 perl-Time-HiRes.x86_64.4.1.9725-3.el7 将被 安装
+	---> 软件包 perl-Time-Local.noarch.0.1.2300-2.el7 将被 安装
+	---> 软件包 perl-constant.noarch.0.1.27-2.el7 将被 安装
+	---> 软件包 perl-libs.x86_64.4.5.16.3-291.el7 将被 安装
+	---> 软件包 perl-macros.x86_64.4.5.16.3-291.el7 将被 安装
+	---> 软件包 perl-threads.x86_64.0.1.87-4.el7 将被 安装
+	---> 软件包 perl-threads-shared.x86_64.0.1.43-6.el7 将被 安装
+	--> 正在检查事务
+	---> 软件包 perl-Encode.x86_64.0.2.51-7.el7 将被 安装
+	---> 软件包 perl-IO-Compress.noarch.0.2.061-2.el7 将被 安装
+	--> 正在处理依赖关系 perl(Compress::Raw::Zlib) >= 2.061，它被软件包 perl-IO-Compress-2.061-2.el7.noarch 需要
+	--> 正在处理依赖关系 perl(Compress::Raw::Bzip2) >= 2.061，它被软件包 perl-IO-Compress-2.061-2.el7.noarch 需要
+	---> 软件包 perl-Net-Daemon.noarch.0.0.48-5.el7 将被 安装
+	---> 软件包 perl-Pod-Escapes.noarch.1.1.04-291.el7 将被 安装
+	---> 软件包 perl-Pod-Perldoc.noarch.0.3.20-4.el7 将被 安装
+	--> 正在处理依赖关系 perl(parent)，它被软件包 perl-Pod-Perldoc-3.20-4.el7.noarch 需要
+	--> 正在处理依赖关系 perl(HTTP::Tiny)，它被软件包 perl-Pod-Perldoc-3.20-4.el7.noarch 需要
+	---> 软件包 perl-podlators.noarch.0.2.5.1-3.el7 将被 安装
+	--> 正在检查事务
+	---> 软件包 perl-Compress-Raw-Bzip2.x86_64.0.2.061-3.el7 将被 安装
+	---> 软件包 perl-Compress-Raw-Zlib.x86_64.1.2.061-4.el7 将被 安装
+	---> 软件包 perl-HTTP-Tiny.noarch.0.0.033-3.el7 将被 安装
+	---> 软件包 perl-parent.noarch.1.0.225-244.el7 将被 安装
+	--> 解决依赖关系完成
+
+	依赖关系解决
+
+	=============================================================================================================================================
+	 Package                                     架构                       版本                                  源                        大小
+	=============================================================================================================================================
+	正在安装:
+	 mariadb-server                              x86_64                     1:5.5.52-1.el7                        base                      11 M
+	为依赖而安装:
+	 libaio                                      x86_64                     0.3.109-13.el7                        base                      24 k
+	 mariadb                                     x86_64                     1:5.5.52-1.el7                        base                     8.7 M
+	 perl                                        x86_64                     4:5.16.3-291.el7                      base                     8.0 M
+	 perl-Carp                                   noarch                     1.26-244.el7                          base                      19 k
+	 perl-Compress-Raw-Bzip2                     x86_64                     2.061-3.el7                           base                      32 k
+	 perl-Compress-Raw-Zlib                      x86_64                     1:2.061-4.el7                         base                      57 k
+	 perl-DBD-MySQL                              x86_64                     4.023-5.el7                           base                     140 k
+	 perl-DBI                                    x86_64                     1.627-4.el7                           base                     802 k
+	 perl-Data-Dumper                            x86_64                     2.145-3.el7                           base                      47 k
+	 perl-Encode                                 x86_64                     2.51-7.el7                            base                     1.5 M
+	 perl-Exporter                               noarch                     5.68-3.el7                            base                      28 k
+	 perl-File-Path                              noarch                     2.09-2.el7                            base                      26 k
+	 perl-File-Temp                              noarch                     0.23.01-3.el7                         base                      56 k
+	 perl-Filter                                 x86_64                     1.49-3.el7                            base                      76 k
+	 perl-Getopt-Long                            noarch                     2.40-2.el7                            base                      56 k
+	 perl-HTTP-Tiny                              noarch                     0.033-3.el7                           base                      38 k
+	 perl-IO-Compress                            noarch                     2.061-2.el7                           base                     260 k
+	 perl-Net-Daemon                             noarch                     0.48-5.el7                            base                      51 k
+	 perl-PathTools                              x86_64                     3.40-5.el7                            base                      82 k
+	 perl-PlRPC                                  noarch                     0.2020-14.el7                         base                      36 k
+	 perl-Pod-Escapes                            noarch                     1:1.04-291.el7                        base                      51 k
+	 perl-Pod-Perldoc                            noarch                     3.20-4.el7                            base                      87 k
+	 perl-Pod-Simple                             noarch                     1:3.28-4.el7                          base                     216 k
+	 perl-Pod-Usage                              noarch                     1.63-3.el7                            base                      27 k
+	 perl-Scalar-List-Utils                      x86_64                     1.27-248.el7                          base                      36 k
+	 perl-Socket                                 x86_64                     2.010-4.el7                           base                      49 k
+	 perl-Storable                               x86_64                     2.45-3.el7                            base                      77 k
+	 perl-Text-ParseWords                        noarch                     3.29-4.el7                            base                      14 k
+	 perl-Time-HiRes                             x86_64                     4:1.9725-3.el7                        base                      45 k
+	 perl-Time-Local                             noarch                     1.2300-2.el7                          base                      24 k
+	 perl-constant                               noarch                     1.27-2.el7                            base                      19 k
+	 perl-libs                                   x86_64                     4:5.16.3-291.el7                      base                     688 k
+	 perl-macros                                 x86_64                     4:5.16.3-291.el7                      base                      43 k
+	 perl-parent                                 noarch                     1:0.225-244.el7                       base                      12 k
+	 perl-podlators                              noarch                     2.5.1-3.el7                           base                     112 k
+	 perl-threads                                x86_64                     1.87-4.el7                            base                      49 k
+	 perl-threads-shared                         x86_64                     1.43-6.el7                            base                      39 k
+
+	事务概要
+	=============================================================================================================================================
+	安装  1 软件包 (+37 依赖软件包)
+
+	总下载量：32 M
+	安装大小：144 M
+	Is this ok [y/d/N]: y
+	Downloading packages:
+	(1/38): libaio-0.3.109-13.el7.x86_64.rpm                                                                              |  24 kB  00:00:00     
+	(2/38): mariadb-5.5.52-1.el7.x86_64.rpm                                                                               | 8.7 MB  00:00:01     
+	(3/38): mariadb-server-5.5.52-1.el7.x86_64.rpm                                                                        |  11 MB  00:00:02     
+	(4/38): perl-Carp-1.26-244.el7.noarch.rpm                                                                             |  19 kB  00:00:00     
+	(5/38): perl-Compress-Raw-Bzip2-2.061-3.el7.x86_64.rpm                                                                |  32 kB  00:00:00     
+	(6/38): perl-Compress-Raw-Zlib-2.061-4.el7.x86_64.rpm                                                                 |  57 kB  00:00:00     
+	(7/38): perl-DBD-MySQL-4.023-5.el7.x86_64.rpm                                                                         | 140 kB  00:00:00     
+	(8/38): perl-5.16.3-291.el7.x86_64.rpm                                                                                | 8.0 MB  00:00:01     
+	(9/38): perl-DBI-1.627-4.el7.x86_64.rpm                                                                               | 802 kB  00:00:00     
+	(10/38): perl-Data-Dumper-2.145-3.el7.x86_64.rpm                                                                      |  47 kB  00:00:00     
+	(11/38): perl-Exporter-5.68-3.el7.noarch.rpm                                                                          |  28 kB  00:00:00     
+	(12/38): perl-File-Path-2.09-2.el7.noarch.rpm                                                                         |  26 kB  00:00:00     
+	(13/38): perl-File-Temp-0.23.01-3.el7.noarch.rpm                                                                      |  56 kB  00:00:00     
+	(14/38): perl-Filter-1.49-3.el7.x86_64.rpm                                                                            |  76 kB  00:00:00     
+	(15/38): perl-Getopt-Long-2.40-2.el7.noarch.rpm                                                                       |  56 kB  00:00:00     
+	(16/38): perl-Encode-2.51-7.el7.x86_64.rpm                                                                            | 1.5 MB  00:00:00     
+	(17/38): perl-HTTP-Tiny-0.033-3.el7.noarch.rpm                                                                        |  38 kB  00:00:00     
+	(18/38): perl-IO-Compress-2.061-2.el7.noarch.rpm                                                                      | 260 kB  00:00:00     
+	(19/38): perl-Net-Daemon-0.48-5.el7.noarch.rpm                                                                        |  51 kB  00:00:00     
+	(20/38): perl-PlRPC-0.2020-14.el7.noarch.rpm                                                                          |  36 kB  00:00:00     
+	(21/38): perl-PathTools-3.40-5.el7.x86_64.rpm                                                                         |  82 kB  00:00:00     
+	(22/38): perl-Pod-Escapes-1.04-291.el7.noarch.rpm                                                                     |  51 kB  00:00:00     
+	(23/38): perl-Pod-Perldoc-3.20-4.el7.noarch.rpm                                                                       |  87 kB  00:00:00     
+	(24/38): perl-Pod-Usage-1.63-3.el7.noarch.rpm                                                                         |  27 kB  00:00:00     
+	(25/38): perl-Scalar-List-Utils-1.27-248.el7.x86_64.rpm                                                               |  36 kB  00:00:00     
+	(26/38): perl-Socket-2.010-4.el7.x86_64.rpm                                                                           |  49 kB  00:00:00     
+	(27/38): perl-Pod-Simple-3.28-4.el7.noarch.rpm                                                                        | 216 kB  00:00:00     
+	(28/38): perl-Text-ParseWords-3.29-4.el7.noarch.rpm                                                                   |  14 kB  00:00:00     
+	(29/38): perl-Storable-2.45-3.el7.x86_64.rpm                                                                          |  77 kB  00:00:00     
+	(30/38): perl-Time-HiRes-1.9725-3.el7.x86_64.rpm                                                                      |  45 kB  00:00:00     
+	(31/38): perl-Time-Local-1.2300-2.el7.noarch.rpm                                                                      |  24 kB  00:00:00     
+	(32/38): perl-constant-1.27-2.el7.noarch.rpm                                                                          |  19 kB  00:00:00     
+	(33/38): perl-macros-5.16.3-291.el7.x86_64.rpm                                                                        |  43 kB  00:00:00     
+	(34/38): perl-parent-0.225-244.el7.noarch.rpm                                                                         |  12 kB  00:00:00     
+	(35/38): perl-podlators-2.5.1-3.el7.noarch.rpm                                                                        | 112 kB  00:00:00     
+	(36/38): perl-threads-1.87-4.el7.x86_64.rpm                                                                           |  49 kB  00:00:00     
+	(37/38): perl-threads-shared-1.43-6.el7.x86_64.rpm                                                                    |  39 kB  00:00:00     
+	(38/38): perl-libs-5.16.3-291.el7.x86_64.rpm                                                                          | 688 kB  00:00:00     
+	---------------------------------------------------------------------------------------------------------------------------------------------
+	总计                                                                                                         7.8 MB/s |  32 MB  00:00:04     
+	Running transaction check
+	Running transaction test
+	Transaction test succeeded
+	Running transaction
+	  正在安装    : 1:perl-parent-0.225-244.el7.noarch                                                                                      1/38 
+	  正在安装    : perl-HTTP-Tiny-0.033-3.el7.noarch                                                                                       2/38 
+	  正在安装    : perl-podlators-2.5.1-3.el7.noarch                                                                                       3/38 
+	  正在安装    : perl-Pod-Perldoc-3.20-4.el7.noarch                                                                                      4/38 
+	  正在安装    : 1:perl-Pod-Escapes-1.04-291.el7.noarch                                                                                  5/38 
+	  正在安装    : perl-Encode-2.51-7.el7.x86_64                                                                                           6/38 
+	  正在安装    : perl-Text-ParseWords-3.29-4.el7.noarch                                                                                  7/38 
+	  正在安装    : perl-Pod-Usage-1.63-3.el7.noarch                                                                                        8/38 
+	  正在安装    : perl-Storable-2.45-3.el7.x86_64                                                                                         9/38 
+	  正在安装    : perl-Exporter-5.68-3.el7.noarch                                                                                        10/38 
+	  正在安装    : perl-constant-1.27-2.el7.noarch                                                                                        11/38 
+	  正在安装    : perl-Carp-1.26-244.el7.noarch                                                                                          12/38 
+	  正在安装    : perl-Time-Local-1.2300-2.el7.noarch                                                                                    13/38 
+	  正在安装    : perl-Socket-2.010-4.el7.x86_64                                                                                         14/38 
+	  正在安装    : 4:perl-Time-HiRes-1.9725-3.el7.x86_64                                                                                  15/38 
+	  正在安装    : perl-PathTools-3.40-5.el7.x86_64                                                                                       16/38 
+	  正在安装    : perl-Scalar-List-Utils-1.27-248.el7.x86_64                                                                             17/38 
+	  正在安装    : 4:perl-libs-5.16.3-291.el7.x86_64                                                                                      18/38 
+	  正在安装    : 4:perl-macros-5.16.3-291.el7.x86_64                                                                                    19/38 
+	  正在安装    : 1:perl-Pod-Simple-3.28-4.el7.noarch                                                                                    20/38 
+	  正在安装    : perl-File-Temp-0.23.01-3.el7.noarch                                                                                    21/38 
+	  正在安装    : perl-File-Path-2.09-2.el7.noarch                                                                                       22/38 
+	  正在安装    : perl-threads-shared-1.43-6.el7.x86_64                                                                                  23/38 
+	  正在安装    : perl-threads-1.87-4.el7.x86_64                                                                                         24/38 
+	  正在安装    : perl-Filter-1.49-3.el7.x86_64                                                                                          25/38 
+	  正在安装    : perl-Getopt-Long-2.40-2.el7.noarch                                                                                     26/38 
+	  正在安装    : 4:perl-5.16.3-291.el7.x86_64                                                                                           27/38 
+	  正在安装    : perl-Data-Dumper-2.145-3.el7.x86_64                                                                                    28/38 
+	  正在安装    : perl-Compress-Raw-Bzip2-2.061-3.el7.x86_64                                                                             29/38 
+	  正在安装    : perl-Net-Daemon-0.48-5.el7.noarch                                                                                      30/38 
+	  正在安装    : 1:mariadb-5.5.52-1.el7.x86_64                                                                                          31/38 
+	  正在安装    : 1:perl-Compress-Raw-Zlib-2.061-4.el7.x86_64                                                                            32/38 
+	  正在安装    : perl-IO-Compress-2.061-2.el7.noarch                                                                                    33/38 
+	  正在安装    : perl-PlRPC-0.2020-14.el7.noarch                                                                                        34/38 
+	  正在安装    : perl-DBI-1.627-4.el7.x86_64                                                                                            35/38 
+	  正在安装    : perl-DBD-MySQL-4.023-5.el7.x86_64                                                                                      36/38 
+	  正在安装    : libaio-0.3.109-13.el7.x86_64                                                                                           37/38 
+	  正在安装    : 1:mariadb-server-5.5.52-1.el7.x86_64                                                                                   38/38 
+	  验证中      : perl-HTTP-Tiny-0.033-3.el7.noarch                                                                                       1/38 
+	  验证中      : perl-threads-shared-1.43-6.el7.x86_64                                                                                   2/38 
+	  验证中      : perl-Storable-2.45-3.el7.x86_64                                                                                         3/38 
+	  验证中      : perl-IO-Compress-2.061-2.el7.noarch                                                                                     4/38 
+	  验证中      : perl-Exporter-5.68-3.el7.noarch                                                                                         5/38 
+	  验证中      : perl-constant-1.27-2.el7.noarch                                                                                         6/38 
+	  验证中      : perl-PathTools-3.40-5.el7.x86_64                                                                                        7/38 
+	  验证中      : perl-Carp-1.26-244.el7.noarch                                                                                           8/38 
+	  验证中      : 1:perl-Pod-Escapes-1.04-291.el7.noarch                                                                                  9/38 
+	  验证中      : perl-Compress-Raw-Bzip2-2.061-3.el7.x86_64                                                                             10/38 
+	  验证中      : 1:perl-parent-0.225-244.el7.noarch                                                                                     11/38 
+	  验证中      : perl-Net-Daemon-0.48-5.el7.noarch                                                                                      12/38 
+	  验证中      : 1:mariadb-server-5.5.52-1.el7.x86_64                                                                                   13/38 
+	  验证中      : perl-File-Temp-0.23.01-3.el7.noarch                                                                                    14/38 
+	  验证中      : 1:perl-Pod-Simple-3.28-4.el7.noarch                                                                                    15/38 
+	  验证中      : perl-Time-Local-1.2300-2.el7.noarch                                                                                    16/38 
+	  验证中      : perl-Pod-Perldoc-3.20-4.el7.noarch                                                                                     17/38 
+	  验证中      : perl-DBI-1.627-4.el7.x86_64                                                                                            18/38 
+	  验证中      : libaio-0.3.109-13.el7.x86_64                                                                                           19/38 
+	  验证中      : perl-Socket-2.010-4.el7.x86_64                                                                                         20/38 
+	  验证中      : 1:mariadb-5.5.52-1.el7.x86_64                                                                                          21/38 
+	  验证中      : perl-Data-Dumper-2.145-3.el7.x86_64                                                                                    22/38 
+	  验证中      : 4:perl-Time-HiRes-1.9725-3.el7.x86_64                                                                                  23/38 
+	  验证中      : perl-Scalar-List-Utils-1.27-248.el7.x86_64                                                                             24/38 
+	  验证中      : 1:perl-Compress-Raw-Zlib-2.061-4.el7.x86_64                                                                            25/38 
+	  验证中      : perl-PlRPC-0.2020-14.el7.noarch                                                                                        26/38 
+	  验证中      : 4:perl-libs-5.16.3-291.el7.x86_64                                                                                      27/38 
+	  验证中      : 4:perl-macros-5.16.3-291.el7.x86_64                                                                                    28/38 
+	  验证中      : perl-Pod-Usage-1.63-3.el7.noarch                                                                                       29/38 
+	  验证中      : perl-DBD-MySQL-4.023-5.el7.x86_64                                                                                      30/38 
+	  验证中      : perl-Encode-2.51-7.el7.x86_64                                                                                          31/38 
+	  验证中      : perl-podlators-2.5.1-3.el7.noarch                                                                                      32/38 
+	  验证中      : perl-Getopt-Long-2.40-2.el7.noarch                                                                                     33/38 
+	  验证中      : perl-File-Path-2.09-2.el7.noarch                                                                                       34/38 
+	  验证中      : 4:perl-5.16.3-291.el7.x86_64                                                                                           35/38 
+	  验证中      : perl-threads-1.87-4.el7.x86_64                                                                                         36/38 
+	  验证中      : perl-Filter-1.49-3.el7.x86_64                                                                                          37/38 
+	  验证中      : perl-Text-ParseWords-3.29-4.el7.noarch                                                                                 38/38 
+
+	已安装:
+	  mariadb-server.x86_64 1:5.5.52-1.el7                                                                                                       
+
+	作为依赖被安装:
+	  libaio.x86_64 0:0.3.109-13.el7                 mariadb.x86_64 1:5.5.52-1.el7                  perl.x86_64 4:5.16.3-291.el7                 
+	  perl-Carp.noarch 0:1.26-244.el7                perl-Compress-Raw-Bzip2.x86_64 0:2.061-3.el7   perl-Compress-Raw-Zlib.x86_64 1:2.061-4.el7  
+	  perl-DBD-MySQL.x86_64 0:4.023-5.el7            perl-DBI.x86_64 0:1.627-4.el7                  perl-Data-Dumper.x86_64 0:2.145-3.el7        
+	  perl-Encode.x86_64 0:2.51-7.el7                perl-Exporter.noarch 0:5.68-3.el7              perl-File-Path.noarch 0:2.09-2.el7           
+	  perl-File-Temp.noarch 0:0.23.01-3.el7          perl-Filter.x86_64 0:1.49-3.el7                perl-Getopt-Long.noarch 0:2.40-2.el7         
+	  perl-HTTP-Tiny.noarch 0:0.033-3.el7            perl-IO-Compress.noarch 0:2.061-2.el7          perl-Net-Daemon.noarch 0:0.48-5.el7          
+	  perl-PathTools.x86_64 0:3.40-5.el7             perl-PlRPC.noarch 0:0.2020-14.el7              perl-Pod-Escapes.noarch 1:1.04-291.el7       
+	  perl-Pod-Perldoc.noarch 0:3.20-4.el7           perl-Pod-Simple.noarch 1:3.28-4.el7            perl-Pod-Usage.noarch 0:1.63-3.el7           
+	  perl-Scalar-List-Utils.x86_64 0:1.27-248.el7   perl-Socket.x86_64 0:2.010-4.el7               perl-Storable.x86_64 0:2.45-3.el7            
+	  perl-Text-ParseWords.noarch 0:3.29-4.el7       perl-Time-HiRes.x86_64 4:1.9725-3.el7          perl-Time-Local.noarch 0:1.2300-2.el7        
+	  perl-constant.noarch 0:1.27-2.el7              perl-libs.x86_64 4:5.16.3-291.el7              perl-macros.x86_64 4:5.16.3-291.el7          
+	  perl-parent.noarch 1:0.225-244.el7             perl-podlators.noarch 0:2.5.1-3.el7            perl-threads.x86_64 0:1.87-4.el7             
+	  perl-threads-shared.x86_64 0:1.43-6.el7       
+
+	完毕！
+###	[root@localhost seafile-server-6.1.2]# yum install python-setuptools python-imaging python-ldap MySQL-python python-memcached python-urllib3
+	已加载插件：fastestmirror
+	Loading mirror speeds from cached hostfile
+	 * base: mirrors.zju.edu.cn
+	 * extras: mirrors.cn99.com
+	 * updates: mirrors.zju.edu.cn
+	正在解决依赖关系
+	--> 正在检查事务
+	---> 软件包 MySQL-python.x86_64.0.1.2.5-1.el7 将被 安装
+	---> 软件包 python-ldap.x86_64.0.2.4.15-2.el7 将被 安装
+	---> 软件包 python-memcached.noarch.0.1.48-4.el7 将被 安装
+	---> 软件包 python-pillow.x86_64.0.2.0.0-19.gitd1c6db8.el7 将被 安装
+	--> 正在处理依赖关系 libwebp.so.4()(64bit)，它被软件包 python-pillow-2.0.0-19.gitd1c6db8.el7.x86_64 需要
+	---> 软件包 python-setuptools.noarch.0.0.9.8-4.el7 将被 安装
+	--> 正在处理依赖关系 python-backports-ssl_match_hostname，它被软件包 python-setuptools-0.9.8-4.el7.noarch 需要
+	---> 软件包 python-urllib3.noarch.0.1.10.2-2.el7_1 将被 安装
+	--> 正在处理依赖关系 python-six，它被软件包 python-urllib3-1.10.2-2.el7_1.noarch 需要
+	--> 正在检查事务
+	---> 软件包 libwebp.x86_64.0.0.3.0-3.el7 将被 安装
+	---> 软件包 python-backports-ssl_match_hostname.noarch.0.3.4.0.2-4.el7 将被 安装
+	--> 正在处理依赖关系 python-backports，它被软件包 python-backports-ssl_match_hostname-3.4.0.2-4.el7.noarch 需要
+	---> 软件包 python-six.noarch.0.1.9.0-2.el7 将被 安装
+	--> 正在检查事务
+	---> 软件包 python-backports.x86_64.0.1.0-8.el7 将被 安装
+	--> 解决依赖关系完成
+
+	依赖关系解决
+
+	=============================================================================================================================================
+	 Package                                            架构                  版本                                     源                   大小
+	=============================================================================================================================================
+	正在安装:
+	 MySQL-python                                       x86_64                1.2.5-1.el7                              base                 90 k
+	 python-ldap                                        x86_64                2.4.15-2.el7                             base                159 k
+	 python-memcached                                   noarch                1.48-4.el7                               base                 33 k
+	 python-pillow                                      x86_64                2.0.0-19.gitd1c6db8.el7                  base                438 k
+	 python-setuptools                                  noarch                0.9.8-4.el7                              base                396 k
+	 python-urllib3                                     noarch                1.10.2-2.el7_1                           base                100 k
+	为依赖而安装:
+	 libwebp                                            x86_64                0.3.0-3.el7                              base                170 k
+	 python-backports                                   x86_64                1.0-8.el7                                base                5.8 k
+	 python-backports-ssl_match_hostname                noarch                3.4.0.2-4.el7                            base                 12 k
+	 python-six                                         noarch                1.9.0-2.el7                              base                 29 k
+
+	事务概要
+	=============================================================================================================================================
+	安装  6 软件包 (+4 依赖软件包)
+
+	总下载量：1.4 M
+	安装大小：5.3 M
+	Is this ok [y/d/N]: y
+	Downloading packages:
+	(1/10): MySQL-python-1.2.5-1.el7.x86_64.rpm                                                                           |  90 kB  00:00:00     
+	(2/10): libwebp-0.3.0-3.el7.x86_64.rpm                                                                                | 170 kB  00:00:00     
+	(3/10): python-backports-1.0-8.el7.x86_64.rpm                                                                         | 5.8 kB  00:00:00     
+	(4/10): python-backports-ssl_match_hostname-3.4.0.2-4.el7.noarch.rpm                                                  |  12 kB  00:00:00     
+	(5/10): python-ldap-2.4.15-2.el7.x86_64.rpm                                                                           | 159 kB  00:00:00     
+	(6/10): python-pillow-2.0.0-19.gitd1c6db8.el7.x86_64.rpm                                                              | 438 kB  00:00:00     
+	(7/10): python-setuptools-0.9.8-4.el7.noarch.rpm                                                                      | 396 kB  00:00:00     
+	(8/10): python-six-1.9.0-2.el7.noarch.rpm                                                                             |  29 kB  00:00:00     
+	(9/10): python-urllib3-1.10.2-2.el7_1.noarch.rpm                                                                      | 100 kB  00:00:00     
+	(10/10): python-memcached-1.48-4.el7.noarch.rpm                                                                       |  33 kB  00:00:00     
+	---------------------------------------------------------------------------------------------------------------------------------------------
+	总计                                                                                                         2.8 MB/s | 1.4 MB  00:00:00     
+	Running transaction check
+	Running transaction test
+	Transaction test succeeded
+	Running transaction
+	  正在安装    : libwebp-0.3.0-3.el7.x86_64                                                                                              1/10 
+	  正在安装    : python-backports-1.0-8.el7.x86_64                                                                                       2/10 
+	  正在安装    : python-backports-ssl_match_hostname-3.4.0.2-4.el7.noarch                                                                3/10 
+	  正在安装    : python-six-1.9.0-2.el7.noarch                                                                                           4/10 
+	  正在安装    : python-urllib3-1.10.2-2.el7_1.noarch                                                                                    5/10 
+	  正在安装    : python-setuptools-0.9.8-4.el7.noarch                                                                                    6/10 
+	  正在安装    : python-pillow-2.0.0-19.gitd1c6db8.el7.x86_64                                                                            7/10 
+	  正在安装    : python-ldap-2.4.15-2.el7.x86_64                                                                                         8/10 
+	  正在安装    : python-memcached-1.48-4.el7.noarch                                                                                      9/10 
+	  正在安装    : MySQL-python-1.2.5-1.el7.x86_64                                                                                        10/10 
+	  验证中      : python-six-1.9.0-2.el7.noarch                                                                                           1/10 
+	  验证中      : python-setuptools-0.9.8-4.el7.noarch                                                                                    2/10 
+	  验证中      : python-backports-ssl_match_hostname-3.4.0.2-4.el7.noarch                                                                3/10 
+	  验证中      : python-backports-1.0-8.el7.x86_64                                                                                       4/10 
+	  验证中      : MySQL-python-1.2.5-1.el7.x86_64                                                                                         5/10 
+	  验证中      : python-memcached-1.48-4.el7.noarch                                                                                      6/10 
+	  验证中      : python-pillow-2.0.0-19.gitd1c6db8.el7.x86_64                                                                            7/10 
+	  验证中      : python-ldap-2.4.15-2.el7.x86_64                                                                                         8/10 
+	  验证中      : python-urllib3-1.10.2-2.el7_1.noarch                                                                                    9/10 
+	  验证中      : libwebp-0.3.0-3.el7.x86_64                                                                                             10/10 
+
+	已安装:
+	  MySQL-python.x86_64 0:1.2.5-1.el7                   python-ldap.x86_64 0:2.4.15-2.el7           python-memcached.noarch 0:1.48-4.el7       
+	  python-pillow.x86_64 0:2.0.0-19.gitd1c6db8.el7      python-setuptools.noarch 0:0.9.8-4.el7      python-urllib3.noarch 0:1.10.2-2.el7_1     
+
+	作为依赖被安装:
+	  libwebp.x86_64 0:0.3.0-3.el7        python-backports.x86_64 0:1.0-8.el7     python-backports-ssl_match_hostname.noarch 0:3.4.0.2-4.el7    
+	  python-six.noarch 0:1.9.0-2.el7    
+
+	完毕！
+###	[root@localhost seafile-server-6.1.2]# mysql -u root
+	ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/lib/mysql/mysql.sock' (2)
+###	[root@localhost seafile-server-6.1.2]# netstat -luntp
+	Active Internet connections (only servers)
+	Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+	tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      920/sshd            
+	tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      1790/master         
+	tcp6       0      0 :::22                   :::*                    LISTEN      920/sshd            
+	tcp6       0      0 ::1:25                  :::*                    LISTEN      1790/master         
+	udp        0      0 0.0.0.0:68              0.0.0.0:*                           9651/dhclient       
+	udp        0      0 127.0.0.1:323           0.0.0.0:*                           594/chronyd         
+	udp        0      0 0.0.0.0:39441           0.0.0.0:*                           9651/dhclient       
+	udp6       0      0 :::20670                :::*                                9651/dhclient       
+	udp6       0      0 ::1:323                 :::*                                594/chronyd         
+###	[root@localhost seafile-server-6.1.2]# yum intsall tree
+	已加载插件：fastestmirror
+	没有该命令：intsall。请使用 /usr/bin/yum --help
+###	[root@localhost seafile-server-6.1.2]# yum install tree   
+	已加载插件：fastestmirror
+	Loading mirror speeds from cached hostfile
+	 * base: mirrors.zju.edu.cn
+	 * extras: mirrors.cn99.com
+	 * updates: mirrors.zju.edu.cn
+	正在解决依赖关系
+	--> 正在检查事务
+	---> 软件包 tree.x86_64.0.1.6.0-10.el7 将被 安装
+	--> 解决依赖关系完成
+
+	依赖关系解决
+
+	=============================================================================================================================================
+	 Package                        架构                             版本                                   源                              大小
+	=============================================================================================================================================
+	正在安装:
+	 tree                           x86_64                           1.6.0-10.el7                           base                            46 k
+
+	事务概要
+	=============================================================================================================================================
+	安装  1 软件包
+
+	总下载量：46 k
+	安装大小：87 k
+	Is this ok [y/d/N]: y
+	Downloading packages:
+	tree-1.6.0-10.el7.x86_64.rpm                                                                                          |  46 kB  00:00:00     
+	Running transaction check
+	Running transaction test
+	Transaction test succeeded
+	Running transaction
+	  正在安装    : tree-1.6.0-10.el7.x86_64                                                                                                 1/1 
+	  验证中      : tree-1.6.0-10.el7.x86_64                                                                                                 1/1 
+
+	已安装:
+	  tree.x86_64 0:1.6.0-10.el7                                                                                                                 
+
+	完毕！
+###	[root@localhost seafile-server-6.1.2]# cd ..
+###	[root@localhost mycloud]# tree -LC 2
+	.
+	├── installed
+	│   └── seafile-server_6.1.2_x86-64.tar.gz
+	└── seafile-server-6.1.2
+		├── check_init_admin.py
+		├── reset-admin.sh
+		├── runtime
+		├── seaf-fsck.sh
+		├── seaf-fuse.sh
+		├── seaf-gc.sh
+		├── seafile
+		├── seafile.sh
+		├── seahub
+		├── seahub.sh
+		├── setup-seafile-mysql.py
+		├── setup-seafile-mysql.sh
+		├── setup-seafile.sh
+		└── upgrade
+
+	6 directories, 11 files
+###	[root@localhost mycloud]# yum -y install bash-com*
+	已加载插件：fastestmirror
+	Loading mirror speeds from cached hostfile
+	 * base: mirrors.zju.edu.cn
+	 * extras: mirrors.cn99.com
+	 * updates: mirrors.zju.edu.cn
+	正在解决依赖关系
+	--> 正在检查事务
+	---> 软件包 bash-completion.noarch.1.2.1-6.el7 将被 安装
+	--> 解决依赖关系完成
+
+	依赖关系解决
+
+	=============================================================================================================================================
+	 Package                                架构                          版本                                 源                           大小
+	=============================================================================================================================================
+	正在安装:
+	 bash-completion                        noarch                        1:2.1-6.el7                          base                         85 k
+
+	事务概要
+	=============================================================================================================================================
+	安装  1 软件包
+
+	总下载量：85 k
+	安装大小：259 k
+	Downloading packages:
+	bash-completion-2.1-6.el7.noarch.rpm                                                                                  |  85 kB  00:00:00     
+	Running transaction check
+	Running transaction test
+	Transaction test succeeded
+	Running transaction
+	  正在安装    : 1:bash-completion-2.1-6.el7.noarch                                                                                       1/1 
+	  验证中      : 1:bash-completion-2.1-6.el7.noarch                                                                                       1/1 
+
+	已安装:
+	  bash-completion.noarch 1:2.1-6.el7                                                                                                         
+
+	完毕！
+###	[root@localhost mycloud]# systemctl start mariadb
+###	[root@localhost mycloud]# netstat -luntp          
+	Active Internet connections (only servers)
+	Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+	tcp        0      0 0.0.0.0:3306            0.0.0.0:*               LISTEN      16962/mysqld        
+	tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      920/sshd            
+	tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      1790/master         
+	tcp6       0      0 :::22                   :::*                    LISTEN      920/sshd            
+	tcp6       0      0 ::1:25                  :::*                    LISTEN      1790/master         
+	udp        0      0 0.0.0.0:68              0.0.0.0:*                           9651/dhclient       
+	udp        0      0 127.0.0.1:323           0.0.0.0:*                           594/chronyd         
+	udp        0      0 0.0.0.0:39441           0.0.0.0:*                           9651/dhclient       
+	udp6       0      0 :::20670                :::*                                9651/dhclient       
+	udp6       0      0 ::1:323                 :::*                                594/chronyd         
+###	[root@localhost mycloud]# mysqladmin -u root -p password 1qaz2wsx
+	Enter password: 
+###	[root@localhost mycloud]# cd seafile-server-*
+###	[root@localhost seafile-server-6.1.2]# ./setup-seafile-mysql.sh
+	Checking python on this machine ...
+	  Checking python module: setuptools ... Done.
+	  Checking python module: python-imaging ... Done.
+	  Checking python module: python-mysqldb ... Done.
+
+	-----------------------------------------------------------------
+	This script will guide you to setup your seafile server using MySQL.
+	Make sure you have read seafile server manual at
+
+			https://github.com/haiwen/seafile/wiki
+
+	Press ENTER to continue
+	-----------------------------------------------------------------
+
+
+	What is the name of the server? It will be displayed on the client.
+	3 - 15 letters or digits
+	[ server name ] my_cloud
+
+	What is the ip or domain of the server?
+	For example: www.mycompany.com, 192.168.1.101
+	[ This server's ip or domain ] 192.168.1.115
+
+	Where do you want to put your seafile data?
+	Please use a volume with enough free space
+	[ default "/home/mycloud/seafile-data" ] 
+
+	Which port do you want to use for the seafile fileserver?
+	[ default "8082" ] 
+
+	-------------------------------------------------------
+	Please choose a way to initialize seafile databases:
+	-------------------------------------------------------
+
+	[1] Create new ccnet/seafile/seahub databases
+	[2] Use existing ccnet/seafile/seahub databases
+
+	[ 1 or 2 ] 
+	-------------------------------------------------------
+	Please choose a way to initialize seafile databases:
+	-------------------------------------------------------
+
+	[1] Create new ccnet/seafile/seahub databases
+	[2] Use existing ccnet/seafile/seahub databases
+
+	[ 1 or 2 ] 1
+
+	What is the host of mysql server?
+	[ default "localhost" ] 
+
+	What is the port of mysql server?
+	[ default "3306" ] 
+
+	What is the password of the mysql root user?
+	[ root password ] 
+
+	verifying password of user root ...  done
+
+	Enter the name for mysql user of seafile. It would be created if not exists.
+	[ default "seafile" ] 
+
+	Enter the password for mysql user "seafile":
+	[ password for seafile ] 
+	Enter the password for mysql user "seafile":
+	[ password for seafile ] 
+
+	Enter the database name for ccnet-server:
+	[ default "ccnet-db" ] 
+
+	Enter the database name for seafile-server:
+	[ default "seafile-db" ] 
+
+	Enter the database name for seahub:
+	[ default "seahub-db" ] 
+
+	---------------------------------
+	This is your configuration
+	---------------------------------
+
+		server name:            my_cloud
+		server ip/domain:       192.168.1.115
+
+		seafile data dir:       /home/mycloud/seafile-data
+		fileserver port:        8082
+
+		database:               create new
+		ccnet database:         ccnet-db
+		seafile database:       seafile-db
+		seahub database:        seahub-db
+		database user:          seafile
+
+
+
+	---------------------------------
+	Press ENTER to continue, or Ctrl-C to abort
+	---------------------------------
+
+	Generating ccnet configuration ...
+
+	done
+	Successly create configuration dir /home/mycloud/ccnet.
+	Generating seafile configuration ...
+
+	Done.
+	done
+	Generating seahub configuration ...
+
+	----------------------------------------
+	Now creating seahub database tables ...
+
+	----------------------------------------
+
+	creating seafile-server-latest symbolic link ...  done
+
+
+
+
+	-----------------------------------------------------------------
+	Your seafile server configuration has been finished successfully.
+	-----------------------------------------------------------------
+
+	run seafile server:     ./seafile.sh { start | stop | restart }
+	run seahub  server:     ./seahub.sh  { start <port> | stop | restart <port> }
+
+	-----------------------------------------------------------------
+	If you are behind a firewall, remember to allow input/output of these tcp ports:
+	-----------------------------------------------------------------
+
+	port of seafile fileserver:   8082
+	port of seahub:               8000
+
+	When problems occur, Refer to
+
+			https://github.com/haiwen/seafile/wiki
+
+	for information.
+
+
+###	[root@localhost seafile-server-6.1.2]# ./seafile.sh start
+
+	[08/19/17 09:03:25] ../common/session.c(132): using config file /home/mycloud/conf/ccnet.conf
+	Starting seafile server, please wait ...
+	Seafile server started
+
+	Done.
+###	[root@localhost seafile-server-6.1.2]# seahub.sh
+	-bash: seahub.sh: 未找到命令
+###	[root@localhost seafile-server-6.1.2]# ./seahub.sh start 
+
+	LC_ALL is not set in ENV, set to en_US.UTF-8
+	Starting seahub at port 8000 ...
+
+	----------------------------------------
+	It's the first time you start the seafile server. Now let's create the admin account
+	----------------------------------------
+
+	What is the email for the admin account?
+	[ admin email ] 894893421@qq.com
+
+	What is the password for the admin account?
+	[ admin password ] 
+
+	Enter the password again:
+	[ admin password again ] 
+
+
+
+	----------------------------------------
+	Successfully created seafile admin
+	----------------------------------------
+
+
+
+
+	Seahub is started
+
+	Done.
+
+###	[root@localhost seafile-server-6.1.2]# netstat -luntp
+	Active Internet connections (only servers)
+	Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+	tcp        0      0 0.0.0.0:3306            0.0.0.0:*               LISTEN      16962/mysqld        
+	tcp        0      0 0.0.0.0:8082            0.0.0.0:*               LISTEN      17062/seaf-server   
+	tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      920/sshd            
+	tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      1790/master         
+	tcp        0      0 0.0.0.0:8000            0.0.0.0:*               LISTEN      17138/python2.7     
+	tcp6       0      0 :::22                   :::*                    LISTEN      920/sshd            
+	tcp6       0      0 ::1:25                  :::*                    LISTEN      1790/master         
+	udp        0      0 0.0.0.0:68              0.0.0.0:*                           9651/dhclient       
+	udp        0      0 127.0.0.1:323           0.0.0.0:*                           594/chronyd         
+	udp        0      0 0.0.0.0:39441           0.0.0.0:*                           9651/dhclient       
+	udp6       0      0 :::20670                :::*                                9651/dhclient       
+	udp6       0      0 ::1:323                 :::*                                594/chronyd         
+###	[root@localhost seafile-server-6.1.2]# ip add
+	1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN qlen 1
+		link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+		inet 127.0.0.1/8 scope host lo
+		   valid_lft forever preferred_lft forever
+		inet6 ::1/128 scope host 
+		   valid_lft forever preferred_lft forever
+	2: ens160: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP qlen 1000
+		link/ether 00:0c:29:59:d6:58 brd ff:ff:ff:ff:ff:ff
+		inet 192.168.1.115/24 brd 192.168.1.255 scope global dynamic ens160
+		   valid_lft 4507sec preferred_lft 4507sec
+		inet6 fe80::6c48:97c4:d17a:c34f/64 scope link 
+		   valid_lft forever preferred_lft forever
+###	[root@localhost seafile-server-6.1.2]# firewall-cmd --zone=public --add-port=8000/tcp --permanent
+	success
+###	[root@localhost seafile-server-6.1.2]# firewall-cmd --zone=public --add-port=8082/tcp --permanent  
+	success
+###	[root@localhost seafile-server-6.1.2]# firewall-cmd --list
+	usage: see firewall-cmd man page
+	firewall-cmd: error: ambiguous option: --list could match --list-lockdown-whitelist-contexts, --list-all, --list-lockdown-whitelist-uids, --list-ports, --list-source-ports, --list-lockdown-whitelist-users, --list-forward-ports, --list-icmp-blocks, --list-interfaces, --list-rich-rules, --list-services, --list-lockdown-whitelist-commands, --list-all-zones, --list-sources, --list-protocols
+###	[root@localhost seafile-server-6.1.2]# firewall-cmd --list-all
+	public (active)
+	  target: default
+	  icmp-block-inversion: no
+	  interfaces: ens160
+	  sources: 
+	  services: dhcpv6-client ssh
+	  ports: 
+	  protocols: 
+	  masquerade: no
+	  forward-ports: 
+	  sourceports: 
+	  icmp-blocks: 
+	  rich rules: 
+
+###	[root@localhost seafile-server-6.1.2]# firewall-cmd -reload
+	usage: see firewall-cmd man page
+	firewall-cmd: error: unrecognized arguments: -reload
+###	[root@localhost seafile-server-6.1.2]# firewall-cmd --reload
+	success
+###	[root@localhost seafile-server-6.1.2]# firewall-cmd --list-all
+	public (active)
+	  target: default
+	  icmp-block-inversion: no
+	  interfaces: ens160
+	  sources: 
+	  services: dhcpv6-client ssh
+	  ports: 8000/tcp 8082/tcp
+	  protocols: 
+	  masquerade: no
+	  forward-ports: 
+	  sourceports: 
+	  icmp-blocks: 
+	  rich rules: 
+
+###	[root@localhost seafile-server-6.1.2]# 
+
 # 39.
 # 40.

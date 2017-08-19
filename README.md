@@ -2323,9 +2323,7 @@ linux学习
 
 	注：以上方法仅在基于RedHat制作的发行版本（如CentOS、OracleLinux、NeoKylin等），其他诸如Fedora、Debian等系统未做测试。​
 # 38.私有云搭建
-	Last failed login: Sat Aug 19 08:47:27 CST 2017 from 61.155.49.162 on ssh:notty
-	There was 1 failed login attempt since the last successful login.
-	Last login: Fri Aug 18 22:30:17 2017 from 49.69.155.179
+	
 ###	[root@localhost ~]# cd /home/
 ###	[root@localhost home]# mkdir mycloud
 ###	[root@localhost home]# cd mycloud/
@@ -2905,7 +2903,7 @@ linux学习
 	udp        0      0 0.0.0.0:39441           0.0.0.0:*                           9651/dhclient       
 	udp6       0      0 :::20670                :::*                                9651/dhclient       
 	udp6       0      0 ::1:323                 :::*                                594/chronyd         
-###	[root@localhost mycloud]# mysqladmin -u root -p password 1qaz2wsx
+###	[root@localhost mycloud]# mysqladmin -u root -p password ******
 	Enter password: 
 ###	[root@localhost mycloud]# cd seafile-server-*
 ###	[root@localhost seafile-server-6.1.2]# ./setup-seafile-mysql.sh

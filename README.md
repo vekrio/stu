@@ -3334,4 +3334,227 @@ linux学习
 		fi 
 		/sbin/sysctl -p
 	fi
-# 40.
+# 40.centos7 nmcli配置
+
+
+		[root@localhost ~]# 
+		[root@localhost ~]# nmcli connection show
+		NAME    UUID                                  TYPE            DEVICE 
+		ens160  ff8ec28b-be52-4897-adc4-f082c16344a2  802-3-ethernet  ens160 
+		virbr0  82805d5f-bb55-4d51-99f4-5fef002c4003  bridge          virbr0 
+		[root@localhost ~]# nmcli connection show ens160 
+		connection.id:                          ens160
+		connection.uuid:                        ff8ec28b-be52-4897-adc4-f082c16344a2
+		connection.stable-id:                   --
+		connection.interface-name:              ens160
+		connection.type:                        802-3-ethernet
+		connection.autoconnect:                 yes
+		connection.autoconnect-priority:        0
+		connection.timestamp:                   1503191459
+		connection.read-only:                   no
+		connection.permissions:                 
+		connection.zone:                        --
+		connection.master:                      --
+		connection.slave-type:                  --
+		connection.autoconnect-slaves:          -1 (default)
+		connection.secondaries:                 
+		connection.gateway-ping-timeout:        0
+		connection.metered:                     unknown
+		connection.lldp:                        -1 (default)
+		802-3-ethernet.port:                    --
+		802-3-ethernet.speed:                   0
+		802-3-ethernet.duplex:                  --
+		802-3-ethernet.auto-negotiate:          yes
+		802-3-ethernet.mac-address:             --
+		802-3-ethernet.cloned-mac-address:      --
+		802-3-ethernet.generate-mac-address-mask:--
+		802-3-ethernet.mac-address-blacklist:   
+		802-3-ethernet.mtu:                     auto
+		802-3-ethernet.s390-subchannels:        
+		802-3-ethernet.s390-nettype:            --
+		802-3-ethernet.s390-options:            
+		802-3-ethernet.wake-on-lan:             1 (default)
+		802-3-ethernet.wake-on-lan-password:    --
+		ipv4.method:                            auto
+		ipv4.dns:                               
+		ipv4.dns-search:                        
+		ipv4.dns-options:                       (default)
+		ipv4.dns-priority:                      0
+		ipv4.addresses:                         
+		ipv4.gateway:                           --
+		ipv4.routes:                            
+		ipv4.route-metric:                      -1
+		ipv4.ignore-auto-routes:                no
+		ipv4.ignore-auto-dns:                   no
+		ipv4.dhcp-client-id:                    --
+		ipv4.dhcp-timeout:                      0
+		ipv4.dhcp-send-hostname:                yes
+		ipv4.dhcp-hostname:                     --
+		ipv4.dhcp-fqdn:                         --
+		ipv4.never-default:                     no
+		ipv4.may-fail:                          yes
+		ipv4.dad-timeout:                       -1 (default)
+		ipv6.method:                            auto
+		ipv6.dns:                               
+		ipv6.dns-search:                        
+		ipv6.dns-options:                       (default)
+		ipv6.dns-priority:                      0
+		ipv6.addresses:                         
+		ipv6.gateway:                           --
+		ipv6.routes:                            
+		ipv6.route-metric:                      -1
+		ipv6.ignore-auto-routes:                no
+		ipv6.ignore-auto-dns:                   no
+		ipv6.never-default:                     no
+		ipv6.may-fail:                          yes
+		ipv6.ip6-privacy:                       -1 (unknown)
+		ipv6.addr-gen-mode:                     stable-privacy
+		ipv6.dhcp-send-hostname:                yes
+		ipv6.dhcp-hostname:                     --
+		ipv6.token:                             --
+		GENERAL.NAME:                           ens160
+		GENERAL.UUID:                           ff8ec28b-be52-4897-adc4-f082c16344a2
+		GENERAL.DEVICES:                        ens160
+		GENERAL.STATE:                          activated
+		GENERAL.DEFAULT:                        yes
+		GENERAL.DEFAULT6:                       no
+		GENERAL.VPN:                            no
+		GENERAL.ZONE:                           --
+		GENERAL.DBUS-PATH:                      /org/freedesktop/NetworkManager/ActiveConnection/3
+		GENERAL.CON-PATH:                       /org/freedesktop/NetworkManager/Settings/0
+		GENERAL.SPEC-OBJECT:                    /
+		GENERAL.MASTER-PATH:                    --
+		IP4.ADDRESS[1]:                         192.168.1.116/24
+		IP4.GATEWAY:                            192.168.1.1
+		IP4.DNS[1]:                             61.177.7.1
+		IP4.DNS[2]:                             114.114.114.114
+		DHCP4.OPTION[1]:                        requested_routers = 1
+		DHCP4.OPTION[2]:                        requested_domain_search = 1
+		DHCP4.OPTION[3]:                        requested_time_offset = 1
+		DHCP4.OPTION[4]:                        requested_domain_name = 1
+		DHCP4.OPTION[5]:                        requested_rfc3442_classless_static_routes = 1
+		DHCP4.OPTION[6]:                        requested_classless_static_routes = 1
+		DHCP4.OPTION[7]:                        requested_wpad = 1
+		DHCP4.OPTION[8]:                        requested_broadcast_address = 1
+		DHCP4.OPTION[9]:                        next_server = 0.0.0.0
+		DHCP4.OPTION[10]:                       broadcast_address = 192.168.1.255
+		DHCP4.OPTION[11]:                       requested_interface_mtu = 1
+		DHCP4.OPTION[12]:                       requested_subnet_mask = 1
+		DHCP4.OPTION[13]:                       expiry = 1503198510
+		DHCP4.OPTION[14]:                       dhcp_lease_time = 7200
+		DHCP4.OPTION[15]:                       ip_address = 192.168.1.116
+		DHCP4.OPTION[16]:                       requested_static_routes = 1
+		DHCP4.OPTION[17]:                       dhcp_message_type = 5
+		DHCP4.OPTION[18]:                       requested_domain_name_servers = 1
+		DHCP4.OPTION[19]:                       requested_nis_servers = 1
+		DHCP4.OPTION[20]:                       requested_ntp_servers = 1
+		DHCP4.OPTION[21]:                       subnet_mask = 255.255.255.0
+		DHCP4.OPTION[22]:                       routers = 192.168.1.1
+		DHCP4.OPTION[23]:                       domain_name_servers = 61.177.7.1 114.114.114.114
+		DHCP4.OPTION[24]:                       requested_ms_classless_static_routes = 1
+		DHCP4.OPTION[25]:                       requested_nis_domain = 1
+		DHCP4.OPTION[26]:                       network_number = 192.168.1.0
+		DHCP4.OPTION[27]:                       requested_host_name = 1
+		DHCP4.OPTION[28]:                       dhcp_server_identifier = 192.168.1.1
+		IP6.ADDRESS[1]:                         fe80::a895:18f3:4d5a:e73a/64
+		IP6.GATEWAY:                            
+				  
+		[root@localhost ~]#  nmcli con add con-name "static" ifname ens160 connection.autoconnect yes type ethernet ipv4.addresses 192.168.1.8/24 ipv4.gateway 192.168.1.1 ipv4.dns 8.8.8.8 ipv4.method "manual"
+		Connection 'static' (2fc150d9-9edb-44b6-9f71-509a9d42ba6f) successfully added.
+
+		[root@localhost ~]# nmcli connection down ens160 
+		[root@localhost ~]# nmcli connection up static
+		[root@localhost ~]# nmcli con show 
+		--active  apath     ens160    help      id        --order   path      static    uuid      virbr0    
+		[root@localhost ~]# nmcli con show static 
+		connection.id:                          static
+		connection.uuid:                        2fc150d9-9edb-44b6-9f71-509a9d42ba6f
+		connection.stable-id:                   --
+		connection.interface-name:              ens160
+		connection.type:                        802-3-ethernet
+		connection.autoconnect:                 yes
+		connection.autoconnect-priority:        0
+		connection.timestamp:                   1503192734
+		connection.read-only:                   no
+		connection.permissions:                 
+		connection.zone:                        --
+		connection.master:                      --
+		connection.slave-type:                  --
+		connection.autoconnect-slaves:          -1 (default)
+		connection.secondaries:                 
+		connection.gateway-ping-timeout:        0
+		connection.metered:                     unknown
+		connection.lldp:                        -1 (default)
+		802-3-ethernet.port:                    --
+		802-3-ethernet.speed:                   0
+		802-3-ethernet.duplex:                  --
+		802-3-ethernet.auto-negotiate:          yes
+		802-3-ethernet.mac-address:             --
+		802-3-ethernet.cloned-mac-address:      --
+		802-3-ethernet.generate-mac-address-mask:--
+		802-3-ethernet.mac-address-blacklist:   
+		802-3-ethernet.mtu:                     auto
+		802-3-ethernet.s390-subchannels:        
+		802-3-ethernet.s390-nettype:            --
+		802-3-ethernet.s390-options:            
+		802-3-ethernet.wake-on-lan:             1 (default)
+		802-3-ethernet.wake-on-lan-password:    --
+		ipv4.method:                            manual
+		ipv4.dns:                               8.8.8.8
+		ipv4.dns-search:                        
+		ipv4.dns-options:                       (default)
+		ipv4.dns-priority:                      0
+		ipv4.addresses:                         192.168.1.8/24
+		ipv4.gateway:                           192.168.1.1
+		ipv4.routes:                            
+		ipv4.route-metric:                      -1
+		ipv4.ignore-auto-routes:                no
+		ipv4.ignore-auto-dns:                   no
+		ipv4.dhcp-client-id:                    --
+		ipv4.dhcp-timeout:                      0
+		ipv4.dhcp-send-hostname:                yes
+		ipv4.dhcp-hostname:                     --
+		ipv4.dhcp-fqdn:                         --
+		ipv4.never-default:                     no
+		ipv4.may-fail:                          yes
+		ipv4.dad-timeout:                       -1 (default)
+		ipv6.method:                            auto
+		ipv6.dns:                               
+		ipv6.dns-search:                        
+		ipv6.dns-options:                       (default)
+		ipv6.dns-priority:                      0
+		ipv6.addresses:                         
+		ipv6.gateway:                           --
+		ipv6.routes:                            
+		ipv6.route-metric:                      -1
+		ipv6.ignore-auto-routes:                no
+		ipv6.ignore-auto-dns:                   no
+		ipv6.never-default:                     no
+		ipv6.may-fail:                          yes
+		ipv6.ip6-privacy:                       -1 (unknown)
+		ipv6.addr-gen-mode:                     stable-privacy
+		ipv6.dhcp-send-hostname:                yes
+		ipv6.dhcp-hostname:                     --
+		ipv6.token:                             --
+		GENERAL.NAME:                           static
+		GENERAL.UUID:                           2fc150d9-9edb-44b6-9f71-509a9d42ba6f
+		GENERAL.DEVICES:                        ens160
+		GENERAL.STATE:                          activated
+		GENERAL.DEFAULT:                        yes
+		GENERAL.DEFAULT6:                       no
+		GENERAL.VPN:                            no
+		GENERAL.ZONE:                           --
+		GENERAL.DBUS-PATH:                      /org/freedesktop/NetworkManager/ActiveConnection/0
+		GENERAL.CON-PATH:                       /org/freedesktop/NetworkManager/Settings/1
+		GENERAL.SPEC-OBJECT:                    /
+		GENERAL.MASTER-PATH:                    --
+		IP4.ADDRESS[1]:                         192.168.1.8/24
+		IP4.GATEWAY:                            192.168.1.1
+		IP4.DNS[1]:                             8.8.8.8
+		IP6.ADDRESS[1]:                         fe80::8ab9:d4ea:6d3d:226f/64
+		IP6.GATEWAY:                            
+		[root@localhost ~]# 
+
+# 41.
+# 42.
+# 43.

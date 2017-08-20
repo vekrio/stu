@@ -3459,9 +3459,9 @@ linux学习
 		IP6.ADDRESS[1]:                         fe80::a895:18f3:4d5a:e73a/64
 		IP6.GATEWAY:                            
 				  
-		[root@localhost ~]#  nmcli con add con-name "static" ifname ens160 connection.autoconnect yes type ethernet ipv4.addresses 192.168.1.8/24 ipv4.gateway 192.168.1.1 ipv4.dns 8.8.8.8 ipv4.method "manual"
+		[root@localhost ~]# nmcli con add con-name "static" ifname ens160 connection.autoconnect yes type ethernet ipv4.addresses 192.168.1.8/24 ipv4.gateway 192.168.1.1 ipv4.dns 8.8.8.8 ipv4.method "manual"
 		Connection 'static' (2fc150d9-9edb-44b6-9f71-509a9d42ba6f) successfully added.
-
+						    nmcli con add con-name 网卡配置名称 ifname 网卡名称 connection.autoconnect 开机是否自动连接 type 网卡类型 ipv4.addresses 192.168.1.8/24 ipv4.gateway 192.168.1.1 ipv4.dns 8.8.8.8 ipv4.method “ip获取方式”
 		[root@localhost ~]# nmcli connection down ens160 
 		[root@localhost ~]# nmcli connection up static
 		[root@localhost ~]# nmcli con show 

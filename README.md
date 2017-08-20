@@ -3156,56 +3156,6 @@ linux学习
 	  icmp-blocks: 
 	  rich rules: 
 	  
-###	[root@localhost seafile-server-6.1.2] vi /etc/systemd/system/seafile.service
-
-
-	[Unit]
-	Description=Seafile
-	# add mysql.service or postgresql.service depending on your database to the line below
-	After=network.target
-
-	[Service]
-	Type=oneshot
-	ExecStart=/home/mycloud/seafile-server-latest/seafile.sh start
-	ExecStop=/home/mycloud//seafile-server-latest/seafile.sh stop
-	RemainAfterExit=yes
-	User=root	
-	Group=root
-
-	[Install]
-	WantedBy=multi-user.target
-
-
-
-
-
-###	[root@localhost seafile-server-6.1.2]vi /etc/systemd/system/seahub.service
-
-	[Unit]
-	Description=Seafile hub
-	After=network.target seafile.service
-
-	[Service]
-	# change start to start-fastcgi if you want to run fastcgi
-	ExecStart=/home/mycloud/seafile-server-latest/seahub.sh start
-	ExecStop=/home/mycloud/seafile-server-latest/seahub.sh stop
-	User=root
-	Group=root
-	Type=oneshot
-	RemainAfterExit=yes
-
-	[Install]
-	WantedBy=multi-user.target
-
-
-
-
-
-
-###	[root@localhost seafile-server-6.1.2]systemctl enable seafile.service
-###	[root@localhost seafile-server-6.1.2]systemctl start seafile.service
-###	[root@localhost seafile-server-6.1.2]systemctl enable seahub.service
-### [root@localhost seafile-server-6.1.2]systemctl start seahub.service
 
 # 39.[centos6/7 系统初始化脚本](http://blog.csdn.net/u012375924/article/details/52486436)
 	#!/bin/bash

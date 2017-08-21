@@ -2755,123 +2755,8 @@ linux学习
 	  python-six.noarch 0:1.9.0-2.el7    
 
 	完毕！
-###	[root@localhost seafile-server-6.1.2]# mysql -u root
-	ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/lib/mysql/mysql.sock' (2)
-###	[root@localhost seafile-server-6.1.2]# netstat -luntp
-	Active Internet connections (only servers)
-	Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
-	tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      920/sshd            
-	tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      1790/master         
-	tcp6       0      0 :::22                   :::*                    LISTEN      920/sshd            
-	tcp6       0      0 ::1:25                  :::*                    LISTEN      1790/master         
-	udp        0      0 0.0.0.0:68              0.0.0.0:*                           9651/dhclient       
-	udp        0      0 127.0.0.1:323           0.0.0.0:*                           594/chronyd         
-	udp        0      0 0.0.0.0:39441           0.0.0.0:*                           9651/dhclient       
-	udp6       0      0 :::20670                :::*                                9651/dhclient       
-	udp6       0      0 ::1:323                 :::*                                594/chronyd         
-###	[root@localhost seafile-server-6.1.2]# yum intsall tree
-	已加载插件：fastestmirror
-	没有该命令：intsall。请使用 /usr/bin/yum --help
-###	[root@localhost seafile-server-6.1.2]# yum install tree   
-	已加载插件：fastestmirror
-	Loading mirror speeds from cached hostfile
-	 * base: mirrors.zju.edu.cn
-	 * extras: mirrors.cn99.com
-	 * updates: mirrors.zju.edu.cn
-	正在解决依赖关系
-	--> 正在检查事务
-	---> 软件包 tree.x86_64.0.1.6.0-10.el7 将被 安装
-	--> 解决依赖关系完成
-
-	依赖关系解决
-
-	=============================================================================================================================================
-	 Package                        架构                             版本                                   源                              大小
-	=============================================================================================================================================
-	正在安装:
-	 tree                           x86_64                           1.6.0-10.el7                           base                            46 k
-
-	事务概要
-	=============================================================================================================================================
-	安装  1 软件包
-
-	总下载量：46 k
-	安装大小：87 k
-	Is this ok [y/d/N]: y
-	Downloading packages:
-	tree-1.6.0-10.el7.x86_64.rpm                                                                                          |  46 kB  00:00:00     
-	Running transaction check
-	Running transaction test
-	Transaction test succeeded
-	Running transaction
-	  正在安装    : tree-1.6.0-10.el7.x86_64                                                                                                 1/1 
-	  验证中      : tree-1.6.0-10.el7.x86_64                                                                                                 1/1 
-
-	已安装:
-	  tree.x86_64 0:1.6.0-10.el7                                                                                                                 
-
-	完毕！
-###	[root@localhost seafile-server-6.1.2]# cd ..
-###	[root@localhost mycloud]# tree -LC 2
-	.
-	├── installed
-	│   └── seafile-server_6.1.2_x86-64.tar.gz
-	└── seafile-server-6.1.2
-		├── check_init_admin.py
-		├── reset-admin.sh
-		├── runtime
-		├── seaf-fsck.sh
-		├── seaf-fuse.sh
-		├── seaf-gc.sh
-		├── seafile
-		├── seafile.sh
-		├── seahub
-		├── seahub.sh
-		├── setup-seafile-mysql.py
-		├── setup-seafile-mysql.sh
-		├── setup-seafile.sh
-		└── upgrade
-
-	6 directories, 11 files
-###	[root@localhost mycloud]# yum -y install bash-com*
-	已加载插件：fastestmirror
-	Loading mirror speeds from cached hostfile
-	 * base: mirrors.zju.edu.cn
-	 * extras: mirrors.cn99.com
-	 * updates: mirrors.zju.edu.cn
-	正在解决依赖关系
-	--> 正在检查事务
-	---> 软件包 bash-completion.noarch.1.2.1-6.el7 将被 安装
-	--> 解决依赖关系完成
-
-	依赖关系解决
-
-	=============================================================================================================================================
-	 Package                                架构                          版本                                 源                           大小
-	=============================================================================================================================================
-	正在安装:
-	 bash-completion                        noarch                        1:2.1-6.el7                          base                         85 k
-
-	事务概要
-	=============================================================================================================================================
-	安装  1 软件包
-
-	总下载量：85 k
-	安装大小：259 k
-	Downloading packages:
-	bash-completion-2.1-6.el7.noarch.rpm                                                                                  |  85 kB  00:00:00     
-	Running transaction check
-	Running transaction test
-	Transaction test succeeded
-	Running transaction
-	  正在安装    : 1:bash-completion-2.1-6.el7.noarch                                                                                       1/1 
-	  验证中      : 1:bash-completion-2.1-6.el7.noarch                                                                                       1/1 
-
-	已安装:
-	  bash-completion.noarch 1:2.1-6.el7                                                                                                         
-
-	完毕！
-###	[root@localhost mycloud]# systemctl start mariadb
+###	[root@localhost mycloud]#cd  seafile-server-6.1.2
+###	[root@localhost seafile-server-6.1.2]# systemctl start mariadb
 ###	[root@localhost seafile-server-6.1.2]# systemctl enable mariadb
 ###	[root@localhost mycloud]# netstat -luntp          
 	Active Internet connections (only servers)
@@ -3083,19 +2968,7 @@ linux学习
 	udp        0      0 0.0.0.0:39441           0.0.0.0:*                           9651/dhclient       
 	udp6       0      0 :::20670                :::*                                9651/dhclient       
 	udp6       0      0 ::1:323                 :::*                                594/chronyd         
-###	[root@localhost seafile-server-6.1.2]# ip add
-	1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN qlen 1
-		link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-		inet 127.0.0.1/8 scope host lo
-		   valid_lft forever preferred_lft forever
-		inet6 ::1/128 scope host 
-		   valid_lft forever preferred_lft forever
-	2: ens160: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP qlen 1000
-		link/ether 00:0c:29:59:d6:58 brd ff:ff:ff:ff:ff:ff
-		inet 192.168.1.115/24 brd 192.168.1.255 scope global dynamic ens160
-		   valid_lft 4507sec preferred_lft 4507sec
-		inet6 fe80::6c48:97c4:d17a:c34f/64 scope link 
-		   valid_lft forever preferred_lft forever
+
 ###	[root@localhost seafile-server-6.1.2]# firewall-cmd --zone=public --add-port=8000/tcp --permanent
 	success
 ###	[root@localhost seafile-server-6.1.2]# firewall-cmd --zone=public --add-port=8082/tcp --permanent  
@@ -3118,9 +2991,6 @@ linux学习
 	  icmp-blocks: 
 	  rich rules: 
 
-###	[root@localhost seafile-server-6.1.2]# firewall-cmd -reload
-	usage: see firewall-cmd man page
-	firewall-cmd: error: unrecognized arguments: -reload
 ###	[root@localhost seafile-server-6.1.2]# firewall-cmd --reload
 	success
 ###	[root@localhost seafile-server-6.1.2]# firewall-cmd --list-all

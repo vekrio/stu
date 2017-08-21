@@ -3137,7 +3137,24 @@ linux学习
 	  sourceports: 
 	  icmp-blocks: 
 	  rich rules: 
-	  
+###	[root@localhost ~]# vi /etc/rc.local
+	#!/bin/bash
+	# THIS FILE IS ADDED FOR COMPATIBILITY PURPOSES
+	#
+	# It is highly advisable to create own systemd services or udev rules
+	# to run scripts during boot instead of using this file.
+	#
+	# In contrast to previous versions due to parallel execution during boot
+	# this script will NOT be run after all other services.
+	#
+	# Please note that you must run 'chmod +x /etc/rc.d/rc.local' to ensure
+	# that this script will be executed during boot.
+
+	touch /var/lock/subsys/local
+	systemctl start mariadb
+	cd /home/mycloud/seafile-server-latest/ && ./seafile.sh start && ./seahub.sh start
+###	[root@localhost ~]# chmod +x   /etc/rc.local
+### [root@localhost ~]# reboot 
 
 # 39.[centos6/7 系统初始化脚本](http://blog.csdn.net/u012375924/article/details/52486436)
 	#!/bin/bash

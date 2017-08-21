@@ -2344,24 +2344,6 @@ linux学习
 	总用量 23392
 	drwxrwxr-x. 6  500  500     4096 8月  14 16:45 seafile-server-6.1.2
 	-rw-r--r--. 1 root root 23948057 8月  15 10:19 seafile-server_6.1.2_x86-64.tar.gz
-###	[root@localhost mycloud]# cd seafile-server-6.1.2/
-###	[root@localhost seafile-server-6.1.2]# ll
-	总用量 132
-	-rw-rw-r--.  1 500 500 11322 8月  14 16:45 check_init_admin.py
-	-rwxrwxr-x.  1 500 500  1821 8月  14 16:45 reset-admin.sh
-	drwxrwxr-x.  2 500 500    25 8月  14 16:45 runtime
-	-rwxrwxr-x.  1 500 500  1937 8月  14 16:45 seaf-fsck.sh
-	-rwxrwxr-x.  1 500 500  3325 8月  14 16:45 seaf-fuse.sh
-	-rwxrwxr-x.  1 500 500  2832 8月  14 16:45 seaf-gc.sh
-	drwxrwxr-x.  6 500 500    53 8月  14 16:45 seafile
-	-rwxrwxr-x.  1 500 500  5176 8月  14 16:45 seafile.sh
-	drwxrwxr-x. 12 500 500  4096 8月  14 16:42 seahub
-	-rwxrwxr-x.  1 500 500  7737 8月  14 16:45 seahub.sh
-	-rw-rw-r--.  1 500 500 52792 8月  14 16:45 setup-seafile-mysql.py
-	-rwxrwxr-x.  1 500 500  2604 8月  14 16:45 setup-seafile-mysql.sh
-	-rwxrwxr-x.  1 500 500 22058 8月  14 16:45 setup-seafile.sh
-	drwxrwxr-x.  4 500 500  4096 8月  14 16:41 upgrade
-###	[root@localhost seafile-server-6.1.2]# cd ..
 ###	[root@localhost mycloud]# mkdir installed
 ###	[root@localhost mycloud]# mv seafile-server_* installed
 ###	[root@localhost mycloud]# ll

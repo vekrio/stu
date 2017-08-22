@@ -3374,6 +3374,7 @@ linux学习
 		IP6.GATEWAY:                            
 ###		[root@localhost ~]# 
 
-# 41.
+# 	41.centos7最小化安装
+####		yum -y install wget vim wget curl net-tools lsof
 # 42.
 # 43.

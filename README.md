@@ -3376,5 +3376,540 @@ linux学习
 
 # 	41.centos7最小化安装
 ####		yum -y install wget vim wget curl net-tools lsof
-# 42.
-# 43.
+
+# 42. 利用yum下载软件包的三种方法
+#### 方法一：用yum安装了某个工具后，我们想要这个工具的包。那yum安装的过程其实就已经把包给下载了，只是没有保持而已。所以，我们要做的，是将其缓存功能打开。
+
+		1.vi /etc/yum.conf  将其中 keepcache=0改为keepcache=1，保存退出。
+
+		2.yum install httpd
+
+		3./var/cache/yum/x86_64/7/base/packages 里就有刚才下载安装的包了
+#### *方法二：yum-utils中的yumdownloader
+
+		yum-utils包含着一系列的yum的工具，比如 debuginfo-install, package-cleanup, repoclosure, repodiff, repo-graph, repomanage, repoquery, repo-rss, reposync, repotrack, verifytree, yum-builddep, yum-complete-transaction, yumdownloader, yum-debug-dump 和 yum-groups-manager.
+
+		1. 安装yum-utils.noarch
+
+		yum -y install yum-utils
+
+		2. 使用yumdownloader
+
+		yumdownloader httpd
+
+		呵呵，就这么简单。
+####方法三： downloadonly插件
+
+		有一个yum的插件叫做downloadonly，顾名思义，就是只下载不安装的意思。
+
+		
+		yum update httpd -y –downloadonly
+
+		这样httpd的rpm就被下载到/var/cache/yum/中去了。
+
+		你也可以指定一个目录存放下载的文件
+
+		yum update httpd -y –downloadonly –downloaddir=/opt
+
+		值得注意的是，downloadonly插件不但适用于yum update，也适用于yum install。
+		
+# 43.安装snapper快照
+##	文件系统为btrfs或精简LVM
+		执行以下命令安装snapper：
+		
+####	# yum install snapper
+		安装完成以后检查一下，确保安装成功
+
+####	# rpm -qa | grep snapper
+		创建配置文件 ###
+
+		接下来一步步创建快照，Snapper需要为每一个卷创建一个配置文件，配置文件定义了快照的创建和维护规则，执行以下命令为我们的根文件系统创建一个名为btrfs_config的配置文件：
+
+		// snapper -c config_name create-config -f btrfs /mount-point
+		
+####	# snapper -c btrfs_config create-config -f btrfs /
+
+		创建的配置文件一般是从/etc/snapper/config-templates/default拷贝，并在/etc/snapper/configs/文件夹下生成，我们可以看到新生成的配置文件如下，目前配置文件先采用默认设置，暂不修改其内容：
+
+		# ls /etc/snapper/configs/
+		btrfs_config
+		
+
+		快照类型
+
+		尽管不同的快照本身并无区别，但根据生成快照的不同情形将它们分成以下三类： 
+		- pre 
+		修改前的文件系统快照。每一张前快照都有一个对应的post快照。
+
+		post 
+		修改后的文件系统快照。每一张后快照都有一个对应的pre快照。
+
+		single 
+		独立的快照。目的之一就是为了自动创建每小时快照。此为创建快照时的默认类型。
+
+		创建pre或者post快照
+
+		可以单独创建pre和post快照，比如我们先创建一个pre快照, -p的含义是创建快照的同时，打印出快照编号：
+
+####	# snapper -c btrfs_config create -t pre -p
+		1
+
+		# snapper -c btrfs_config list
+		Type   | # | Pre # | Date                            | User | Cleanup  | Description | Userdata
+		-------+---+-------+---------------------------------+------+----------+-------------+---------
+		single | 0 |       |                                 | root |          | current     |         
+		pre    | 1 |       | Wed 08 Jun 2016 11:28:09 AM EDT | root |          |             | 
+		之后我们可能会执行一些系统操作，比如我们安装了一个软件包，根分区文件系统内容会有一些变化
+
+		yum install net-tools
+		我们可以在创建一个post快照：
+
+####	# snapper -c btrfs_config create -t post --pre-num 1 -p 
+		2
+##	注释：	snapper -c btrfs_config brtfs文件系统固定格式，  -t快照类型  --pre-num对映pre的编号 -p打印出post编号
+
+####	# snapper -c btrfs_config list
+		Type   | # | Pre # | Date                            | User | Cleanup  | Description | Userdata
+		-------+---+-------+---------------------------------+------+----------+-------------+---------
+		single | 0 |       |                                 | root |          | current     |         
+		pre    | 1 |       | Wed 08 Jun 2016 11:28:09 AM EDT | root |          |             |         
+		post   | 2 | 1     | Wed 08 Jun 2016 12:26:19 PM EDT | root |          |             |  
+		编号为1和2的快照就组成了一个快照对，记录了在安装net-tools前后的根分区变化，通过以下命令查看这些变化：
+
+####	# snapper -c btrfs_config status 1..2
+		+..... /usr/bin/netstat
+		+..... /usr/lib/systemd/system/arp-ethers.service
+		+..... /usr/sbin/arp
+		+..... /usr/sbin/ether-wake
+		+..... /usr/sbin/ifconfig
+		+..... /usr/sbin/ipmaddr
+		+..... /usr/sbin/iptunnel
+		+..... /usr/sbin/mii-diag
+		+..... /usr/sbin/mii-tool
+		+..... /usr/sbin/nameif
+		+..... /usr/sbin/plipconfig
+		+..... /usr/sbin/route
+		+..... /usr/sbin/slattach
+		+..... /usr/share/doc/net-tools-2.0
+		+..... /usr/share/doc/net-tools-2.0/COPYING
+		(略...)
+		+..... /usr/share/man/pt/man8/route.8.gz
+		c..... /var/cache/yum/x86_64/7/timedhosts
+		c..... /var/lib/rpm/Basenames
+		c..... /var/lib/rpm/Dirnames
+		(略...)
+		+..... /var/lib/yum/yumdb/n/6a2a1ded37167c106d2be6dbec20003079f37cf6-net-tools-2.0-0.17.20131004git.el7-x86_64/var_infra
+		+..... /var/lib/yum/yumdb/n/6a2a1ded37167c106d2be6dbec20003079f37cf6-net-tools-2.0-0.17.20131004git.el7-x86_64/var_uuid
+		c..... /var/log/audit/audit.log
+		c..... /var/log/cron
+		c..... /var/log/messages
+		c..... /var/log/snapper.log
+		c..... /var/log/yum.log
+		“+”号代表新增文件，“-”代表删除文件，“c”代表修改了文件，与diff语法相同。
+
+		为快照添加描述和用户数据
+
+		创建pre类型的快照并打印快照编号，该快照标记为important，且为其添加描述以方便以后查询：
+
+####	# snapper create --type pre --print-number --description "Before install net-tools"--userdata "important=yes"
+		创建post类型的快照，其对应的pre快照编号为1，该快照标记为important，且为其添加描述以方便以后查询:
+
+####	# snapper create --type post --pre-number 1 --description "After install net-tools" --userdata "important=yes"
+		以上操作也可以合并成一个命令：
+
+####	# snapper -c btrfs_config create --command "yum install net-tools"
+		
+		查看快照 ###
+
+		由于默认配置中，启动了自动快照功能，自动记录整点的快照，也即类型为single的timeline快照，我们可以看到Snapper自动生成了一个标号为3的快照（注：如果每小时生成一个快照，过不了多久我们的系统就会被快照占满，就会因存储空间不足而崩溃，所以不可能无限制的生成快照，这就是配置文件中快照清理规则的作用了，仅会保留有限个数的当年、当月、当日快照，后面会详细讲解，这里仅做预览。）
+
+		
+####	# snapper -c btrfs_config list
+		Type   | #  | Pre # | Date                            | User | Cleanup  | Description | Userdata
+		-------+----+-------+---------------------------------+------+----------+-------------+---------
+		single | 0  |       |                                 | root |          | current     |         
+		pre    | 1  |       | Wed 08 Jun 2016 01:15:16 PM EDT | root |          |             |         
+		post   | 2  | 1     | Wed 08 Jun 2016 01:15:21 PM EDT | root |          |             |         
+		single | 3  |       | Wed 08 Jun 2016 02:01:01 PM EDT | root | timeline | timeline    |         
+		快照元数据
+
+		通过以上快照列表可以看到，每一张快照均由快照本身以及一些元数据组成。创建快照时，需要指定元数据。修改快照意味着只能更改其元数据，快照内容是无法更改的。每一张快照使用的元数据如下：
+
+		Type：          快照类型，有关详细信息请参见快照类型，不能更改；
+		#：             快照的唯一编号，不能更改；
+		Pre #：         指定相应前快照的编号，仅适用于post，不能更改；
+		Date：          创建快照的时间戳
+		User：          创建快照的用户
+		Cleanup：       清理规则
+		Description：   快照的说明。
+		Userdata：      扩展的说明。可使用逗号分隔的“键=值”列表格式指定自定义数据“reason=testing, project=foo”，此字段也可用于将快照标记为重要 (important=yes) 以及列出创建快照的用户 (user=tux)。
+		查看文件的改动
+
+		显示指定快照中发生更改的一系列文件，例如，运行以下命令列出文件/var/log/yum.log的标号为0的当前版本与标号为2的快照中文件版本的差异，如果不指定文件名，则会显示所有文件的差异：
+
+####	# snapper -c btrfs_config diff 1..0 /var/log/yum.log
+		--- /.snapshots/1/snapshot/var/log/yum.log  2016-06-08 13:01:51.977879395 -0400
+		+++ /var/log/yum.log    2016-06-08 13:47:50.520081926 -0400
+		@@ -3,3 +3,12 @@
+		 Jun 08 08:15:18 Installed: snapper-libs-0.1.7-10.el7.x86_64
+		 Jun 08 08:15:18 Installed: boost-serialization-1.53.0-25.el7.x86_64
+		 Jun 08 08:15:19 Installed: snapper-0.1.7-10.el7.x86_64
+		+Jun 08 13:15:21 Installed: net-tools-2.0-0.17.20131004git.el7.x86_64
+		+Jun 08 13:47:47 Updated: 7:device-mapper-1.02.107-5.el7_2.2.x86_64
+		+Jun 08 13:47:47 Updated: 7:device-mapper-libs-1.02.107-5.el7_2.2.x86_64
+		+Jun 08 13:47:47 Installed: 7:device-mapper-event-libs-1.02.107-5.el7_2.2.x86_64
+		+Jun 08 13:47:48 Installed: 7:device-mapper-event-1.02.107-5.el7_2.2.x86_64
+		+Jun 08 13:47:48 Installed: 7:lvm2-libs-2.02.130-5.el7_2.2.x86_64
+		+Jun 08 13:47:48 Installed: libaio-0.3.109-13.el7.x86_64
+		+Jun 08 13:47:48 Installed: device-mapper-persistent-data-0.5.5-1.el7.x86_64
+		+Jun 08 13:47:50 Installed: 7:lvm2-2.02.130-5.el7_2.2.x86_64
+		如果是新增文件，则仅会显示：
+
+####	# snapper -c btrfs_config diff 1..0 /usr/bin/netstat
+		Binary files /.snapshots/1/snapshot/usr/bin/netstat and /usr/bin/netstat differ
+		运行以下命令列出文件/var/log/yum.log在标号为1和2的快照中文件版本的差异：
+
+####	# snapper -c btrfs_config diff 1..2 /var/log/yum.log
+		(略...)
+		通过以上命令可以看到，Snapper 的快照存储在当前子卷根目录的 .snapshots 隐藏文件夹中。比如当前子卷是 /，那么就是 /.snapshots，如果是 /mnt/vol1，那就是 /mnt/vol1/.snapshots。快照始终存放在创建快照的那个分区或子卷中，无法将快照存储到其他分区或子卷。
+
+		恢复文件
+
+		要恢复一个或多个文件，请运行
+
+####	# snapper -c CONFIG -v undochange
+		  SNAPSHOT_ID..0 FILENAME1 FILENAME2
+		如果没有指定文件名，则会恢复所有已更改的文件,可以通过以下命令撤销以上操作，恢复系统状态到快照1：
+
+####	# snapper -c btrfs_config undochange 1..2
+		
+		
+		
+		删除快照
+
+		可以通过以下命令删除快照：
+
+####	# snapper -c btrfs_config delete 1 2
+
+####	# snapper -c btrfs_config list
+		Type   | # | Pre # | Date | User | Cleanup | Description | Userdata
+		-------+---+-------+------+------+---------+-------------+---------
+		single | 0 |       |      | root |         | current     |  
+		提示： 旧快照占用的磁盘空间更多！！！ 
+		如果您要删除快照以释放硬盘上的空间，请务必先删除旧快照。快照生成的时间越长，其占用的空间就越大。通过配置文件设置自动删除快照。有关详细信息，请参见清理算法。
+		在精简LVM卷上创建快照
+
+		除了在 Btrfs 文件系统上生成快照之外，快照程序还支持在 XFS、Ext4 或 Ext3 格式的精简LVM 卷（不支持在常规 LVM 卷上生成快照）上生成快照。
+		
+		更改快照的清理方法
+		
+		####	#  snapper -c btrfs_config modify  -c empty-pre-post  2
+		
+##	注释：	snapper -c btrfs_config brtfs文件系统固定格式，		modify  -c快照的清理方法  快照编号
+		
+		
+		
+#		创建精简LVM
+
+		以系统上的/dev/sdb、/dev/sdc为例，首先分别创建分区/dev/sdb1、/dev/sdc1：
+
+		# fdisk /dev/sdb 
+		Welcome to fdisk (util-linux 2.23.2).
+
+		Changes will remain in memory only, until you decide to write them.
+		Be careful before using the write command.
+
+		Device does not contain a recognized partition table
+		Building a new DOS disklabel with disk identifier 0x962bc2ec.
+
+		Command (m for help): n
+		Partition type:
+		   p   primary (0 primary, 0 extended, 4 free)
+		   e   extended
+		Select (default p): 
+		Using default response p
+		Partition number (1-4, default 1): 
+		First sector (2048-10485759, default 2048): 
+		Using default value 2048
+		Last sector, +sectors or +size{K,M,G} (2048-10485759, default 10485759): 
+		Using default value 10485759
+		Partition 1 of type Linux and of size 5 GiB is set
+
+		Command (m for help): w
+		The partition table has been altered!
+
+		Calling ioctl() to re-read partition table.
+		Syncing disks.
+		查看创建好的分区如下：
+
+		# lsblk
+		NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+		fd0      2:0    1    4K  0 disk 
+		sda      8:0    0   30G  0 disk 
+		+-sda1   8:1    0  500M  0 part /boot
+		+-sda2   8:2    0    2G  0 part [SWAP]
+		+-sda3   8:3    0 27.5G  0 part /home
+		sdb      8:16   0    5G  0 disk 
+		+-sdb1   8:17   0    5G  0 part 
+		sdc      8:32   0    5G  0 disk 
+		+-sdc1   8:33   0    5G  0 part 
+		sr0     11:0    1 1024M  0 rom  
+		创建PV：
+
+		# pvcreate /dev/sdb1
+		  Physical volume "/dev/sdb1" successfully created
+
+		# pvcreate /dev/sdc1
+		  Physical volume "/dev/sdc1" successfully created
+		创建VG：
+
+		# vgcreate vg_thin /dev/sdb1 /dev/sdc1 
+		  Volume group "vg_thin" successfully created
+		创建精简池：
+
+		# lvcreate -L 5G --thinpool thin_pool vg_thin
+		  Logical volume "thin_pool" created.
+		查看精简LVM，可以看到Allocated pool data为0，说明thin_pool尚未实际占用磁盘空间：
+
+		# lvdisplay /dev/vg_thin/thin_pool 
+		  --- Logical volume ---
+		  LV Name                thin_pool
+		  VG Name                vg_thin
+		  LV UUID                3811nd-ltYk-XWqO-mxog-Gq82-38do-BywBfY
+		  LV Write Access        read/write
+		  LV Creation host, time localhost.localdomain, 2016-06-08 14:05:58 -0400
+		  LV Pool metadata       thin_pool_tmeta
+		  LV Pool data           thin_pool_tdata
+		  LV Status              available
+		  # open                 0
+		  LV Size                5.00 GiB
+		  Allocated pool data    0.00%
+		  Allocated metadata     0.68%
+		  Current LE             1280
+		  Segments               1
+		  Allocation             inherit
+		  Read ahead sectors     auto
+		  - currently set to     8192
+		  Block device           253:2
+		创建精简卷thin_vol1、thin_vol2、thin_vol3，忽略警告，可以看到三个2G的精简卷相加已经大于5G的精简池thin_pool大小，但是创建仍然成功了，至于为什么可以超额分配，请参考自动精简配置（Thin provisioning ）介绍
+
+		# lvcreate -V 2G --thin -n thin_vol1 vg_thin/thin_pool
+		  Logical volume "thin_vol1" created.
+
+		# lvcreate -V 2G --thin -n thin_vol2 vg_thin/thin_pool
+		  Logical volume "thin_vol2" created.
+
+		# lvcreate -V 2G --thin -n thin_vol3 vg_thin/thin_pool
+		6 GiB)!
+		  For thin pool auto extension activation/thin_pool_autoextend_threshold should be below 100.
+		  Logical volume "thin_vol3" created.
+		创建文件系统：
+
+		# mkfs.ext4 /dev/vg_thin/thin_vol1
+		挂载文件系统：
+
+		# mkdir /mnt/vol1
+		# mount /dev/vg_thin/thin_vol1 /mnt/vol1
+		创建快照配置文件
+
+		为了在精简 LVM 卷上使用快照程序，首先为其创建快照配置文件。在 LVM 上要使用 –fstype=lvm(filesystem) 指定文件系统。文件系统的有效值为 ext3、etx4 或 xfs。如下：
+
+		# snapper -c lvm_config create-config -f "lvm(ext4)" /mnt/vol1/
+
+		# ls /etc/snapper/configs/
+		btrfs_config  lvm_config  
+
+		# snapper -c lvm_config list
+		Type   | # | Pre # | Date | User | Cleanup | Description | Userdata
+		-------+---+-------+------+------+---------+-------------+---------
+		single | 0 |       |      | root |         | current     |  
+		创建一组pre/post快照对
+
+		# snapper -c lvm_config create --command "echo Hello > /mnt/vol1/hello_file"
+
+		# snapper -c lvm_config list
+		Type   | # | Pre # | Date                            | User | Cleanup | Description | Userdata
+		-------+---+-------+---------------------------------+------+---------+-------------+---------
+		single | 0 |       |                                 | root |         | current     |         
+		pre    | 1 |       | Wed 08 Jun 2016 02:41:07 PM EDT | root |         |             |         
+		post   | 2 | 1     | Wed 08 Jun 2016 02:41:07 PM EDT | root |         |             |   
+		查看快照1和2之间的变化
+
+		# snapper -c lvm_config diff 1..2
+		--- /mnt/vol1/.snapshots/1/snapshot/hello_file  1969-12-31 19:00:00.000000000 -0500
+		+++ /mnt/vol1/.snapshots/2/snapshot/hello_file  2016-06-08 14:41:07.860147086 -0400
+		@@ -0,0 +1 @@
+		+Hello
+		以普通用户身份使用快照
+
+		默认情况下，快照程序只能由 root 用户使用。但在特定情况下，某些组或用户也需要创建快照或通过还原至快照来撤销更改：
+
+		为 ALLOW_USERS 和（或）ALLOW_GROUPS 设置值，分别为用户和（或）组授予权限。多个条目需要使用空格 分隔。例如，要为用户 thin_user 和 thin_group 授予权限，可运行：
+
+		# snapper -c web_data set-config "ALLOW_USERS=thin_user" "ALLOW_GROUPS=thin_group"
+		也可以通过直接修改配置文件实现，此时，指定的用户和（或）组便可以使用指定的快照程序配置。您可以使用 list 命令对其进行测试，例如：
+
+		# thin_user:~ > snapper -c lvm_config list
+		基本操作的讲解到此结束，下面讲一下一些高级配置：
+
+###    自定义设置
+
+####	以上我们都是采用Snapper自带的默认设置/etc/snapper/config-templates/default创建配置文件，该默认配置文件经过了多方面的考虑，适合多数使用情况。用户也可以根据自己的需要对如何创建自动快照以及如何保留快照进行自定义配置。
+
+		每个配置都包含一系列选项，这些选项可以通过命令行进行修改:
+
+		# snapper -c btrfs_config set-config "TIMELINE_CREATE=yes"
+		FSTYPE 
+		分区的文件系统类型：btrfs、lvm(ext3)、lvm(ext4)、lvm(xfs)，快照类型不可更改。
+
+		SUBVOLUME 
+		分区或子卷生成快照的安装点。不可更改。
+
+		BACKGROUND_COMPARISON 
+		定义在创建前后快照后是否要在后台对他们进行比较。默认值为 “yes”。
+
+		禁用/启用timeline快照
+
+		时间线快照默认会启用，可以直接修改配置文件里的TIMELINE_CREATE为yes/no，也可以通过以下命令启停： 
+		- 启用
+
+			# snapper -c btrfs_config set-config "TIMELINE_CREATE=yes"
+		禁用
+
+		# snapper -c btrfs_config set-config "TIMELINE_CREATE=no"
+		控制快照存档间隔(清理规则)
+
+		快照会占用磁盘空间。为了防止磁盘空间不足进而导致系统中断，旧的快照会自动删除:
+
+		清理算法
+
+		Snapper提供有三种清理旧快照的算法。这些算法以每天计划作业方式执行。您可以定义要在 Snapper 配置中保留的不同类型的快照数:
+
+		number 
+		当达到某一快照计数时将删除旧快照。
+
+		timeline 
+		将删除超过一定时限的旧快照，但保留一定量的每小时、每天、每月和每年快照。
+
+		empty-pre-post 
+		将删除无差异的前后快照对。
+
+		Snapper通过以下配置选项控制快照的清理规则：
+
+		TIMELINE_CLEANUP 
+		定义当快照数量超出 TIMELINE_LIMIT_* 选项指定的数值同时快照超出 TIMELINE_MIN_AGE 中指定的时限时是否自动删除旧快照。有效值：yes、no，默认值为 “yes”。
+
+		TIMELINE_CREATE 
+		如果设置为 yes，便会每小时创建一个快照。这是目前唯一一种可以自动创建快照的方式，因此强烈建议将其设置为 yes。有效值：yes、no，默认值为 “yes”。
+
+		TIMELINE_MIN_AGE 
+		定义快照在自动删除前必须保留的最小时限（以秒为单位）。 
+		默认值为 “1800”。
+
+		TIMELINE_LIMIT_DAILY、TIMELINE_LIMIT_HOURLY、TIMELINE_LIMIT_MONTHLY、 TIMELINE_LIMIT_YEARLY 
+		按小时、天、月、年保留的快照数量。每一项的默认值均为 “10”。
+
+		TIMELINE_CLEANUP=”yes” 
+		TIMELINE_CREATE=”yes” 
+		TIMELINE_LIMIT_DAILY=”10” 
+		TIMELINE_LIMIT_HOURLY=”10” 
+		TIMELINE_LIMIT_MONTHLY=”10” 
+		TIMELINE_LIMIT_YEARLY=”10” 
+		TIMELINE_MIN_AGE=”1800”
+
+		每小时：最近创建的十张快照。 
+		每天：保留最近十天内每天创建的首张快照。 
+		每月：保留最近十个月内每月的最后一天创建的首张快照。 
+		每年：保留最后十年内每年的最后一天创建的首张快照。
+
+		此示例配置能够实现按小时生成将自动清理的快照。TIMELINE_MIN_AGE和 TIMELINE_LIMIT_* 始终会同时进行评估。在本示例中，快照删除前的最小保留时限设置为 30 分钟（1800 秒）。因为我们会每小时创建一次快照，所以确保了只会保留最近的快照。如果 TIMELINE_LIMIT_DAILY 设置为非零值，则表示还会保留当天的首张快照。
+
+		NUMBER_CLEANUP 
+		定义当快照总数超出 NUMBER_LIMIT 中指定的数值，同时快照超出 NUMBER_MIN_AGE 中指定的时限时，是否自动删除旧的快照。有效值：yes、no，默认值为 “yes”。
+
+		NUMBER_LIMIT 
+		在 NUMBER_CLEANUP 设置为 yes 时，定义要保留的没有标记为重要的安装快照对和管理快照对的数量。所保留的会是最新的那些快照。默认值为 “50”。
+
+		NUMBER_LIMIT_IMPORTANT 
+		在 NUMBER_CLEANUP 设置为 yes 时，定义要保留的标记为重要的快照对数。所保留的会是最新的那些快照。默认值为 “10”。
+
+		NUMBER_MIN_AGE 
+		定义快照对在自动删除前必须保留的最小时限（以秒为单位）。默认值为 “1800”，即30分钟。
+
+		注： 限制和时限 
+		NUMBER_LIMIT、NUMBER_LIMIT_IMPORTANT 和 NUMBER_MIN_AGE 始终都会评估。只有同时符合全部条件才会删除快照。如果想不考虑时限而始终保留一定数量的快照，则可将 NUMBER_MIN_AGE 设置为 0。另外，如果快照超过一定时限之后不想再保留，可以将 NUMBER_LIMIT 和 NUMBER_LIMIT_IMPORTANT 设置为 0。
+
+		空快照的处理
+
+		EMPTY_PRE_POST_CLEANUP 
+		如果设置为 yes，系统会删除前后快照相同的快照对。默认值为 “yes”。
+
+		EMPTY_PRE_POST_MIN_AGE 
+		定义前后快照相同的快照对在自动删除之前必须保留的最短时限（以秒为单位）。默认值为 “1800”。
+
+		管理现有配置
+
+		snapper 有多个子命令可用于管理现有的配置。您可以列出、显示这些配置，也可以对它们进行删除和修改：
+
+		列出配置
+
+		使用以下命令显示所有现有的配置：
+
+		# snapper list-configs
+		Config       | Subvolume
+		-------------+----------
+		btrfs_config | /        
+		lvm_config   | /mnt/vol1
+		查看配置
+
+		使用 snapper -c CONFIG get-config 子命令可以显示指定的配置。CONFIG 应替换为执行 snapper list-configs 命令后所显示的某个配置名称。请参见配置数据以了解有关配置选项的更多信息。
+
+		删除配置
+
+		使用以下命令可以删除配置。CONFIG 应替换为执行 snapper list-configs 命令后所显示的某个配置名称:
+
+		# snapper -c CONFIG delete-config
+		修改配置
+
+		使用以下命令可以修改指定配置中的选项。CONFIG 应替换为执行 snapper list-configs 命令后所显示的某个配置名称。OPTION 和 VALUE 的可能值可参见配置数据：
+
+		# snapper -c CONFIG set-config OPTION=VALUE
+		关于数据一致性
+
+		在创建快照时并没有能确保数据一致性的机制。如果在创建快照的同时写入某个文件（例如数据库），将导致文件损坏或写入不完整。恢复此类文件会产生问题。而且，有些系统文件（例如/etc/mtab）甚至永远都无法恢复。因此==强烈建议==您要始终仔细查看已更改文件及其差异的列表。只恢复您要还原的操作真正包含的文件。
+
+		修改快照元数据
+
+		用户可以使用快照程序修改说明、清理算法以及快照的用户数据，其他元数据均无法更改。
+
+		使用snapper list 查看所有快照及其编号
+
+		# snapper -c btrfs_config list 
+		修改 btrfs_cconfig 配置的第 10 张快照的元数据，将清理算法设置为 timeline：
+
+		# snapper -c btrfs_config modify --cleanup-algorithm "timeline" 10
+		修改名为 btrfs_cconfig 配置的第 12 张快照的元数据，设置新的说明，并取消设置清理算法：
+
+		# snapper --config btrfs_config modify --description "daily backup" -cleanup-algorithm "timeline" 120
+		设置过滤规则
+
+		一些文件主要用来保存系统信息，例如/etc/mtab，这类文件不希望被快照操作影响到，Snapper允许通过/etc/snapper/filters/*.txt 指定过滤项，并在快照操作中忽略指定文件或文件夹的变化。 
+		例如我们的btrfs中我们不希望快照跟踪/var、/tmp等，可以添加到filters，这样在以后创建的快照中就看到不到关于/var、/tmp的快照跟踪了。
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#

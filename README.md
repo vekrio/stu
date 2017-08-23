@@ -3413,7 +3413,7 @@ linux学习
 
 		值得注意的是，downloadonly插件不但适用于yum update，也适用于yum install。
 		
-# 43.安装snapper快照
+# 43.[安装snapper快照](http://blog.csdn.net/helloanthea/article/details/51692532)
 ##	文件系统为btrfs或精简LVM
 		执行以下命令安装snapper：
 		

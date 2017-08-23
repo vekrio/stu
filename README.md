@@ -3466,7 +3466,7 @@ linux学习
 
 ####	# snapper -c btrfs_config create -t post --pre-num 1 -p 
 		2
-##	注释：	snapper -c btrfs_config brtfs文件系统固定格式，  -t快照类型  --pre-num对映pre的编号 -p打印出post编号
+##	注释：	snapper -c配置名称    -t快照类型  --pre-num对映pre的编号 -p打印出post编号
 
 ####	# snapper -c btrfs_config list
 		Type   | # | Pre # | Date                            | User | Cleanup  | Description | Userdata
@@ -3874,34 +3874,34 @@ linux学习
 		使用以下命令可以修改指定配置中的选项。CONFIG 应替换为执行 snapper list-configs 命令后所显示的某个配置名称。OPTION 和 VALUE 的可能值可参见配置数据：
 
 		# snapper -c CONFIG set-config OPTION=VALUE
+			
+				
 		关于数据一致性
-
 		在创建快照时并没有能确保数据一致性的机制。如果在创建快照的同时写入某个文件（例如数据库），将导致文件损坏或写入不完整。恢复此类文件会产生问题。而且，有些系统文件（例如/etc/mtab）甚至永远都无法恢复。因此==强烈建议==您要始终仔细查看已更改文件及其差异的列表。只恢复您要还原的操作真正包含的文件。
 
-		修改快照元数据
-
+##		修改快照元数据
 		用户可以使用快照程序修改说明、清理算法以及快照的用户数据，其他元数据均无法更改。
 
 		使用snapper list 查看所有快照及其编号
+####	# snapper -c btrfs_config list
 
-		# snapper -c btrfs_config list 
 		修改 btrfs_cconfig 配置的第 10 张快照的元数据，将清理算法设置为 timeline：
+####	# snapper -c btrfs_config modify --cleanup-algorithm "timeline" 10
 
-		# snapper -c btrfs_config modify --cleanup-algorithm "timeline" 10
+
 		修改名为 btrfs_cconfig 配置的第 12 张快照的元数据，设置新的说明，并取消设置清理算法：
-
-		# snapper --config btrfs_config modify --description "daily backup" -cleanup-algorithm "timeline" 120
+####	# snapper --config btrfs_config modify --description "daily backup" -cleanup-algorithm "timeline" 120
 		设置过滤规则
 
 		一些文件主要用来保存系统信息，例如/etc/mtab，这类文件不希望被快照操作影响到，Snapper允许通过/etc/snapper/filters/*.txt 指定过滤项，并在快照操作中忽略指定文件或文件夹的变化。 
 		例如我们的btrfs中我们不希望快照跟踪/var、/tmp等，可以添加到filters，这样在以后创建的快照中就看到不到关于/var、/tmp的快照跟踪了。
-#
-#
-#
-#
-#
-#
-#
+
+		
+#	44.
+#	45.
+#	46.
+#	47.
+#	48.
 #
 #
 #

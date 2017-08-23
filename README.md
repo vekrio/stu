@@ -4149,11 +4149,9 @@ linux学习
 		Complete!
 		此处应有掌声
 
-		4. 最后一步了，启动服务
+		4. 最后一步了，启动服务service mysqld restart
 
-		启动服务 
-		官网的安装指南使用service mysqld start，CentOS7改用systemctl命令启动服务了，使用service命令会默认转向调用systemctl命令的。
-
+		
 		附加步骤，修改MySQL密码，修改MySQL默认端口
 
 		MySQL5.7之前的版本如果按照这种方式安装后，默认是没有密码的。对于MySQL5.7 有点特殊，下面是官网描述MySQL5.7的安装过程： 

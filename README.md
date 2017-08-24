@@ -4244,7 +4244,7 @@ ServerAliveInterval 540
 2. SecureCRT
 
 设置反空闲，如下图所示
-![1]()
+![1](https://github.com/vekrio/stu/blob/master/20170718/photo/ssh.png?raw=true)
 3 Putty
 
  

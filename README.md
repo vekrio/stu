@@ -3375,7 +3375,7 @@ linux学习
 ###		[root@localhost ~]# 
 
 # 	41.centos7最小化安装
-####		yum -y install wget vim wget curl net-tools lsof
+####		yum -y install wget vim wget curl net-tools lsof yum-utils bash-com*
 
 # 42. 利用yum下载软件包的三种方法
 #### 方法一：用yum安装了某个工具后，我们想要这个工具的包。那yum安装的过程其实就已经把包给下载了，只是没有保持而已。所以，我们要做的，是将其缓存功能打开。

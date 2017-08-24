@@ -4185,7 +4185,79 @@ linux学习
 
 #	45.如何解决SecureCRT连接SSH之后一会就自动断开连接的问题?
 		会话选项-->终端-->发送协议NO-OP(P),选中，完成设置session的noop属性来保持连接。
-#	46.
+#	46.[ssh超时断开的解决方法](http://www.cnblogs.com/longshiyVip/p/4774177.html)
+当用SSH Secure Shell连接Linux时，如果几分钟没有任何操作，连接就会断开，必须重新登陆才行，每次都重复相同的操作，很是烦人，本文总结了两种解决的方法。
+
+方法1：更改ssh服务器的配置文件/etc/ssh/sshd_config
+
+ClientAliveInterval指定了服务器端向客户端请求消息的时间间隔, 默认是0，不发送。而ClientAliveInterval 60表示每分钟发送一次，然后客户端响应，这样就保持长连接了。这里比较怪的地方是：不是客户端主动发起保持连接的请求(如FTerm, CTerm等),而是需要服务器先主动。
+
+另外，至于ClientAliveCountMax，使用默认值3即可。ClientAliveCountMax表示服务器发出请求后客户端没有响应的次数达到一定值，就自动断开，正常情况下，客户端不会不响应。
+
+复制代码
+ ClientAliveCountMax
+
+Sets the number of client alive messages (see below) which may be sent without sshd(8) receiving any messages back from the client. 
+If this threshold is reached while client alive messages are being sent, sshd will disconnect the client, terminating the ses-sion. 
+It is important to note that the use of client alive messages is very different from TCPKeepAlive (below).
+The client alive messages are sent through the encrypted channel and therefore will not be spoofable. 
+The TCP keepalive option enabled by TCPKeepAlive is spoofable.
+ The client alive mechanism is valuable when the client or server depend on knowing when a connection has become inactive.The default value is 3. 
+If ClientAliveInterval (see below) is set to 15, and ClientAliveCountMax is left at the default, 
+unresponsive SSH clients will be disconnected after approximately 45 seconds.
+This option applies to protocol version 2 only.
+
+ClientAliveInterval
+
+Sets a timeout interval in seconds after which if no data has been received from the client, 
+sshd(8) will send a message through the encrypted channel to request a response from the client. 
+The default is 0, indicating that these messages will not be sent to the client. This option applies to protocol version 2 only. 
+复制代码
+vim /etc/ssh/sshd_config
+
+找到ClientAliveInterval 参数，如果没有就自己加一行。
+
+ClientAliveInterval 参数的数值是秒，比如你设置为540，就是9分钟.
+
+ClientAliveInterval 540
+
+对于ClientAliveCountMax
+
+指如果发现客户端没有相应，则判断一次超时，这个参数设置允许超时的次数，比如10。
+
+ClientAliveInterval 540
+
+ClientAliveCountMax 10;
+
+则代表允许超时 5400秒 = 90分钟。
+
+方法2：配置客户端
+
+1. linux下的ssh命令
+
+vim /etc/ssh/ssh_config
+
+然后找到里面的ServerAliveInterval 参数，如果没有你同样自己加一个就好了。参数意义相同，都是秒数，比如9分钟：
+
+ServerAliveInterval 540
+
+2. SecureCRT
+
+设置反空闲，如下图所示
+![1]()
+3 Putty
+
+ 
+
+启用putty keepalive
+
+ 
+
+putty -> Connection -> Seconds between keepalives ( 0 to turn off )，默认为0，改为60。
+
+ 
+
+怀有希望!!
 #	47.
 #	48.
 #

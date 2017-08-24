@@ -4183,7 +4183,8 @@ linux学习
 		wget： World Wide Web Get，wget是一个从网络上自动下载文件的自由工具，支持HTTP、HTTPS、FTP常见协议。 
 		uname： Unix Name，显示主机操作系统名称。
 
-#	45.
+#	45.如何解决SecureCRT连接SSH之后一会就自动断开连接的问题?
+		会话选项-->终端-->发送协议NO-OP(P),选中，完成设置session的noop属性来保持连接。
 #	46.
 #	47.
 #	48.

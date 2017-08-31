@@ -4500,11 +4500,77 @@ linux学习
 
 		解决方法很简单：
 		执行 rm -rf /tmp/seahub_cache/*    把缓存清空一下即可。
-#49.
-#50.
-#
-#
-#
+#49.yum死锁
+         yum在锁定状态中。 
+		 可以通过强制关掉yum进程： 
+###		 #rm -f /var/run/yum.pid 
+		  然后就可以使用yum了。
+#50.	[CentOS下使用yum命令安装计划任务程序crontab](http://blog.csdn.net/testcs_dn/article/details/48780971)
+		#		概述
+
+		利用“任务计划”，可以将任何脚本、程序或文档安排在某个最方便的时间运行。通俗的讲就是定时执行某个脚本、程序。
+		常见用途
+		定时关机 
+		定时检查更新 
+		定时对系统配置、数据库、日志进行备份 
+		定时清理垃圾文件
+		检测是否已安装
+		# crontab
+		-bash: crontab: command not found
+		执行 crontab 命令如果报 command not found，就表明没有安装.
+		开始安装
+		# yum -y install vixie-cron
+		Loaded plugins: fastestmirror, refresh-packagekit, security
+		Existing lock /var/run/yum.pid: another copy is running as pid 25960.
+		Another app is currently holding the yum lock; waiting for it to exit...
+		可能是系统自动升级正在运行，yum在锁定状态中。 
+		可以通过强制关掉yum进程： 
+		#rm -f /var/run/yum.pid 
+		然后就可以使用yum了。
+		# yum -y install vixie-cron
+		
+		查看命令帮助
+		crontab 并不支持-h或–help之类的选项，不过还是可以通过它查看命令帮助
+		# crontab -h
+		crontab：无效选项 -- h
+		crontab: usage error: unrecognized option
+		usage:  crontab [-u user] file
+			crontab [-u user] [ -e | -l | -r ]
+				(default operation is replace, per 1003.2)
+			-e  (edit user's crontab)
+			-l  (list user's crontab)
+			-r  (delete user's crontab)
+			-i  (prompt before deleting user's crontab)
+			-s  (selinux context)
+		也可以使用 info crontab 命令查看详细的帮助信息。
+		cron服务提供crontab命令来设定cron服务的，以下是这个命令的一些参数与说明:
+		　　crontab -u //设定某个用户的cron服务，一般root用户在执行这个命令的时候需要此参数
+		　　crontab -l //列出某个用户cron服务的详细内容
+		　　crontab -r //删除没个用户的cron服务
+		　　crontab -e //编辑某个用户的cron服务
+		　　比如说root查看自己的cron设置:crontab -u root -l
+		　　再例如，root想删除fred的cron设置:crontab -u fred -r
+		　　在编辑cron服务时，编辑的内容有一些格式和约定，输入:crontab -u root -e
+		　　进入vi编辑模式，编辑的内容一定要符合下面的格式:/1 * * * ls >> /tmp/ls.txt
+		服务状态控制
+		/sbin/service crond start //启动服务 
+		/sbin/service crond stop //关闭服务 
+		/sbin/service crond restart //重启服务 
+		/sbin/service crond reload //重新载入配置 
+		/sbin/service crond status //查看状态
+		或者使用
+		# service crond start 
+		# service crond stop 
+		# service crond restart 
+		# service crond reload 
+		# service crond status
+		开机启动
+		你也可以将这个服务在系统启动的时候自动启动: 
+		在/etc/rc.d/rc.local这个脚本的末尾加上:
+		/sbin/service crond start
+		现在Cron这个服务已经在进程里面了，我们就可以用这个服务了。
+#51.[IPV6学习之旅----1](http://blog.csdn.net/linuxblack125125/article/details/7785770)
+#52.
 #
 #
 #

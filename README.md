@@ -806,12 +806,15 @@ linux学习
 	-p password 是密码选项，其后面的newpasswd即为新的密码*/
 	
 ##		 增加远程登录账号
-	###	GRANT ALL PRIVILEGES ON *.* TO '远程登录用户'@'%' IDENTIFIED BY '远程登录用户密码' WITH GRANT OPTION; 
-	### FLUSH PRIVILEGES;
-	### quit;
+	GRANT ALL PRIVILEGES ON *.* TO '远程登录用户'@'%' IDENTIFIED BY '远程登录用户密码' WITH GRANT OPTION; 
+    
+	FLUSH PRIVILEGES;
+    
+	quit;
 ##  	 开放防火墙
-### firewall-cmd --zone=public --add-port=3306/tcp --permanent 
-### firewall-cmd --reload
+	firewall-cmd --zone=public --add-port=3306/tcp --permanent 
+	
+	firewall-cmd --reload
 	
 ##	初始化sql：
 	[root@localhost usr]# mysql_secure_installation

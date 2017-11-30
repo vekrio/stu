@@ -805,11 +805,11 @@ linux学习
 ### [root@localhost ~]# mysqladmin -u root -p password ******     /*mariadb修改密码：-u root，是指定用户，指定修改root用户的密码。
 	-p password 是密码选项，其后面的newpasswd即为新的密码*/
 	
-##	增加远程登录账号
-###	GRANT ALL PRIVILEGES ON *.* TO '远程登录用户'@'%' IDENTIFIED BY '远程登录用户密码' WITH GRANT OPTION; 
-### FLUSH PRIVILEGES;
-### quit;
-##   开放防火墙
+##		 增加远程登录账号
+	###	GRANT ALL PRIVILEGES ON *.* TO '远程登录用户'@'%' IDENTIFIED BY '远程登录用户密码' WITH GRANT OPTION; 
+	### FLUSH PRIVILEGES;
+	### quit;
+##  	 开放防火墙
 ### firewall-cmd --zone=public --add-port=3306/tcp --permanent 
 ### firewall-cmd --reload
 	

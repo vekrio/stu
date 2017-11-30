@@ -805,6 +805,15 @@ linux学习
 ### [root@localhost ~]# mysqladmin -u root -p password ******     /*mariadb修改密码：-u root，是指定用户，指定修改root用户的密码。
 	-p password 是密码选项，其后面的newpasswd即为新的密码*/
 	
+##	增加远程登录账号
+###	GRANT ALL PRIVILEGES ON *.* TO '远程登录用户'@'%' IDENTIFIED BY '远程登录用户密码' WITH GRANT OPTION; 
+### FLUSH PRIVILEGES;
+### quit;
+##   开放防火墙
+### firewall-cmd --zone=public --add-port=3306/tcp --permanent 
+### firewall-cmd --reload
+	
+##	初始化sql：
 	[root@localhost usr]# mysql_secure_installation
 	/usr/bin/mysql_secure_installation:行379: find_mysql_client: 未找到命令
 
@@ -883,56 +892,11 @@ linux学习
 
 	MariaDB [(none)]> 
 
-	之前看了一篇文章觉得太扯了，本来之前是看别人写的，后来自己研究一下，发现完全是两回事
-
-
-	下面发现本地无法访问虚拟机可是ip都能ping通呀！我以为是防火墙，但是我发现我虚拟机防火墙是默认关闭的
-
-	那就只有一个就是权限问题
-
-	这里可以接着上面直接往下走
-
-	[plain] view plain copy print?
-	MariaDB [(none)]> use mysql   #<span style="font-family:Arial;">进入mysql库</span>  
-	Reading table information for completion of table and column names  
-	You can turn off this feature to get a quicker startup with -A  
-	  
-	Database changed  
-	MariaDB [mysql]> select user,password,host from user;     #查询所有用户权限反正不管了  
-	<span style="font-family:Arial;">#</span>我这里是之前<span style="font-family:Arial;">没整干净所以这样的</span>  
-	+------+-------------------------------------------+-----------------------+  
-	| user | password                                  | host                  |  
-	+------+-------------------------------------------+-----------------------+  
-	| root | *DB469070DB0AD0CA0B93040D166D7FC4713D6961 | localhost             |  
-	| root | *DB469070DB0AD0CA0B93040D166D7FC4713D6961 | localhost.localdomain |  
-	| root | *DB469070DB0AD0CA0B93040D166D7FC4713D6961 | 127.0.0.1             |  
-	| root | *DB469070DB0AD0CA0B93040D166D7FC4713D6961 | ::1                   |  
-	|      |                                           | localhost             |  
-	|      |                                           | localhost.localdomain |  
-	+------+-------------------------------------------+-----------------------+  
-	6 rows in set (0.00 sec)  
-	<span style="color:#362e2b;"><span style="font-size:14px;"><span style="font-family:Arial;"></span></span></span><pre name="code" class="plain"><span style="font-family:Arial;">#‘%’意思给用户设置所有ip都可以访问</span>  
-	MariaDB [mysql]> grant all privileges on *.* to root@"%" identified by "1q2w3e4r";
-	Query OK, 0 rows affected (0.00 sec)MariaDB [mysql]> flush privileges; #提交Query OK, 0 rows affected (0.00 sec)MariaDB [mysql]> quit 退出Bye[root@localhost usr]# systemctl stop mariadb.service #停止服务[root@localhost usr]# ps aux|grep mariadb #看一下mariadb服务是否停止如下已停止root 2899 0.0 0.0 112664 980 pts/0 S+ 19:01 0:00 grep --color=auto mariadb[root@localhost usr]# systemctl start mariadb #启动赶快本地用navcat连接试一下
-	[root@localhost usr]# ip addr #不知道ip centos7用ip addr查看 建议最好用静态ip不然每次secure充连多麻烦
-	1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN 
-		link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-		inet 127.0.0.1/8 scope host lo
-		   valid_lft forever preferred_lft forever
-		inet6 ::1/128 scope host 
-		   valid_lft forever preferred_lft forever
-	2: eno16777736: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP qlen 1000
-		link/ether 00:0c:29:4f:a3:ab brd ff:ff:ff:ff:ff:ff
-		inet 192.168.0.173/24 brd 192.168.0.255 scope global dynamic eno16777736
-		   valid_lft 7166sec preferred_lft 7166sec
-		inet6 fe80::20c:29ff:fe4f:a3ab/64 scope link 
-		   valid_lft forever preferred_lft forever
+	
    
    
    
    
-			
-			
 #  14.查询某个工具包是哪个包装出来的（这里比如netstat）
 	which netstat    /*看看有没装netstat*/
 	如没装，在一个已经装好的服务器上查询which netstat

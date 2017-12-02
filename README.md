@@ -228,7 +228,7 @@ linux学习
 	[root@localhost ~]# vgs
 	  VG #PV #LV #SN Attr   VSize  VFree 
 	  cl   2   2   0 wz--n- 38.99g 32.00g
-###	[root@localhost ~]# lvextend -L +32GB /dev/cl/root 
+###	[root@localhost ~]# lvextend -L +32GB /dev/cl/root     逻辑卷下/dev/cl/root增加32个G
 	  Insufficient free space: 8192 extents needed, but only 8191 available
 ###	[root@localhost ~]# lvextend -L +31.95GB /dev/cl/root  
 	  Rounding size to boundary between physical extents: 31.95 GiB.
@@ -245,7 +245,7 @@ linux学习
 	tmpfs               tmpfs     783M     0  783M   0% /run/user/0
 ###	[root@localhost ~]# xfs_growfs /dev/cl/
 	root  swap  
-	[root@localhost ~]# xfs_growfs /dev/cl/root
+###	[root@localhost ~]# xfs_growfs /dev/cl/root
 	meta-data=/dev/mapper/cl-root    isize=512    agcount=4, agsize=406016 blks
 			 =                       sectsz=512   attr=2, projid32bit=1
 			 =                       crc=1        finobt=0 spinodes=0

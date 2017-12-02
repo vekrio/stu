@@ -4541,7 +4541,7 @@ linux学习
 		
 #      重启ESXI系统，从光驱启动，在光驱中插入esxi系统盘，对原有系统进行重装               
        此处需选择安装原有系统的存储     
-	   选择安装esxi，保留vmfs数据存储选项   
+	   选择安装esxi，保留vmfs数据存储选项  （即：Install ESXI,presever VMFS datastore） 
 	   重新部署密码 
          
 	   安装完成后重启esxi系统 

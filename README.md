@@ -4537,8 +4537,22 @@ linux学习
 		/sbin/service crond start
 		现在Cron这个服务已经在进程里面了，我们就可以用这个服务了。
 #51.[IPV6学习之旅----1](http://blog.csdn.net/linuxblack125125/article/details/7785770)
-#52.
-#
+#52. ESXI5.5故障恢复或意外遗忘密码可以重装来恢复
+		
+#      重启ESXI系统，从光驱启动，在光驱中插入esxi系统盘，对原有系统进行重装               
+       此处需选择安装原有系统的存储     
+	   选择安装esxi，保留vmfs数据存储选项   
+	   重新部署密码 
+         
+	   安装完成后重启esxi系统 
+       进入配置选项，配置相关的配置                 
+       配置完成后从vclient登陆esxi 
+       登陆后选择datastore--浏览存储器      
+	   找到之前建立的虚拟机文件夹xxx.vmk虚拟机文件
+       将虚拟机添加到清单               
+                  
+       
+
 #
 #
 #

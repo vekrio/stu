@@ -4435,7 +4435,7 @@ linux学习
 	mkdir sys
 
 	当你重启电脑，你会发现一切东西恢复到你创建备份时的样子了！
-#48.[云盘服务器突然断电关机，开启，启动服务后访问报错：Page unavailable](http://blog.sina.com.cn/s/blog_9d0e7bf10102x59x.html)
+#    48.[云盘服务器突然断电关机，开启，启动服务后访问报错：Page unavailable](http://blog.sina.com.cn/s/blog_9d0e7bf10102x59x.html)
 		eafile Page unavailable (2017-01-19 09:46:48)转载▼
 		云盘服务器突然断电关机，开启，启动服务后访问报错：
 		Page unavailable
@@ -4467,12 +4467,12 @@ linux学习
 
 		解决方法很简单：
 		执行 rm -rf /tmp/seahub_cache/*    把缓存清空一下即可。
-#49.yum死锁
+#    49.yum死锁
          yum在锁定状态中。 
 		 可以通过强制关掉yum进程： 
 ###		 #rm -f /var/run/yum.pid 
 		  然后就可以使用yum了。
-#50.	[CentOS下使用yum命令安装计划任务程序crontab](http://blog.csdn.net/testcs_dn/article/details/48780971)
+#    50.	[CentOS下使用yum命令安装计划任务程序crontab](http://blog.csdn.net/testcs_dn/article/details/48780971)
 		#		概述
 
 		利用“任务计划”，可以将任何脚本、程序或文档安排在某个最方便的时间运行。通俗的讲就是定时执行某个脚本、程序。
@@ -4536,9 +4536,9 @@ linux学习
 		在/etc/rc.d/rc.local这个脚本的末尾加上:
 		/sbin/service crond start
 		现在Cron这个服务已经在进程里面了，我们就可以用这个服务了。
-#51.	[IPV6学习之旅----1](http://blog.csdn.net/linuxblack125125/article/details/7785770)
+#    51.	[IPV6学习之旅----1](http://blog.csdn.net/linuxblack125125/article/details/7785770)
 
-#52. 	ESXI5.5故障恢复或意外遗忘密码可以重装来恢复
+#    52. 	ESXI5.5故障恢复或意外遗忘密码可以重装来恢复
 		
 	   重启ESXI系统，从光驱启动，在光驱中插入esxi系统盘，对原有系统进行重装               
        此处需选择安装原有系统的存储     
@@ -4554,7 +4554,7 @@ linux学习
                   
        
 
-#	ESXI5.5故障恢复或网络设置
+# 	 53.	ESXI5.5故障恢复或网络设置
 		添加虚拟机以后记得右击虚拟机>编辑设置>网络适配器>网络连接（网络标签里选择正确的网络标签）
 #
 #

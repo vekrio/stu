@@ -4536,10 +4536,11 @@ linux学习
 		在/etc/rc.d/rc.local这个脚本的末尾加上:
 		/sbin/service crond start
 		现在Cron这个服务已经在进程里面了，我们就可以用这个服务了。
-#51.[IPV6学习之旅----1](http://blog.csdn.net/linuxblack125125/article/details/7785770)
-#52. ESXI5.5故障恢复或意外遗忘密码可以重装来恢复
+#51.	[IPV6学习之旅----1](http://blog.csdn.net/linuxblack125125/article/details/7785770)
+
+#52. 	ESXI5.5故障恢复或意外遗忘密码可以重装来恢复
 		
-#      重启ESXI系统，从光驱启动，在光驱中插入esxi系统盘，对原有系统进行重装               
+	   重启ESXI系统，从光驱启动，在光驱中插入esxi系统盘，对原有系统进行重装               
        此处需选择安装原有系统的存储     
 	   选择安装esxi，保留vmfs数据存储选项  （即：Install ESXI,presever VMFS datastore） 
 	   重新部署密码 

@@ -993,7 +993,7 @@ linux学习
 
 	yum install setuptool（使用setup配置工具很方便地配置防火墙、网络、系统服务等配置项）
 
-	上传crysadm到/root
+	上传crysadm到/root   （注意是crysadm-master- 文件。在私有云桌面文件下）
 
 	yum -y install wget
 

@@ -4557,4 +4557,11 @@ linux学习
 # 	 53.	ESXI5.5故障恢复或网络设置
 		添加虚拟机以后记得右击虚拟机>编辑设置>网络适配器>网络连接（网络标签里选择正确的网络标签）
 #
-#
+#	54. Windows Server 2012 R2 密钥
+		原本Windows Server 2008 R2包含企业版, 
+		但至Windows Server 2012 企业版已消失,表示原先的企业版功能已由Datacenter版替换及加强。
+		数据中心版Datacenter版本功能最全，建议安装
+		
+		[Key]：YJQK4-VNR69-QGGY4-86FQQ-2WDW8 [剩余次数：20000+] 可用
+		
+#	55. Windows Server 2008 R2 密钥

@@ -2993,6 +2993,9 @@ linux学习
 ###	[root@localhost ~]# chmod +x   /etc/rc.local
 ### [root@localhost ~]# reboot 
 
+###  升级服务： [升级]https://manual-cn.seafile.com/deploy/upgrade.html
+		
+
 # 39.[centos6/7 系统初始化脚本](http://blog.csdn.net/u012375924/article/details/52486436)
 	#!/bin/bash
 	#

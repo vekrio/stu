@@ -2995,6 +2995,81 @@ linux学习
 
 ###  升级服务： [升级]https://manual-cn.seafile.com/deploy/upgrade.html
 		
+	
+		升级指南
+
+		使用预编译 Seafile 服务器安装包的用户请看.
+		如果你是 源码编译安装 Seafile 的，请参考那篇文档中的 升级 部分。
+		升级之后, 如果没有正常运行，请清空 Seahub 缓存。
+		主版本升级 (比如从 2.x 升级到 3.y)
+
+		假设你现在使用 2.1.0 版本，想要升级到 3.1.0 版本，下载、解压新版本安装包后，得到目录结构如下：
+		haiwen
+		   -- seafile-server-2.1.0
+		   -- seafile-server-3.1.0
+		   -- ccnet
+		   -- seafile-data
+		升级到 3.1.0：
+		关闭 Seafile 服务（如果正在运行）：
+		cd haiwen/seafile-server-2.1.0
+		./seahub.sh stop
+		./seafile.sh stop
+		查看 seafile-server-3.1.0 目录下的升级脚本：
+		cd haiwen/seafile-server-3.1.0
+		ls upgrade/upgrade_*
+		可以看到升级脚本文件如下:
+		...
+		upgrade/upgrade_2.0_2.1.sh
+		upgrade/upgrade_2.1_2.2.sh
+		upgrade/upgrade_2.2_3.0.sh
+		upgrade/upgrade_3.0_3.1.sh
+		从当前版本（2.1.0）开始，按顺序运行以下脚本：
+		upgrade/upgrade_2.1_2.2.sh
+		upgrade/upgrade_2.2_3.0.sh
+		upgrade/upgrade_3.0_3.1.sh
+		启动新版本 Seafile 服务器，完成升级：
+		cd haiwen/seafile-server-3.1.0/
+		./seafile.sh start
+		./seahub.sh start
+		小版本升级 (比如从 3.0.x 升级到 3.2.y)
+
+		假设你现在使用 3.0.0 版本，想要升级到 3.2.2 版本，下载、解压新版本安装包，得到目录结构如下：
+		haiwen
+		   -- seafile-server-3.0.0
+		   -- seafile-server-3.2.2
+		   -- ccnet
+		   -- seafile-data
+		升级到 3.2.2：
+		关闭 Seafile 服务（如果正在运行）：
+		cd haiwen/seafile-server-3.0.0
+		./seahub.sh stop
+		./seafile.sh stop
+		查看 seafile-server-3.2.2 目录下的升级脚本：
+		cd haiwen/seafile-server-3.2.2
+		ls upgrade/upgrade_*
+		可以看到升级脚本文件如下:
+		...
+		upgrade/upgrade_2.2_3.0.sh
+		upgrade/upgrade_3.0_3.1.sh
+		upgrade/upgrade_3.1_3.2.sh
+		从当前版本（3.0.0）开始，按顺序运行以下脚本：
+		upgrade/upgrade_3.0_3.1.sh
+		upgrade/upgrade_3.1_3.2.sh
+		启动新版本 Seafile 服务器，完成升级：
+		cd haiwen/seafile-server-3.2.2/
+		./seafile.sh start
+		./seahub.sh start
+		维护版本升级 (比如从 3.1.0 升级到 3.1.2)
+
+		类似从 3.1.0 升级到 3.1.2，为维护版本升级。
+		关闭 Seafile 服务（如果正在运行）；
+		对于此类升级，只需更新头像链接，直接运行升级脚本即可(因为历史原因，此升级脚本命名为 minor-upgrade.sh):
+		cd seafile-server-3.1.2
+		upgrade/minor-upgrade.sh
+		运行升级脚本之后，启动新版本 Seafile 服务器，完成升级；
+		如果新版本运行正常，可以删除旧版本 Seafile 文件。+
+
+		rm -rf seafile-server-3.1.0
 
 # 39.[centos6/7 系统初始化脚本](http://blog.csdn.net/u012375924/article/details/52486436)
 	#!/bin/bash

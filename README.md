@@ -4642,7 +4642,7 @@ linux学习
 		
 		[Key]：YJQK4-VNR69-QGGY4-86FQQ-2WDW8 [剩余次数：20000+] 可用
 		
-#	 55.SQL Server中的sysobjects[1](http://www.cnblogs.com/KeenLeung/archive/2012/11/18/2776077.html)
+#	 55.[SQL Server中的sysobjects](http://www.cnblogs.com/KeenLeung/archive/2012/11/18/2776077.html)
 			关于SQL Server数据库的一切信息都保存在它的系统表格里。我怀疑你是否花过比较多的时间来检查系统表格，因为你总是忙于用户表格。但是，你可能需要偶尔做一点不同寻常的事，例如数据库所有的触发器。你可以一个一个地检查表格，但是如果你有500个表格的话，这可能会消耗相当大的人工。
 
 			这就让sysobjects表格有了用武之地。虽然我不建议你更新这个表格，但是你当然有权对其进行审查。
@@ -4746,3 +4746,4 @@ linux学习
 			可以从“链接管理器”那里找到：
 
 			在连接管理器里点“可编程性”-》“函数”-》“系统函数”-》“元数据函数”，就能找到object_id和OBJECTPROPERTY
+			![1](https://github.com/vekrio/stu/blob/master/20170718/photo/2012111819131256.jpg?raw=true)

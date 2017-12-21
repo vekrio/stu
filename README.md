@@ -4635,11 +4635,114 @@ linux学习
 # 	 53.	ESXI5.5故障恢复或网络设置
 		添加虚拟机以后记得右击虚拟机>编辑设置>网络适配器>网络连接（网络标签里选择正确的网络标签）
 #
-#	54. Windows Server 2012 R2 密钥
+#	 54. Windows Server 2012 R2 密钥
 		原本Windows Server 2008 R2包含企业版, 
 		但至Windows Server 2012 企业版已消失,表示原先的企业版功能已由Datacenter版替换及加强。
 		数据中心版Datacenter版本功能最全，建议安装
 		
 		[Key]：YJQK4-VNR69-QGGY4-86FQQ-2WDW8 [剩余次数：20000+] 可用
 		
-#	55. Windows Server 2008 R2 密钥
+#	 55.SQL Server中的sysobjects[1](http://www.cnblogs.com/KeenLeung/archive/2012/11/18/2776077.html)
+			关于SQL Server数据库的一切信息都保存在它的系统表格里。我怀疑你是否花过比较多的时间来检查系统表格，因为你总是忙于用户表格。但是，你可能需要偶尔做一点不同寻常的事，例如数据库所有的触发器。你可以一个一个地检查表格，但是如果你有500个表格的话，这可能会消耗相当大的人工。
+
+			这就让sysobjects表格有了用武之地。虽然我不建议你更新这个表格，但是你当然有权对其进行审查。
+
+			在大多数情况下，对你最有用的两个列是sysobjects.name和sysobjects.xtype。前面一个用来列出待考察对象的名字，而后一个用来定义对象的类型，可以是下列对象类型中的一种：
+
+			   C = CHECK 约束 
+			   D = 默认值或 DEFAULT 约束 
+			   F = FOREIGN KEY 约束 
+			   L = 日志 
+			   FN = 标量函数 
+			   IF = 内嵌表函数 
+			   P = 存储过程 
+			   PK = PRIMARY KEY 约束（类型是 K） 
+			   RF = 复制筛选存储过程 
+			   S = 系统表 
+			   TF = 表函数 
+			   TR = 触发器 
+			   U = 用户表 
+			   UQ = UNIQUE 约束（类型是 K） 
+			   V = 视图 
+			   X = 扩展存储过程 
+
+			在碰到触发器的情形下，用来识别触发器类型的其他三个列是：deltrig、instrig和uptrig。
+
+			你可以用下面的命令列出感兴趣的所有对象：
+
+			SELECT * FROM sysobjects WHERE xtype = <type of interest>
+
+			 
+
+			select * from sys.objects --在数据库中创建的每个用户定义的架构范围内的对象在该表中均对应一行。
+
+			select * from sys.sysobjects--在数据库中创建的每个对象（例如约束、默认值、日志、规则以及存储过程）都对应一行。
+
+			"sys.objects是sys.sysobjects的子集"
+
+			 
+
+			补充：
+
+			载自：http://hi.baidu.com/pgzdskwfxbcdiwr/item/d9b22e91b0552bdc7a7f0151
+
+			判断数据库中是否已经存在某个表，有的话就删除该表
+
+			if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[表名]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+			drop table [dbo].[表名]
+
+			或者
+
+			if exists (select * from sysobjects where id = object_id(N'表名') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+
+			drop table [dbo].[表名]
+
+			或者
+
+			if(Exists(Select * From SysObjects Where xtype='U' And Name='表名')) 
+			drop table [dbo].[表名]
+
+			1、问：object_id(N'表名')中N'代表什么意思
+
+			 答：N'' 代表 Unicode类型.可以支持不同语种的对象名
+
+			2、 问：select   *   from   dbo.sysobjects   where   id   =   object_id(N'[dbo].[usertab]')   and   OBJECTPROPERTY(id,   N'IsUserTable')   =   1   
+			这句中的object_id(N'[dbo].[usertab]')和OBJECTPROPERTY(id,   N'IsUserTable')   =   1   
+			是什么意思？
+
+			 答：object_id(N'[dbo].[usertab]'):是得出系统给表usertab分配的唯一ＩＤ   
+			OBJECTPROPERTY(id,   N'IsUserTable')   =   1   
+			该对象的属性是表类型的 objectproperty(id,property)函数的使用，
+
+			 3、 问：USE master SELECT * FROM ...SysObjects ” ...sysobjects ” -- 三个句点的前缀是什么意思？
+
+			答：　对数据库对象名的 Transact-SQL 引用可以是由四部分组成的名称，格式如下：[ server_name.[[database_name].[owner_name]. | database_name.[owner_name]. | owner_name.] ] object_name
+
+			 
+
+			更多：
+
+			http://www.linuxso.com/sql/18468.html
+
+			 
+
+			进一步了解：
+
+			object_id()和objectproperty()都是系统函数来的：
+
+			object_id():返回对象标识号。参数：对象名称(nvarchar(128))。返回integer
+			objectproperty():返回对象属性的属性值。参数：对象ID(integer),属相名称(varchar)。返回integer
+
+			可以从MSDN上查找相关信息：
+
+			http://msdn.microsoft.com/zh-cn/library/ms190328.aspx
+
+			http://msdn.microsoft.com/zh-cn/library/ms176105.aspx
+
+			 
+
+			N:表示UNICODE类型，可以支持不同语种的对象名
+
+			可以从“链接管理器”那里找到：
+
+			在连接管理器里点“可编程性”-》“函数”-》“系统函数”-》“元数据函数”，就能找到object_id和OBJECTPROPERTY

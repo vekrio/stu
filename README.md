@@ -4747,3 +4747,4 @@ linux学习
 
 			在连接管理器里点“可编程性”-》“函数”-》“系统函数”-》“元数据函数”，就能找到object_id和OBJECTPROPERTY
 ![1](https://github.com/vekrio/stu/blob/master/20170718/photo/2012111819131256.jpg?raw=true)
+![2](https://github.com/vekrio/stu/blob/master/20170718/photo/20171221.jpg?raw=true)

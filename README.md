@@ -1007,6 +1007,7 @@ linux学习
 
 	yum makecache
 	
+	
 	python -V    /*查看python版本*/
 
 	cd 

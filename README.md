@@ -3420,8 +3420,9 @@ linux学习
 		IP6.GATEWAY:                            
 ###		[root@localhost ~]# 
 
-# 	41.centos7最小化安装
-####		yum -y install wget vim wget curl net-tools lsof yum-utils bash-com*
+# 	41.centos7最小化安装及字符集修改
+####		 yum install lrzsz tree net-toools nmap  vim bash-completion lsof dos2unix nc telnet ntp wget rng-tools psmisc screen -y
+###		 localectl set-locale LANG=zh_CN.UTF-8
 
 # 42. 利用yum下载软件包的三种方法
 #### 方法一：用yum安装了某个工具后，我们想要这个工具的包。那yum安装的过程其实就已经把包给下载了，只是没有保持而已。所以，我们要做的，是将其缓存功能打开。

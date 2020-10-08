@@ -2739,9 +2739,11 @@ linux学习
 	udp        0      0 0.0.0.0:39441           0.0.0.0:*                           9651/dhclient       
 	udp6       0      0 :::20670                :::*                                9651/dhclient       
 	udp6       0      0 ::1:323                 :::*                                594/chronyd         
-###	[root@localhost mycloud]# mysqladmin -u root -p password ******
-	Enter password: 
-###	[root@localhost mycloud]# cd seafile-server-*
+###	[root@localhost mycloud]# mysqladmin -u root -p password 
+        Enter password: 
+        New password: 
+        Confirm new password: 
+###	
 ###	[root@localhost seafile-server-6.1.2]# ./setup-seafile-mysql.sh
 	Checking python on this machine ...
 	  Checking python module: setuptools ... Done.

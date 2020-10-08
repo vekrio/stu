@@ -2292,7 +2292,7 @@ linux学习
 	注：以上方法仅在基于RedHat制作的发行版本（如CentOS、OracleLinux、NeoKylin等），其他诸如Fedora、Debian等系统未做测试。​
 # 38.私有云搭建
 	
-###	[root@localhost ~]# cd /home/
+###	[root@localhost ~]#  yum install lrzsz tree net-tools nmap  vim bash-completion lsof dos2unix nc telnet ntp wget rng-tools psmisc screen -y && cd /home/
 ###	[root@localhost home]# mkdir mycloud
 ###	[root@localhost home]# cd mycloud/
 ###	[root@localhost mycloud]# wget http://seafile-downloads.oss-cn-shanghai.aliyuncs.com/seafile-server_6.1.2_x86-64.tar.gz
@@ -2723,7 +2723,7 @@ linux学习
 	  python-six.noarch 0:1.9.0-2.el7    
 
 	完毕！
-###	[root@localhost mycloud]#cd  seafile-server-6.1.2
+###	[root@localhost mycloud]#
 ###	[root@localhost seafile-server-6.1.2]# systemctl start mariadb
 ###	[root@localhost seafile-server-6.1.2]# systemctl enable mariadb
 ###	[root@localhost mycloud]# netstat -luntp          
@@ -3421,7 +3421,7 @@ linux学习
 ###		[root@localhost ~]# 
 
 # 	41.centos7最小化安装及字符集修改
-####		 yum install lrzsz tree net-toools nmap  vim bash-completion lsof dos2unix nc telnet ntp wget rng-tools psmisc screen -y
+####		 yum install lrzsz tree net-tools nmap  vim bash-completion lsof dos2unix nc telnet ntp wget rng-tools psmisc screen -y
 ###		 localectl set-locale LANG=zh_CN.UTF-8
 
 # 42. 利用yum下载软件包的三种方法
